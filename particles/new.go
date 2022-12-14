@@ -46,6 +46,8 @@ func NewSystem() System {
 			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
 			Opacity: config.General.Opacity,
+			SpeedX : rand.Float64(),
+			SpeedY : rand.Float64(),
 		})
 	}
 	
