@@ -43,7 +43,7 @@ func NewSystem() System {
 		l.PushFront(&Particle{
 			PositionX: _PositionX,
 			PositionY: _PositionY,
-			ScaleX:    1, ScaleY: 1,
+			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
 			Opacity: config.General.Opacity,
 		})
