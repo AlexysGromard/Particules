@@ -15,7 +15,7 @@ type Config struct {
 	InitNumParticles         int
 	RandomSpawn              bool
 	SpawnX, SpawnY           int
-	SpawnRate                float64
+	SpawnRate				 float64
 	// Particule properties
 	ScaleX, ScaleY           float64
 	Opacity				  	 float64
