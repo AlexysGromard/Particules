@@ -8,5 +8,11 @@
 	"RandomSpawn": true,
 	"SpawnX": 400,
 	"SpawnY": 400,
-	"SpawnRate": 1
+	"SpawnRate": 1,
+	"ScaleX": 1,
+	"ScaleY": 1,
+	"Opacity": 1,
+	"ColorRed": 1,
+	"ColorGreen": 0,
+	"ColorBlue": 0
 }
