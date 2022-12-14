@@ -16,5 +16,5 @@
 	"ColorGreen": 1,
 	"ColorBlue": 1,
 	"_comment": "(SpeedType) : 1 = Low, 2 = Medium, 3 = High",
-	"SpeedType" : 3
+	"SpeedType" : 2
 }
