@@ -1,0 +1,5 @@
+# .DS_store 
+*.DS_store
+
+# Project build files
+project-particles
