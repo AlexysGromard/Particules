@@ -5,6 +5,7 @@ import (
 	"project-particles/config"
 	"math/rand"
 	"time"
+	"fmt"
 )
 
 // NewSystem est une fonction qui initialise un système de particules et le
@@ -31,7 +32,7 @@ func NewSystem() System {
 	rand.Seed(time.Now().UnixNano())
 
 	for i:=0;i < config.General.InitNumParticles ; i++ {
-
+		// Initialisation de la position de la particule
 		if config.General.RandomSpawn{
 			_PositionX = float64(rand.Intn(config.General.WindowSizeX)) + rand.Float64()
 			_PositionY = float64(rand.Intn(config.General.WindowSizeY)) + rand.Float64()
@@ -39,17 +40,32 @@ func NewSystem() System {
 			_PositionX = float64(config.General.SpawnX)
 			_PositionY = float64(config.General.SpawnY)
 		}
-
+		// Initialisation de la vitesse de la particule
+		var minSpeed, maxSpeed int
+		switch config.General.SpeedType {
+		case 1:
+			minSpeed = 0
+			maxSpeed = 1
+		case 2:
+			minSpeed = 1
+			maxSpeed = 3
+		case 3:
+			minSpeed = 3
+			maxSpeed = 5
+		}
 		l.PushFront(&Particle{
 			PositionX: _PositionX,
 			PositionY: _PositionY,
 			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
 			Opacity: config.General.Opacity,
-			SpeedX : float64(rand.Intn(2)) + rand.Float64() - 1,
-			SpeedY : float64(rand.Intn(2)) + rand.Float64() - 1,
+			SpeedX : float64(rand.Intn(maxSpeed*2-minSpeed)+minSpeed) + rand.Float64() - 10,
+			SpeedY : float64(rand.Intn(maxSpeed*2-minSpeed)+minSpeed) + rand.Float64() - 10,
 		})
 	}
+
+	
+
 	
 	return System{Content: l}
 }

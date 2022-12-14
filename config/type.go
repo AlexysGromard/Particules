@@ -20,6 +20,7 @@ type Config struct {
 	ScaleX, ScaleY           float64
 	Opacity				  	 float64
 	ColorRed, ColorGreen, ColorBlue float64
+	SpeedType				 int
 }
 
 var General Config
