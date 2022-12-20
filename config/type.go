@@ -23,6 +23,7 @@ type Config struct {
 	SpeedType				 int
 	KillParticlesOutside	 bool
 	Gravity					 float64
+	MarginOutsideScreen		 float64
 }
 
 var General Config

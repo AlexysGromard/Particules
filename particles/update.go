@@ -20,19 +20,23 @@ func (s *System) Update() {
 	//actualisation des particules
 	for i := s.Content.Front(); i != nil; i = i.Next() {
 		p, ok := i.Value.(*Particle)
-		if ok {
-			// mouvement des particule
-			p.SpeedY = p.SpeedY + config.General.Gravity
 
-			p.PositionX = p.PositionX + p.SpeedX
-			p.PositionY = p.PositionY + p.SpeedY
+		if !((p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX) + config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY) + config.General.MarginOutsideScreen)){
+			if ok {
+				// mouvement des particule
+				p.SpeedY = p.SpeedY + config.General.Gravity
 
-			
-			//suprestion des particule sortante
-			if config.General.KillParticlesOutside{
-				if (p.PositionX+p.ScaleX <= 0 && p.PositionX-p.ScaleX >= float64(config.General.WindowSizeX)) && (p.PositionY+p.ScaleY <= 0 && p.PositionX-p.ScaleY >= float64(config.General.WindowSizeY)){
-					s.Content.Remove(i)
+				p.PositionX = p.PositionX + p.SpeedX
+				p.PositionY = p.PositionY + p.SpeedY
+
+				/*
+				//suprestion des particule sortante
+				if config.General.KillParticlesOutside{
+					if (p.PositionX+p.ScaleX <= 0 && p.PositionX-p.ScaleX >= float64(config.General.WindowSizeX)) && (p.PositionY+p.ScaleY <= 0 && p.PositionX-p.ScaleY >= float64(config.General.WindowSizeY)){
+						s.Content.Remove(i)
+					}
 				}
+				*/
 			}
 		}
 	}

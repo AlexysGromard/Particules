@@ -18,5 +18,6 @@
 	"_comment": "(SpeedType) : 1 = Low, 2 = Medium, 3 = High",
 	"SpeedType" : 2,
 	"KillParticlesOutside" : true,
-	"Gravity" : 1
+	"Gravity" : 1,
+	"MarginOutsideScreen": 1
 }

@@ -18,12 +18,14 @@ func (g *game) Draw(screen *ebiten.Image) {
 	for e := g.system.Content.Front(); e != nil; e = e.Next() {
 		p, ok := e.Value.(*particles.Particle)
 		if ok {
-			options := ebiten.DrawImageOptions{}
-			options.GeoM.Rotate(p.Rotation)
-			options.GeoM.Scale(p.ScaleX, p.ScaleY)
-			options.GeoM.Translate(p.PositionX, p.PositionY)
-			options.ColorM.Scale(p.ColorRed, p.ColorGreen, p.ColorBlue, p.Opacity)
-			screen.DrawImage(assets.ParticleImage, &options)
+			if !((p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX) + config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY) + config.General.MarginOutsideScreen)){
+				options := ebiten.DrawImageOptions{}
+				options.GeoM.Rotate(p.Rotation)
+				options.GeoM.Scale(p.ScaleX, p.ScaleY)
+				options.GeoM.Translate(p.PositionX, p.PositionY)
+				options.ColorM.Scale(p.ColorRed, p.ColorGreen, p.ColorBlue, p.Opacity)
+				screen.DrawImage(assets.ParticleImage, &options)
+			}
 		}
 	}
 
