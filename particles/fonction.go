@@ -35,6 +35,14 @@ func Creat_Particles(l *list.List){
 		maxSpeed = 5
 	}
 
+	var _Life int
+
+	if config.General.HaveLife && config.General.RandomLife{
+		_Life = rand.Intn(180)
+	}else{
+		_Life = config.General.Life
+	}
+
 	l.PushFront(&Particle{
 		PositionX: _PositionX,
 		PositionY: _PositionY,
@@ -43,6 +51,7 @@ func Creat_Particles(l *list.List){
 		Opacity: config.General.Opacity,
 		SpeedX:  (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1),
 		SpeedY:  (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1),
+		Life : _Life,
 	})
 
 }

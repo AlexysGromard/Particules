@@ -21,13 +21,18 @@ func (s *System) Update() {
 	for i := s.Content.Front(); i != nil; i = i.Next() {
 		p, ok := i.Value.(*Particle)
 
-		if !((p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX) + config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY) + config.General.MarginOutsideScreen)){
+		if !((p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX) + config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY) + config.General.MarginOutsideScreen) || p.Life <= 0 ){
 			if ok {
 				// mouvement des particule
 				p.SpeedY = p.SpeedY + config.General.Gravity
 
 				p.PositionX = p.PositionX + p.SpeedX
 				p.PositionY = p.PositionY + p.SpeedY
+		
+
+				if config.General.HaveLife{
+					p.Life -= 1
+				}
 
 				/*
 				//suprestion des particule sortante

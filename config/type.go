@@ -24,6 +24,9 @@ type Config struct {
 	KillParticlesOutside	 bool
 	Gravity					 float64
 	MarginOutsideScreen		 float64
+	HaveLife				 bool
+	RandomLife				 bool
+	Life					 int
 }
 
 var General Config
