@@ -22,6 +22,7 @@ type Config struct {
 	ColorRed, ColorGreen, ColorBlue float64
 	SpeedType				 int
 	KillParticlesOutside	 bool
+	Gravity					 float64
 }
 
 var General Config
