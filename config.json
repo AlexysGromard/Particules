@@ -16,8 +16,11 @@
 	"ColorGreen": 0.5,
 	"ColorBlue": 1,
 	"_comment": "(SpeedType) : 1 = Low, 2 = Medium, 3 = High",
-	"SpeedType" : 2,
+	"SpeedType" : 1,
 	"KillParticlesOutside" : true,
 	"Gravity" : 1,
-	"MarginOutsideScreen": 1
+	"MarginOutsideScreen": 1,
+	"HaveLife": true,
+	"RandomLife": true,
+	"Life": 600
 }
