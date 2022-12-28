@@ -17,6 +17,7 @@ type Config struct {
 	SpawnX, SpawnY           int
 	SpawnRate				 float64
 	// Particule properties
+	Rotation				 float64
 	ScaleX, ScaleY           float64
 	Opacity				  	 float64
 	ColorRed, ColorGreen, ColorBlue float64
@@ -27,6 +28,10 @@ type Config struct {
 	HaveLife				 bool
 	RandomLife				 bool
 	Life					 int
+	ChangeColorAccordingTo	 int
+	ChangeScaleAccordingTo	 int
+	ChangeRotationAccordingTo int
+	ChangeOpacityAccordingTo int
 }
 
 var General Config

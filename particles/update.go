@@ -42,6 +42,13 @@ func (s *System) Update() {
 					}
 				}
 				*/
+
+				UpdateColor(p)
+				UpdateScale(p)
+				UpdateRotation(p)
+				UpdateOpacity(p)
+
+
 			}
 		}
 	}
