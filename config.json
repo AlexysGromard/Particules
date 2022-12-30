@@ -9,6 +9,10 @@
 	"SpawnX": 400,
 	"SpawnY": 300,
 	"SpawnRate": 2,
+	"SpawnOnAnObject" : true,
+	"__comment_": "(SpawnObject) : circle, square",
+	"SpawnObject" : "circle",
+	"SpawnObjectWidth" : 300,
 	"Rotation":0,
 	"ScaleX": 1,
 	"ScaleY": 1,
@@ -24,9 +28,9 @@
 	"HaveLife": true,
 	"RandomLife": false,
 	"Life": 600,
-	"ChangeColorAccordingTo":1,
+	"ChangeColorAccordingTo":0,
 	"ChangeScaleAccordingTo":0,
 	"ChangeRotationAccordingTo":0,
-	"ChangeOpacityAccordingTo":0,
+	"ChangeOpacityAccordingTo":1,
 	"__comment": "(ChangeXXXAccordingTo) : 0 = Nothing, 1 = Position, 2 = Life"
 }

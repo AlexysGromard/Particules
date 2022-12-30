@@ -15,23 +15,26 @@ type Config struct {
 	InitNumParticles         int
 	RandomSpawn              bool
 	SpawnX, SpawnY           int
-	SpawnRate				 float64
+	SpawnRate                float64
+	SpawnOnAnObject          bool
+	SpawnObject              string
+	SpawnObjectWidth         int
 	// Particule properties
-	Rotation				 float64
-	ScaleX, ScaleY           float64
-	Opacity				  	 float64
+	Rotation                        float64
+	ScaleX, ScaleY                  float64
+	Opacity                         float64
 	ColorRed, ColorGreen, ColorBlue float64
-	SpeedType				 int
-	KillParticlesOutside	 bool
-	Gravity					 float64
-	MarginOutsideScreen		 float64
-	HaveLife				 bool
-	RandomLife				 bool
-	Life					 int
-	ChangeColorAccordingTo	 int
-	ChangeScaleAccordingTo	 int
-	ChangeRotationAccordingTo int
-	ChangeOpacityAccordingTo int
+	SpeedType                       int
+	KillParticlesOutside            bool
+	Gravity                         float64
+	MarginOutsideScreen             float64
+	HaveLife                        bool
+	RandomLife                      bool
+	Life                            int
+	ChangeColorAccordingTo          int
+	ChangeScaleAccordingTo          int
+	ChangeRotationAccordingTo       int
+	ChangeOpacityAccordingTo        int
 }
 
 var General Config
