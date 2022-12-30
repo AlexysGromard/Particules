@@ -27,7 +27,21 @@ func Creat_Particles(l *list.List) {
 			_PositionX = xCenter + float64(float64(config.General.SpawnObjectWidth/2)*math.Cos(float64(randomPosition)))
 			_PositionY = yCenter + float64(float64(config.General.SpawnObjectWidth/2)*math.Sin(float64(randomPosition)))
 		case "square":
-			// Work in progress
+			var randomPosition int = rand.Intn(4)
+			switch randomPosition {
+			case 0:
+				_PositionX = xCenter + float64(config.General.SpawnObjectWidth/2)
+				_PositionY = yCenter + float64(rand.Intn(config.General.SpawnObjectWidth)) - float64(config.General.SpawnObjectWidth/2)
+			case 1:
+				_PositionX = xCenter + float64(rand.Intn(config.General.SpawnObjectWidth)) - float64(config.General.SpawnObjectWidth/2)
+				_PositionY = yCenter + float64(config.General.SpawnObjectWidth/2)
+			case 2:
+				_PositionX = xCenter - float64(config.General.SpawnObjectWidth/2)
+				_PositionY = yCenter + float64(rand.Intn(config.General.SpawnObjectWidth)) - float64(config.General.SpawnObjectWidth/2)
+			case 3:
+				_PositionX = xCenter + float64(rand.Intn(config.General.SpawnObjectWidth)) - float64(config.General.SpawnObjectWidth/2)
+				_PositionY = yCenter - float64(config.General.SpawnObjectWidth/2)
+			}
 		}
 	} else {
 		_PositionX = float64(config.General.SpawnX)

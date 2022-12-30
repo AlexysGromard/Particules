@@ -11,7 +11,7 @@
 	"SpawnRate": 2,
 	"SpawnOnAnObject" : true,
 	"__comment_": "(SpawnObject) : circle, square",
-	"SpawnObject" : "circle",
+	"SpawnObject" : "square",
 	"SpawnObjectWidth" : 300,
 	"Rotation":0,
 	"ScaleX": 1,
