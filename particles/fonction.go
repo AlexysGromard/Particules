@@ -19,13 +19,16 @@ func Creat_Particles(l *list.List) {
 		_PositionX = float64(rand.Intn(config.General.WindowSizeX)) + rand.Float64()
 		_PositionY = float64(rand.Intn(config.General.WindowSizeY)) + rand.Float64()
 	} else if config.General.SpawnOnAnObject {
+		// Initialisation de la position de la particule sur un objet géométrique
 		var xCenter float64 = float64(config.General.WindowSizeX / 2)
 		var yCenter float64 = float64(config.General.WindowSizeY / 2)
 		switch config.General.SpawnObject {
+		// Création d'un cercle
 		case "circle":
 			var randomPosition int = rand.Intn(360)
 			_PositionX = xCenter + float64(float64(config.General.SpawnObjectWidth/2)*math.Cos(float64(randomPosition)))
 			_PositionY = yCenter + float64(float64(config.General.SpawnObjectWidth/2)*math.Sin(float64(randomPosition)))
+		// Création d'un carré
 		case "square":
 			var randomPosition int = rand.Intn(4)
 			switch randomPosition {
@@ -70,6 +73,20 @@ func Creat_Particles(l *list.List) {
 		_Life = config.General.Life
 	}
 
+	// Initialisation de la vitesse de la particule
+	var SpeedX, SpeedY float64
+	if config.General.Propulsion {
+		// Récuépartion de l'angle en fonction du centre
+		var angle float64 = math.Atan2(_PositionY-float64(config.General.WindowSizeY/2), _PositionX-float64(config.General.WindowSizeX/2))
+		// Calcul de la vitesse en fonction de l'angle
+		SpeedX = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * math.Cos(angle)
+		SpeedY = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * math.Sin(angle)
+	} else {
+		SpeedX = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+		SpeedY = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+
+	}
+
 	ParticuleDead := DeadParticles.Content.Front()
 
 	if ParticuleDead != nil {
@@ -100,8 +117,8 @@ func Creat_Particles(l *list.List) {
 			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
 			Opacity: config.General.Opacity,
-			SpeedX:  (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1),
-			SpeedY:  (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1),
+			SpeedX:  SpeedX,
+			SpeedY:  SpeedY,
 			Life:    _Life,
 		})
 	}

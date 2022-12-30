@@ -19,6 +19,7 @@ type Config struct {
 	SpawnOnAnObject          bool
 	SpawnObject              string
 	SpawnObjectWidth         int
+	Propulsion               bool
 	// Particule properties
 	Rotation                        float64
 	ScaleX, ScaleY                  float64
