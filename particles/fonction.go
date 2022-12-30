@@ -102,8 +102,8 @@ func Creat_Particles(l *list.List) {
 			pd.ColorGreen = config.General.ColorGreen
 			pd.ColorBlue = config.General.ColorBlue
 			pd.Opacity = config.General.Opacity
-			pd.SpeedX = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
-			pd.SpeedY = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+			pd.SpeedX = SpeedX // (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+			pd.SpeedY = SpeedY // (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
 			pd.Life = _Life
 
 			DeadParticles.Content.Remove(ParticuleDead)

@@ -32,6 +32,6 @@
 	"ChangeColorAccordingTo":0,
 	"ChangeScaleAccordingTo":0,
 	"ChangeRotationAccordingTo":0,
-	"ChangeOpacityAccordingTo":1,
+	"ChangeOpacityAccordingTo":2,
 	"__comment": "(ChangeXXXAccordingTo) : 0 = Nothing, 1 = Position, 2 = Life"
 }
