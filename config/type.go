@@ -36,6 +36,8 @@ type Config struct {
 	ChangeScaleAccordingTo          int
 	ChangeRotationAccordingTo       int
 	ChangeOpacityAccordingTo        int
+	Collision						bool
+	WhatCollisionDo					int
 }
 
 var General Config

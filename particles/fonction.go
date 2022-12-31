@@ -88,7 +88,6 @@ func Creat_Particles(l *list.List) {
 	}
 
 	ParticuleDead := DeadParticles.Content.Front()
-
 	if ParticuleDead != nil {
 		pd, ok := ParticuleDead.Value.(*Particle)
 
