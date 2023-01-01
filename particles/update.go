@@ -60,14 +60,14 @@ func (s *System) Update() {
 						if ok2 {
 							if !((q.PositionX < 0-config.General.MarginOutsideScreen || q.PositionX > float64(config.General.WindowSizeX) + config.General.MarginOutsideScreen) || (q.PositionY < 0-config.General.MarginOutsideScreen || q.PositionY > float64(config.General.WindowSizeY) + config.General.MarginOutsideScreen) || q.Life <= 0 ) {
 								if math.Abs(p.PositionX - q.PositionX) <= p.ScaleX*10 && math.Abs(p.PositionY - q.PositionY) <= p.ScaleY*10 && q != p{
-									q.ColorRed,q.ColorGreen,q.ColorBlue = 1,0,0
+									//q.ColorRed,q.ColorGreen,q.ColorBlue = 1,0,0
 									if config.General.WhatCollisionDo == 1{
 										q.SpeedX,q.SpeedY,p.SpeedX,p.SpeedY = p.SpeedX,p.SpeedY,q.SpeedX,q.SpeedY
 									}
 								}
 							}
 						}
-					}	
+					}
 				}
 			}
 		}

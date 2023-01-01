@@ -41,33 +41,5 @@ func NewSystem() System {
 
 	}
 
-	/*
-
-		//experience
-		l.PushFront(&Particle{
-			PositionX: 100,
-			PositionY: 100,
-			Rotation:  0,
-			ScaleX:    1, ScaleY: 1,
-			ColorRed: 1, ColorGreen: 1, ColorBlue: 1,
-			Opacity: 1,
-			SpeedX:  0,
-			SpeedY:  0,
-			Life:    6000,
-		})
-
-		l.PushFront(&Particle{
-			PositionX: 100,
-			PositionY: 110,
-			Rotation:  0,
-			ScaleX:    1, ScaleY: 1,
-			ColorRed: 1, ColorGreen: 1, ColorBlue: 1,
-			Opacity: 1,
-			SpeedX:  0,
-			SpeedY:  0,
-			Life:    6000,
-		})*/
-	
-
 	return System{Content: l}
 }

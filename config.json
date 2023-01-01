@@ -9,7 +9,7 @@
 	"SpawnX": 400,
 	"SpawnY": 300,
 	"SpawnRate": 1,
-	"SpawnOnAnObject" : true,
+	"SpawnOnAnObject" : false,
 	"__comment_": "(SpawnObject) : circle, square",
 	"SpawnObject" : "square",
 	"SpawnObjectWidth" : 300,
