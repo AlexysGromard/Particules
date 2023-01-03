@@ -54,6 +54,9 @@ func Creat_Particles(l *list.List) {
 	// Initialisation de la vitesse de la particule
 	var minSpeed, maxSpeed int
 	switch config.General.SpeedType {
+	case 0:
+		minSpeed = 0
+		maxSpeed = 5
 	case 1:
 		minSpeed = 0
 		maxSpeed = 1
@@ -68,7 +71,7 @@ func Creat_Particles(l *list.List) {
 	// Initialisation de la vie de la particule
 	var _Life int
 	if config.General.HaveLife && config.General.RandomLife {
-		_Life = rand.Intn(180)
+		_Life = rand.Intn(50)
 	} else {
 		_Life = config.General.Life
 	}
