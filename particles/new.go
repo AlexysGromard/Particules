@@ -6,6 +6,7 @@ import (
 	"project-particles/config"
 	"time"
 )
+
 //cette variable est un System qui contiendra les particule morte
 var DeadParticles System
 
@@ -15,7 +16,7 @@ var DeadParticles System
 // Dans sa version actuelle, cette fonction affiche une particule blanche au
 // centre de l'écran.
 func NewSystem() System {
-	l := list.New()
+	//l := list.New()
 
 	/* //créer une particule //
 		l.PushFront(&Particle{
@@ -27,19 +28,19 @@ func NewSystem() System {
 	})
 	*/
 
-
 	rand.Seed(time.Now().UnixNano())
 
 	//
 	DeadParticles = System{Content: list.New()}
+	Particles := System{Content: list.New()}
 	//
 
 	for i := 0; i < config.General.InitNumParticles; i++ {
 		// Initialisation de la position de la particule
 
-		Creat_Particles(l)
+		Particles.Add_Particule()
 
 	}
 
-	return System{Content: l}
+	return Particles
 }

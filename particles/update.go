@@ -43,10 +43,10 @@ func (s *System) Update() {
 					}
 				*/
 
-				UpdateColor(p)
-				UpdateScale(p)
-				UpdateRotation(p)
-				UpdateOpacity(p)
+				p.UpdateColor(config.General.ChangeColorAccordingTo)
+				p.UpdateScale(config.General.ChangeScaleAccordingTo)
+				p.UpdateRotation(config.General.ChangeRotationAccordingTo)
+				p.UpdateOpacity(config.General.ChangeOpacityAccordingTo)
 
 				//enregistre les particule morte
 				if (p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || p.Life <= 0 {
@@ -77,7 +77,7 @@ func (s *System) Update() {
 
 		for i := 0; float64(i) < Part_particle; i++ {
 			Part_particle -= 1
-			Creat_Particles(s.Content)
+			s.Add_Particule()
 		}
 	}
 
