@@ -40,6 +40,7 @@ type Config struct {
 	WhatCollisionDo                 int
 	// Interaction
 	Interaction bool
+	FollowMouse bool
 }
 
 var General Config

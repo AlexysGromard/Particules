@@ -37,6 +37,13 @@ func (g *game) Update() error {
 			particles.Explosion(g.system.Content)
 		}
 	}
+	if config.General.FollowMouse {
+		// On recupere les coordonnees de la souris
+		x, y := ebiten.CursorPosition()
+		// On met a jour les coordonnees de la zone de spawn
+		config.General.SpawnX = x
+		config.General.SpawnY = y
+	}
 
 	g.system.Update()
 
