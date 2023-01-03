@@ -37,5 +37,5 @@
 	"Collision": false,
 	"WhatCollisionDo": 1,
 	"Interaction": true,
-	"FollowMouse": true
+	"FollowMouse": false
 }
