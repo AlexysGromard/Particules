@@ -5,6 +5,9 @@ import (
 	"math/rand"
 )
 
+// La fonction Random_Speed permet de définir la vitesse de la particule aléatoirement
+// Valeur d'entrée : un entier (mode de vitesse)
+// Valeur de sortie : deux flottants (vitesse de la particule x et y)
 func Random_Speed(SpeedMode int) (SpeedX, SpeedY float64) {
 	// Initialisation de l'interval vitesse de la particule
 	maxSpeed, minSpeed := MinAndMaxSpeed(SpeedMode)
