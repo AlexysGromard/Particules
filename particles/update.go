@@ -54,7 +54,7 @@ func (s *System) Update() {
 				}
 
 				if config.General.Collision {
-					for j := s.Content.Front(); j != nil; j = j.Next() {
+					for j := i.Next(); j != nil; j = j.Next() {
 						q, ok2 := j.Value.(*Particle)
 						if ok2 {
 							if !((q.PositionX < 0-config.General.MarginOutsideScreen || q.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) || (q.PositionY < 0-config.General.MarginOutsideScreen || q.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || q.Life <= 0) {

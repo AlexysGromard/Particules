@@ -4,7 +4,6 @@ import (
 	//"container/list"
 	"math"
 	"math/rand"
-	"project-particles/config"
 	//"fmt"
 )
 
@@ -14,7 +13,7 @@ import (
 // deux flottants (coordonnées du centre de la forme)
 func PositionAccordingToShape(TypeShape string, Width int, CentreX, CentreY float64) (PositionX, PositionY float64) {
 	// Initialisation de la position de la particule sur un objet géométrique
-	switch config.General.SpawnObject {
+	switch TypeShape {
 	// Création d'un cercle
 	case "circle":
 		// On  Choisit un angle aléatoire et on calcule les coordonnées de la particule

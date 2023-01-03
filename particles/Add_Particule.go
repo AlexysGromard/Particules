@@ -53,8 +53,8 @@ func (s *System) Add_Particule() {
 			pd.ColorGreen = config.General.ColorGreen
 			pd.ColorBlue = config.General.ColorBlue
 			pd.Opacity = config.General.Opacity
-			pd.SpeedX = SpeedX // (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
-			pd.SpeedY = SpeedY // (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+			pd.SpeedX = SpeedX
+			pd.SpeedY = SpeedY
 			pd.Life = Life
 
 			DeadParticles.Content.Remove(ParticuleDead)
