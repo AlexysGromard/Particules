@@ -4,20 +4,19 @@ import (
 	//"container/list"
 	"math"
 	"math/rand"
-	"project-particles/config"
 	//"fmt"
 )
 
 func PositionAccordingToShape(TypeShape string, Width int, CentreX, CentreY float64) (PositionX, PositionY float64) {
 	// Initialisation de la position de la particule sur un objet géométrique
-	switch config.General.SpawnObject {
+	switch TypeShape {
 	// Création d'un cercle
-	case TypeShape:
+	case "circle":
 		var randomPosition int = rand.Intn(360)
 		PositionX = CentreX + float64(float64(Width/2)*math.Cos(float64(randomPosition)))
 		PositionY = CentreY + float64(float64(Width/2)*math.Sin(float64(randomPosition)))
 	// Création d'un carré
-	case TypeShape:
+	case "square":
 		var randomPosition int = rand.Intn(4)
 		switch randomPosition {
 		case 0:
