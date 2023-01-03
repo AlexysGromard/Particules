@@ -5,7 +5,6 @@ import (
 	"math"
 	"math/rand"
 	"project-particles/config"
-	//"time"
 	//"fmt"
 )
 
@@ -75,7 +74,7 @@ func Creat_Particles(l *list.List) {
 
 	// Initialisation de la vitesse de la particule
 	var SpeedX, SpeedY float64
-	if config.General.Propulsion {
+	if config.General.SpawnOnAnObject {
 		// Récuépartion de l'angle en fonction du centre
 		var angle float64 = math.Atan2(_PositionY-float64(config.General.WindowSizeY/2), _PositionX-float64(config.General.WindowSizeX/2))
 		// Calcul de la vitesse en fonction de l'angle
@@ -164,5 +163,38 @@ func UpdateOpacity(p *Particle) {
 		p.Opacity = ((p.PositionX + p.PositionY) / float64(config.General.WindowSizeX+config.General.WindowSizeY)) * config.General.Opacity
 	} else if config.General.ChangeOpacityAccordingTo == 2 {
 		p.Opacity = (float64(p.Life) / float64(config.General.Life)) * config.General.Opacity
+	}
+}
+
+// Explosion
+func abs(nb float64) float64 {
+	if nb < 0 {
+		return -nb
+	}
+	return nb
+}
+func speed() (speedX, speedY float64) {
+	speedX = (float64(rand.Intn(5)) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+	speedY = (float64(rand.Intn(5)) + rand.Float64()) * float64(rand.Intn(2)*2-1)
+	if abs(speedX)+abs(speedY) <= 2.5 {
+		speedX, speedY = speed()
+	}
+	return speedX, speedY
+}
+func Explosion(l *list.List) {
+	// On crée une explosion de particules
+	for i := 0; i < 100; i++ {
+		SpeedX, SpeedY := speed()
+		l.PushFront(&Particle{
+			PositionX: float64(config.General.SpawnX),
+			PositionY: float64(config.General.SpawnY),
+			Rotation:  config.General.Rotation,
+			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
+			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
+			Opacity: config.General.Opacity,
+			SpeedX:  SpeedX,
+			SpeedY:  SpeedY,
+			Life:    config.General.Life,
+		})
 	}
 }

@@ -19,7 +19,6 @@ type Config struct {
 	SpawnOnAnObject          bool
 	SpawnObject              string
 	SpawnObjectWidth         int
-	Propulsion               bool
 	// Particule properties
 	Rotation                        float64
 	ScaleX, ScaleY                  float64
@@ -36,8 +35,8 @@ type Config struct {
 	ChangeScaleAccordingTo          int
 	ChangeRotationAccordingTo       int
 	ChangeOpacityAccordingTo        int
-	Collision						bool
-	WhatCollisionDo					int
+	Collision                       bool
+	WhatCollisionDo                 int
 }
 
 var General Config
