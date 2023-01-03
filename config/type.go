@@ -14,12 +14,12 @@ type Config struct {
 	Debug                    bool
 	InitNumParticles         int
 	RandomSpawn              bool
+	SpanwCenter              bool
 	SpawnX, SpawnY           int
 	SpawnRate                float64
 	SpawnOnAnObject          bool
 	SpawnObject              string
 	SpawnObjectWidth         int
-	Propulsion               bool
 	// Particule properties
 	Rotation                        float64
 	ScaleX, ScaleY                  float64
@@ -36,8 +36,11 @@ type Config struct {
 	ChangeScaleAccordingTo          int
 	ChangeRotationAccordingTo       int
 	ChangeOpacityAccordingTo        int
-	Collision						bool
-	WhatCollisionDo					int
+	Collision                       bool
+	WhatCollisionDo                 int
+	// Interaction
+	Interaction bool
+	FollowMouse bool
 }
 
 var General Config
