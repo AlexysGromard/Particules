@@ -38,11 +38,8 @@ func (g *game) Update() error {
 		}
 	}
 	if config.General.FollowMouse {
-		// On recupere les coordonnees de la souris
-		x, y := ebiten.CursorPosition()
-		// On met a jour les coordonnees de la zone de spawn
-		config.General.SpawnX = x
-		config.General.SpawnY = y
+		// On recupere les coordonnees de la souris et on met à jour la zone de spawn
+		config.General.SpawnX, config.General.SpawnY = ebiten.CursorPosition()
 	}
 
 	g.system.Update()
