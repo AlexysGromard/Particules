@@ -1,14 +1,12 @@
 package particles
 
 import (
-	//"container/list"
-
+	"container/list"
 	"project-particles/config"
-	//"fmt"
 )
 
 // cette fonction crée des particules en fonction des paramètre indiqué dans "config.json"
-func (s *System) Add_Particule() {
+func (s *System) Add_Particule(DeadList *list.List) {
 
 	var CentreX, CentreY float64
 	CentreX, CentreY = float64(config.General.WindowSizeX)/2, float64(config.General.WindowSizeY)/2
@@ -40,7 +38,7 @@ func (s *System) Add_Particule() {
 		Life = config.General.Life
 	}
 
-	ParticuleDead := DeadParticles.Content.Front()
+	ParticuleDead := DeadList.Front()
 	if ParticuleDead != nil {
 		pd, ok := ParticuleDead.Value.(*Particle)
 		if ok {
@@ -57,7 +55,7 @@ func (s *System) Add_Particule() {
 			pd.SpeedY = SpeedY
 			pd.Life = Life
 
-			DeadParticles.Content.Remove(ParticuleDead)
+			DeadList.Remove(ParticuleDead)
 		}
 
 	} else {
@@ -73,6 +71,4 @@ func (s *System) Add_Particule() {
 			Life:    Life,
 		})
 	}
-
-	//fmt.Println(DeadParticles.Content)
 }

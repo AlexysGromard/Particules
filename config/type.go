@@ -14,6 +14,7 @@ type Config struct {
 	Debug                    bool
 	InitNumParticles         int
 	RandomSpawn              bool
+	SpanwCenter              bool
 	SpawnX, SpawnY           int
 	SpawnRate                float64
 	SpawnOnAnObject          bool
@@ -39,6 +40,7 @@ type Config struct {
 	WhatCollisionDo                 int
 	// Interaction
 	Interaction bool
+	FollowMouse bool
 }
 
 var General Config
