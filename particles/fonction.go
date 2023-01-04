@@ -14,6 +14,7 @@ func abs(nb float64) float64 {
 	}
 	return nb
 }
+
 func speed() (speedX, speedY float64) {
 	speedX = (float64(rand.Intn(5)) + rand.Float64()) * float64(rand.Intn(2)*2-1)
 	speedY = (float64(rand.Intn(5)) + rand.Float64()) * float64(rand.Intn(2)*2-1)
@@ -22,6 +23,7 @@ func speed() (speedX, speedY float64) {
 	}
 	return speedX, speedY
 }
+
 func Explosion(l *list.List) {
 	// On crée une explosion de particules
 	for i := 0; i < 100; i++ {
