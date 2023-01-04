@@ -9,13 +9,8 @@
 	"SpanwCenter": true,
 	"SpawnX": 400,
 	"SpawnY": 300,
-<<<<<<< HEAD
-	"SpawnRate": 50,
-	"SpawnOnAnObject" : true,
-=======
 	"SpawnRate": 5,
 	"SpawnOnAnObject" : false,
->>>>>>> e636b89192b4edc7f4b8fc1f18e38134059d3d9b
 	"__comment_": "(SpawnObject) : circle, square",
 	"SpawnObject" : "square",
 	"SpawnObjectWidth" : 300,
@@ -31,15 +26,9 @@
 	"KillParticlesOutside" : true,
 	"Gravity" : 0,
 	"MarginOutsideScreen": 10,
-<<<<<<< HEAD
-	"HaveLife": false,
-	"RandomLife": true,
-	"Life": 30,
-=======
 	"HaveLife": true,
 	"RandomLife": false,
 	"Life": 600,
->>>>>>> e636b89192b4edc7f4b8fc1f18e38134059d3d9b
 	"ChangeColorAccordingTo":2,
 	"ChangeScaleAccordingTo":0,
 	"ChangeRotationAccordingTo":0,
