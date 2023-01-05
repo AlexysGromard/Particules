@@ -1,11 +1,7 @@
 package particles
 
 import (
-	//"math/rand"
-	//"math"
 	"project-particles/config"
-	//"time"
-	//"fmt"
 )
 
 var Part_particle float64
@@ -33,15 +29,6 @@ func (s *System) Update() {
 				if config.General.HaveLife {
 					p.Life -= 1
 				}
-
-				/*
-					//suprestion des particule sortante
-					if config.General.KillParticlesOutside{
-						if (p.PositionX+p.ScaleX <= 0 && p.PositionX-p.ScaleX >= float64(config.General.WindowSizeX)) && (p.PositionY+p.ScaleY <= 0 && p.PositionX-p.ScaleY >= float64(config.General.WindowSizeY)){
-							s.Content.Remove(i)
-						}
-					}
-				*/
 
 				var PositionMax int = config.General.WindowSizeX + config.General.WindowSizeY
 
@@ -79,34 +66,35 @@ func (s *System) Update() {
 				if (p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || p.Life <= 0 {
 					DeadParticles.PushFront(p)
 				}
-
 				/*
 					if config.General.Collision {
-						var suivant *Particle = i.Next()
-
-						if p.SpeedX < 0 && p.PositionX > suivant.Value.PositionX {
-							s.Content.InsertBefore(suivant)
+						//suivant := i.Next()
+						//particule_suivante, _ := suivant.Value.(*Particle)
+						fmt.Println("test1")
+						fmt.Println(DeadParticles)
+						if p.SpeedX < 0 && p.PositionX > i.Next().Value.(*Particle).PositionX {
+							s.Content.InsertBefore(i, i.Next())
 							s.Content.Remove(i)
-							//p.PositionX, i.Next().Value(*Particle).PositionX = i.Next().Value(*Particle).PositionX, p.PositionX
-						}
-
-						var avant Particle = i.Pred()
-						if p.SpeedX > 0 && p.PositionX > i.Prev().Value(*Particle).positionX {
-							s.Content.InsertBefore(avant)
+						} else if p.SpeedX > 0 && p.PositionX > i.Prev().Value.(*Particle).PositionX {
+							s.Content.InsertBefore(i, i.Prev())
 							s.Content.Remove(i)
-							//p.PositionX, i.Prev().Value(*Particle).PositionX = i.Prev().Value(*Particle).PositionX, p.PositionX
 						}
-
+						fmt.Println("test2")
 						for j := i.Next(); j != nil; j = j.Next() {
+							fmt.Println("test3")
 							q, ok2 := j.Value.(*Particle)
 							if ok2 {
-								if !((q.PositionX < 0-config.General.MarginOutsideScreen || q.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) || (q.PositionY < 0-config.General.MarginOutsideScreen || q.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || q.Life <= 0) {
-									if math.Abs(p.PositionX-q.PositionX) <= p.ScaleX*10 && math.Abs(p.PositionY-q.PositionY) <= p.ScaleY*10 && q != p {
-										//q.ColorRed,q.ColorGreen,q.ColorBlue = 1,0,0
-										if config.General.WhatCollisionDo == 1 {
-											q.SpeedX, q.SpeedY, p.SpeedX, p.SpeedY = p.SpeedX, p.SpeedY, q.SpeedX, q.SpeedY
+								if !(q.PositionX < 0-config.General.MarginOutsideScreen || q.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) {
+									if !((q.PositionY < 0-config.General.MarginOutsideScreen || q.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || q.Life <= 0) {
+										if math.Abs(p.PositionX-q.PositionX) <= p.ScaleX*10 && math.Abs(p.PositionY-q.PositionY) <= p.ScaleY*10 && q != p {
+											//q.ColorRed,q.ColorGreen,q.ColorBlue = 1,0,0
+											if config.General.WhatCollisionDo == 1 {
+												q.SpeedX, q.SpeedY, p.SpeedX, p.SpeedY = p.SpeedX, p.SpeedY, q.SpeedX, q.SpeedY
+											}
 										}
 									}
+								} else {
+									break
 								}
 							}
 						}

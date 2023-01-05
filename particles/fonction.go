@@ -4,7 +4,6 @@ import (
 	"container/list"
 	"math/rand"
 	"project-particles/config"
-	//"fmt"
 )
 
 // Explosion
