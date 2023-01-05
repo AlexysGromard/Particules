@@ -1,10 +1,8 @@
 package particles
 
 import (
-	//"container/list"
 	"math"
 	"math/rand"
-	//"fmt"
 )
 
 // La fonction PositionAccordingToShape permet de définir la position de la particule
