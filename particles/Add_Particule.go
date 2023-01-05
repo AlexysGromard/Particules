@@ -53,6 +53,7 @@ func (s *System) Add_Particule(DeadList *list.List) {
 			pd.Opacity = config.General.Opacity
 			pd.SpeedX = SpeedX
 			pd.SpeedY = SpeedY
+			pd.LifeInit = Life
 			pd.Life = Life
 
 			DeadList.Remove(ParticuleDead)
@@ -65,10 +66,10 @@ func (s *System) Add_Particule(DeadList *list.List) {
 			Rotation:  config.General.Rotation,
 			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
-			Opacity: config.General.Opacity,
-			SpeedX:  SpeedX,
-			SpeedY:  SpeedY,
-			Life:    Life,
+			Opacity:  config.General.Opacity,
+			SpeedX:   SpeedX,
+			SpeedY:   SpeedY,
+			LifeInit: Life, Life: Life,
 		})
 	}
 }

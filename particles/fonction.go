@@ -33,10 +33,10 @@ func Explosion(l *list.List) {
 			Rotation:  config.General.Rotation,
 			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
-			Opacity: config.General.Opacity,
-			SpeedX:  SpeedX,
-			SpeedY:  SpeedY,
-			Life:    config.General.Life,
+			Opacity:  config.General.Opacity,
+			SpeedX:   SpeedX,
+			SpeedY:   SpeedY,
+			LifeInit: config.General.Life, Life: config.General.Life,
 		})
 	}
 }
