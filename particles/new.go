@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-//cette variable est un System qui contiendra les particule morte
+//cette variable est un System qui contiendra les particule morte du system
 var DeadParticles *list.List
 
 // NewSystem est une fonction qui initialise un système de particules et le

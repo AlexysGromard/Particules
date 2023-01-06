@@ -69,9 +69,9 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 - ```ScaleX``` : Taille de la particule en X
 - ```ScaleY``` : Taille de la particule en Y
 - ```Opacity``` : Opacité de la particule
-- ```ColorRed``` : Couleur de la particule en rouge (1 = 255 en RGB)
-- ```ColorGreen``` : Couleur de la particule en vert (1 = 255 en RGB)
-- ```ColorBlue``` : Couleur de la particule en bleu (1 = 255 en RGB)
+- ```ColorRed``` : Couleur de la particule en rouge (1 => 255 en RGB)
+- ```ColorGreen``` : Couleur de la particule en vert (1 => 255 en RGB)
+- ```ColorBlue``` : Couleur de la particule en bleu (1 => 255 en RGB)
 ### Comportement de la particule 
 ```json
 	"SpeedType" : 2,

@@ -22,7 +22,7 @@ func TestPossitionAccordingToCircle(t *testing.T) {
 
 func TestPossitionAccordingToSquare(t *testing.T) {
 	var centreX, centreY float64 = 100, 100
-	largeur := 10
+	largeur := 20
 	posX, posY := PositionAccordingToShape("square", largeur, centreX, centreY)
 
 	DistanceOX := posX - centreX

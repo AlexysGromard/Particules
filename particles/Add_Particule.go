@@ -6,6 +6,9 @@ import (
 )
 
 // cette fonction crée des particules en fonction des paramètre indiqué dans "config.json"
+// si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
+
+//enter : DeadList (une liste de particule morte qui sont aussi dans le System)
 func (s *System) Add_Particule(DeadList *list.List) {
 
 	var CentreX, CentreY float64
@@ -23,6 +26,7 @@ func (s *System) Add_Particule(DeadList *list.List) {
 		PositionY = float64(config.General.SpawnY)
 	}
 
+	// Initialisation de la Vitesse de la partucle
 	var SpeedX, SpeedY float64
 	if config.General.SpawnOnAnObject {
 		SpeedX, SpeedY = SpeedAccordingToShape(config.General.SpeedType, PositionX, PositionY, CentreX, CentreY)
@@ -33,11 +37,12 @@ func (s *System) Add_Particule(DeadList *list.List) {
 	// Initialisation de la vie de la particule
 	var Life int
 	if config.General.HaveLife && config.General.RandomLife {
-		Life = Random_Life()
+		Life = Random_Life(50)
 	} else {
 		Life = config.General.Life
 	}
 
+	//Ajoute de la paticule au System
 	ParticuleDead := DeadList.Front()
 	if ParticuleDead != nil {
 		pd, ok := ParticuleDead.Value.(*Particle)
