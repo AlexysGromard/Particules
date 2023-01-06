@@ -1,11 +1,5 @@
 package main
 
-import (
-	"project-particles/config"
-	"project-particles/particles"
-
-	"github.com/hajimehoshi/ebiten/v2"
-)
 
 // Update se charge d'appeler la fonction Update du système de particules
 // g.system. Elle est appelée automatiquement exactement 60 fois par seconde par
