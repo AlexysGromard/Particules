@@ -12,13 +12,13 @@
 	"SpawnY": 300,
 	"SpawnRate": 1,
 
-	"Rotation":3.14,
+	"Rotation":0,
 	"ScaleX": 0.75,
 	"ScaleY": 0.75,
-	"Opacity": 0.75,
-	"ColorRed": 1,
-	"ColorGreen": 0.1,
-	"ColorBlue": 0.1,
+	"Opacity": 0.8,
+	"ColorRed": 0.8,
+	"ColorGreen": 0.25,
+	"ColorBlue": 0.8,
 	"_comment": "(SpeedType) : 1 = Low, 2 = Medium, 3 = High",
-	"SpeedType" : 1
+	"SpeedType" : 2
 }
