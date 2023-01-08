@@ -13,11 +13,10 @@ type Config struct {
 	ParticleImage            string
 	Debug                    bool
 
-	InitNumParticles         int
-	RandomSpawn              bool
-	SpanwCenter              bool
-	SpawnX, SpawnY           int
-	SpawnRate                float64
+	InitNumParticles int
+	RandomSpawn      bool
+	SpawnX, SpawnY   int
+	SpawnRate        float64
 	// Particule properties
 	Rotation                        float64
 	ScaleX, ScaleY                  float64

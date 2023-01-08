@@ -7,7 +7,6 @@
 
 	"InitNumParticles": 2,
 	"RandomSpawn": true,
-	"SpanwCenter": true,
 	"SpawnX": 400,
 	"SpawnY": 300,
 	"SpawnRate": 1,
