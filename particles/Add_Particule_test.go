@@ -11,7 +11,7 @@ func TestAdd_ParticuleFromNothing(t *testing.T) {
 	sys.Add_Particule()
 
 	if sys.Content.Len() != 1 {
-		t.Error("il y a ", sys.Content.Len(), " particule dans le system ,mais il devrait en avoire que 1")
+		t.Error("il y a ", sys.Content.Len(), " particule dans le system ,mais il devrait en avoir que 1")
 	}
 
 }

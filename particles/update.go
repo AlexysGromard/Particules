@@ -13,22 +13,17 @@ var Part_particle float64 // cette variable correspond au partie de particule
 // C'est à vous de développer cette fonction.
 func (s *System) Update() {
 	Part_particle += config.General.SpawnRate
-
 	//actualisation des particules
 	for i := s.Content.Front(); i != nil; i = i.Next() {
 		p, ok := i.Value.(*Particle)
-
 		if ok {
 			// mouvement des particule
 			//la position est modifie ne fonction de la vitesse
 			p.PositionX = p.PositionX + p.SpeedX
 			p.PositionY = p.PositionY + p.SpeedY
-			//
 		}
 	}
-	//
-
-	//ajout des particule
+	//ajout des particules
 	if Part_particle >= 1 {
 
 		for i := 0; float64(i) < Part_particle; i++ {
@@ -36,5 +31,4 @@ func (s *System) Update() {
 			s.Add_Particule()
 		}
 	}
-	//
 }
