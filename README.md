@@ -54,7 +54,6 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 ````
 - ```InitNumParticles``` : Nombre de particules à générer au lancement du programme
 - ```RandomSpawn``` : Si ```true```, les particules sont générées aléatoirement sur la fenêtre, sinon elles sont générées à la position ```SpawnX``` et ```SpawnY```
-- ```SpanwCenter``` : Si ```true```, les particules sont générées obligatoirement au centre de la fenêtre.
 - ```SpawnX``` : Position X de la génération des particules
 - ```SpawnY``` : Position Y de la génération des particules
 - ```SpawnRate``` : Nombre de particules générées par seconde
@@ -85,9 +84,3 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
     - 1 : Vitesse faible
     - 2 : Vitesse moyenne
     - 3 : Vitesse forte
-- ```KillParticlesOutside``` : Si ```true```, les particules sont supprimées si elles sortent de l'écran
-- ```Gravity``` : Force de la gravité
-- ```MarginOutsideScreen``` : Marge de la fenêtre pour la suppression des particules
-- ```HaveLife``` : Si ```true```, les particules ont une durée de vie
-- ```RandomLife``` : Si ```true```, la durée de vie des particules est aléatoire
-- ```Life``` : Durée de vie des particules
