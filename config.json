@@ -6,11 +6,11 @@
 	"Debug": true,
 
 	"InitNumParticles": 2,
-	"RandomSpawn": false,
-	"SpanwCenter": true,
+	"RandomSpawn": true,
+	"SpanwCenter": false,
 	"SpawnX": 400,
 	"SpawnY": 300,
-	"SpawnRate": 1,
+	"SpawnRate": 100,
 	"SpawnOnAnObject" : false,
 	"__comment_": "(SpawnObject) : circle, square",
 	"SpawnObject" : "circle",
@@ -32,10 +32,16 @@
 
 	"MarginOutsideScreen": 10,
 
-	"ChangeColorAccordingTo":0,
+	"ChangeColorAccordingTo":1,
+	"minColorRed":1, 
+	"minColorGreen":0.5,
+	"minColorBlue":0,
+	"maxColorRed":1,
+	"maxColorGreen":0,
+	"maxColorBlue":1,
 	"ChangeScaleAccordingTo":0,
 	"ChangeRotationAccordingTo":0,
-	"ChangeOpacityAccordingTo":2,
+	"ChangeOpacityAccordingTo":0,
 	"__comment": "(ChangeXXXAccordingTo) : 0 = Nothing, 1 = Position, 2 = Life",
 
 	"Collision": false,

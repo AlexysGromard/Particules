@@ -35,6 +35,12 @@ type Config struct {
 	MarginOutsideScreen float64
 
 	ChangeColorAccordingTo    int
+	MinColorRed               float64
+	MinColorGreen             float64
+	MinColorBlue              float64
+	MaxColorRed               float64
+	MaxColorGreen             float64
+	MaxColorBlue              float64
 	ChangeScaleAccordingTo    int
 	ChangeRotationAccordingTo int
 	ChangeOpacityAccordingTo  int

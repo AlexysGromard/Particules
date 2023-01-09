@@ -20,6 +20,5 @@ type Particle struct {
 	ColorRed, ColorGreen, ColorBlue float64
 	Opacity                         float64
 	SpeedX, SpeedY                  float64
-	LifeInit                        int
-	Life                            int
+	LifeInit, Life                  int
 }

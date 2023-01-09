@@ -25,7 +25,7 @@ func (s *System) Update() {
 				//la vitesse est modifier en fonction de l'accélération de la gravité
 				p.SpeedY = p.SpeedY + config.General.Gravity
 				//
-				
+
 				//la position est modifie ne fonction de la vitesse
 				p.PositionX = p.PositionX + p.SpeedX
 				p.PositionY = p.PositionY + p.SpeedY
@@ -40,9 +40,9 @@ func (s *System) Update() {
 				// Modifciation des parametre Couleur, Scale, Rotation, Opacity en fonction de mode choisie dans "config.json"
 				var PositionMax int = config.General.WindowSizeX + config.General.WindowSizeY
 				if config.General.ChangeColorAccordingTo == 1 { //modifie les parametre en fonction de la position de la particule
-					p.ColorRed = p.UpdateAccordingToPosition(0, config.General.ColorRed, PositionMax)
-					p.ColorBlue = p.UpdateAccordingToPosition(0, config.General.ColorBlue, PositionMax)
-					p.ColorGreen = p.UpdateAccordingToPosition(0, config.General.ColorGreen, PositionMax)
+					p.ColorRed = p.UpdateAccordingToPosition(config.General.MinColorRed, config.General.MaxColorRed, PositionMax)
+					p.ColorBlue = p.UpdateAccordingToPosition(config.General.MinColorBlue, config.General.MaxColorBlue, PositionMax)
+					p.ColorGreen = p.UpdateAccordingToPosition(config.General.MinColorGreen, config.General.MaxColorGreen, PositionMax)
 				} else if config.General.ChangeColorAccordingTo == 2 { //modifie les parametre en fonction de la position de la vie
 					p.ColorRed = p.UpdateAccordingToLife(0, config.General.ColorRed)
 					p.ColorBlue = p.UpdateAccordingToLife(0, config.General.ColorBlue)
@@ -74,7 +74,7 @@ func (s *System) Update() {
 				if (p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || p.Life <= 0 {
 					DeadParticles.PushFront(p)
 				}
-				
+
 				if config.General.Collision {
 					for j := i.Next(); j != nil; j = j.Next() {
 						q, ok2 := j.Value.(*Particle)
