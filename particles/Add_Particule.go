@@ -8,7 +8,7 @@ import (
 // cette fonction crée des particules en fonction des paramètre indiqué dans "config.json"
 // si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
 
-//enter : DeadList (une liste de particule morte qui sont aussi dans le System)
+// enter : DeadList (une liste de particule morte qui sont aussi dans le System)
 func (s *System) Add_Particule(DeadList *list.List) {
 
 	var CentreX, CentreY float64
@@ -30,6 +30,8 @@ func (s *System) Add_Particule(DeadList *list.List) {
 	var SpeedX, SpeedY float64
 	if config.General.SpawnOnAnObject {
 		SpeedX, SpeedY = SpeedAccordingToShape(config.General.SpeedType, PositionX, PositionY, CentreX, CentreY)
+	} else if config.General.SpeedType == 0 {
+		SpeedX, SpeedY = 0, 0
 	} else {
 		SpeedX, SpeedY = Random_Speed(config.General.SpeedType)
 	}

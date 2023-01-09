@@ -7,10 +7,6 @@ package particles
 // et maximale
 func MinAndMaxSpeed(SpeedMode int) (minSpeed, maxSpeed int) {
 	switch SpeedMode {
-	// 0: vitesse aleatoire entre 0 et 5
-	case 0:
-		minSpeed = 0
-		maxSpeed = 5
 	// 1: vitesse aleatoire entre 0 et 1
 	case 1:
 		minSpeed = 0
