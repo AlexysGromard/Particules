@@ -18,12 +18,32 @@ type Config struct {
 	SpanwCenter              bool
 	SpawnX, SpawnY           int
 	SpawnRate                float64
+	SpawnOnAnObject          bool
+	SpawnObject              string
+	SpawnObjectWidth         int
 	// Particule properties
 	Rotation                        float64
 	ScaleX, ScaleY                  float64
 	Opacity                         float64
 	ColorRed, ColorGreen, ColorBlue float64
 	SpeedType                       int
+	Gravity                         float64
+	HaveLife                        bool
+	RandomLife                      bool
+	Life                            int
+
+	MarginOutsideScreen             float64
+
+	ChangeColorAccordingTo          int
+	ChangeScaleAccordingTo          int
+	ChangeRotationAccordingTo       int
+	ChangeOpacityAccordingTo        int
+
+	Collision                       bool
+	WhatCollisionDo                 int
+	// Interaction
+	Interaction bool
+	FollowMouse bool
 }
 
 var General Config

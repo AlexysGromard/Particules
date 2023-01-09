@@ -48,9 +48,11 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 ```json
 	"InitNumParticles": 100,
 	"RandomSpawn": false,
+	"SpanwCenter": true,
 	"SpawnX": 400,
 	"SpawnY": 300,
 	"SpawnRate": 2,
+	"SpawnOnAnObject" : true,
 ````
 - ```InitNumParticles``` : Nombre de particules à générer au lancement du programme
 - ```RandomSpawn``` : Si ```true```, les particules sont générées aléatoirement sur la fenêtre, sinon elles sont générées à la position ```SpawnX``` et ```SpawnY```
@@ -58,7 +60,17 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 - ```SpawnX``` : Position X de la génération des particules
 - ```SpawnY``` : Position Y de la génération des particules
 - ```SpawnRate``` : Nombre de particules générées par seconde
+- ```SpawnOnAnObject``` : Si ```true```, les particules sont générées sur un objet
+### Generation sur un objet
+```json
+	"SpawnObject" : "circle",
+	"SpawnObjectWidth" : 300,
+````
+- ```SpawnObject``` : Type d'objet
+	- ```circle``` : Cercle
+	- ```square``` : Carré
 
+- ```SpawnObjectWidth``` : Largeur de l'objet
 
 ### Propriétés des particules
 ```json
@@ -80,6 +92,12 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 ### Comportement de la particule 
 ```json
 	"SpeedType" : 2,
+	"KillParticlesOutside" : true,
+	"Gravity" : 1,
+	"MarginOutsideScreen": 1,
+	"HaveLife": true,
+	"RandomLife": true,
+	"Life": 600
 ````
 - ```SpeedType``` : Type de vitesse de la particule
     - 1 : Vitesse faible
@@ -91,3 +109,61 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 - ```HaveLife``` : Si ```true```, les particules ont une durée de vie
 - ```RandomLife``` : Si ```true```, la durée de vie des particules est aléatoire
 - ```Life``` : Durée de vie des particules
+
+### Gestion de la particule 
+```json
+	"KillParticlesOutside" : true,
+	"Gravity" : 0,
+	"MarginOutsideScreen": 10,
+	"HaveLife": true,
+	"RandomLife": true,
+	"Life": 50,
+```
+- ```KillParticlesOutside``` : Si ```true```, les particules sont supprimées si elles sortent de l'écran
+- ```Gravity``` : Force de la gravité (de 0 à 1)
+- ```MarginOutsideScreen``` : Marge de la fenêtre pour la suppression des particules
+- ```HaveLife``` : Si ```true```, les particules ont une durée de vie
+- ```RandomLife``` : Si ```true```, la durée de vie des particules est aléatoire
+- ```Life``` : Durée de vie des particules (si ```RandomLife``` est ```false```)
+
+### Changement dynamique des particules
+```json
+	"ChangeColorAccordingTo":2,
+	"ChangeScaleAccordingTo":0,
+	"ChangeRotationAccordingTo":0,
+	"ChangeOpacityAccordingTo":0,
+````
+- ```ChangeColorAccordingTo``` : Changement de la couleur des particules
+	- 0 : Aucun changement
+	- 1 : Changement de la couleur en fonction de la vitesse
+	- 2 : Changement de la couleur en fonction de la durée de vie
+- ```ChangeScaleAccordingTo``` : Changement de la taille des particules
+	- 0 : Aucun changement
+	- 1 : Changement de la taille en fonction de la vitesse
+	- 2 : Changement de la taille en fonction de la durée de vie
+- ```ChangeRotationAccordingTo``` : Changement de la rotation des particules
+	- 0 : Aucun changement
+	- 1 : Changement de la rotation en fonction de la vitesse
+	- 2 : Changement de la rotation en fonction de la durée de vie
+- ```ChangeOpacityAccordingTo``` : Changement de l'opacité des particules
+	- 0 : Aucun changement
+	- 1 : Changement de l'opacité en fonction de la vitesse
+	- 2 : Changement de l'opacité en fonction de la durée de vie
+
+### Collision 
+```json
+	"Collision": false,
+	"WhatCollisionDo": 1,
+```
+- ```Collision``` : Si ```true```, les particules peuvent entrer en collision
+- ```WhatCollisionDo``` : Action à effectuer en cas de collision
+	- 0 : Aucune action
+	- 1 : Suppression des particules en collision
+	- 2 : Changement de la couleur des particules en collision
+### Interaction avec l'utilisateur 
+```json
+	"Interaction": true,
+	"FollowMouse": false
+```
+- ```Interaction``` : Si ```true```, les particules peuvent être déplacées par l'utilisateur avec le clavier. (Touches : flèches directionnelles)
+- ```FollowMouse``` : Si ```true```, les particules suivent la souris
