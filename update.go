@@ -12,12 +12,12 @@ import (
 // la bibliothèque Ebiten. Cette fonction ne devrait pas être modifiée sauf
 // pour les deux dernières extensions.
 func (g *game) Update() error {
+	// INTERACTION AVEC CONFIGURATION
+	// Si on appuie sur la touche espace, on change de page
+	if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == configurationsPage {
+		CurrentPage = particlesPage
+	}
 	if config.General.Interaction {
-		// INTERACTION AVEC CONFIGURATION
-		// Si on appuie sur la touche espace, on change de page
-		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == configurationsPage {
-			CurrentPage = particlesPage
-		}
 		// INTERACTION AVEC PARTICULES
 		// Deplacement de la zone de spawn
 		// Si fleche haut est appuyee, on diminue la coordonnee Y de la zone de spawn
