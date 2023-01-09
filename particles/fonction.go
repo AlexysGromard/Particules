@@ -40,3 +40,7 @@ func Explosion(l *list.List) {
 		})
 	}
 }
+
+//question ?
+//According : je veux utiliser le même programme mais j'utilise un paramêtre
+//DeadListe : je le fais correctement ?

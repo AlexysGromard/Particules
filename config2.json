@@ -33,6 +33,12 @@
 	"MarginOutsideScreen": 10,
 
 	"ChangeColorAccordingTo":0,
+	"minColorRed":0, 
+	"minColorGreen":0,
+	"minColorBlue":0,
+	"maxColorRed":1,
+	"maxColorGreen":0.1,
+	"maxColorBlue":0.1,
 	"ChangeScaleAccordingTo":0,
 	"ChangeRotationAccordingTo":0,
 	"ChangeOpacityAccordingTo":2,

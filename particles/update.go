@@ -44,9 +44,9 @@ func (s *System) Update() {
 					p.ColorBlue = p.UpdateAccordingToPosition(config.General.MinColorBlue, config.General.MaxColorBlue, PositionMax)
 					p.ColorGreen = p.UpdateAccordingToPosition(config.General.MinColorGreen, config.General.MaxColorGreen, PositionMax)
 				} else if config.General.ChangeColorAccordingTo == 2 { //modifie les parametre en fonction de la position de la vie
-					p.ColorRed = p.UpdateAccordingToLife(0, config.General.ColorRed)
-					p.ColorBlue = p.UpdateAccordingToLife(0, config.General.ColorBlue)
-					p.ColorGreen = p.UpdateAccordingToLife(0, config.General.ColorGreen)
+					p.ColorRed = p.UpdateAccordingToLife(config.General.MinColorRed, config.General.MaxColorRed)
+					p.ColorBlue = p.UpdateAccordingToLife(config.General.MinColorBlue, config.General.MaxColorBlue)
+					p.ColorGreen = p.UpdateAccordingToLife(config.General.MinColorGreen, config.General.MaxColorGreen)
 				}
 
 				if config.General.ChangeScaleAccordingTo == 1 { //modifie les parametre en fonction de la position de la particule
