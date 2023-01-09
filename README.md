@@ -56,7 +56,6 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 ````
 - ```InitNumParticles``` : Nombre de particules à générer au lancement du programme
 - ```RandomSpawn``` : Si ```true```, les particules sont générées aléatoirement sur la fenêtre, sinon elles sont générées à la position ```SpawnX``` et ```SpawnY```
-- ```SpanwCenter``` : Si ```true```, les particules sont générées obligatoirement au centre de la fenêtre.
 - ```SpawnX``` : Position X de la génération des particules
 - ```SpawnY``` : Position Y de la génération des particules
 - ```SpawnRate``` : Nombre de particules générées par seconde
