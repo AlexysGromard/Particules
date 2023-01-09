@@ -13,12 +13,12 @@ import (
 // pour les deux dernières extensions.
 func (g *game) Update() error {
 	if config.General.Interaction {
-		// Interaction avec page de configuration
+		// INTERACTION AVEC CONFIGURATION
 		// Si on appuie sur la touche espace, on change de page
 		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == configurationsPage {
 			CurrentPage = particlesPage
-			// call draw
 		}
+		// INTERACTION AVEC PARTICULES
 		// Deplacement de la zone de spawn
 		// Si fleche haut est appuyee, on diminue la coordonnee Y de la zone de spawn
 		if ebiten.IsKeyPressed(ebiten.KeyUp) && config.General.SpawnY > 0 {
@@ -36,7 +36,6 @@ func (g *game) Update() error {
 		if ebiten.IsKeyPressed(ebiten.KeyRight) && config.General.SpawnX < config.General.WindowSizeX {
 			config.General.SpawnX += 3
 		}
-
 		// Explosion
 		// Si espace est appuyee, on appelle la fonction Explosion du systeme de particules
 		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == particlesPage {
