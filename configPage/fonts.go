@@ -7,11 +7,13 @@ import (
 	"golang.org/x/image/font"
 )
 
+// Importer les deux polices de caractères
 const (
 	fontFaceRegular = "assets/fonts/Roboto-Regular.ttf"
 	fontFaceBold    = "assets/fonts/Roboto-Bold.ttf"
 )
 
+// Créer une structure pour les polices
 type fonts struct {
 	face         font.Face
 	titleFace    font.Face
@@ -19,6 +21,9 @@ type fonts struct {
 	toolTipFace  font.Face
 }
 
+// LoadFonts charge les polices de caractères
+// Entrée: aucun
+// Sortie: fonts, error
 func loadFonts() (*fonts, error) {
 	// Font face 20
 	fontFace, err := loadFont(fontFaceRegular, 20)
@@ -52,17 +57,21 @@ func loadFonts() (*fonts, error) {
 	}, nil
 }
 
+// LoadFont charge une police de caractères à partir d'un fichier et d'une taille
+// Entrée: chemin du fichier, taille de la police
+// Sortie: font.Face, error
 func loadFont(path string, size float64) (font.Face, error) {
+	// Lecture du fichier
 	fontData, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-
+	// Copie la police dans une variable
 	ttfFont, err := truetype.Parse(fontData)
 	if err != nil {
 		return nil, err
 	}
-
+	// Retourne la police
 	return truetype.NewFace(ttfFont, &truetype.Options{
 		Size:    size,
 		DPI:     72,
