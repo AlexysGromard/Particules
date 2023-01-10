@@ -5,7 +5,8 @@ import (
 	"project-particles/config"
 )
 
-var Part_particle float64 // cette variable correspond au partie de particule
+var Part_particle float64       // cette variable correspond au partie de particule
+var WhirlwindState bool = false // cette variable permet de savoir si le tourbillon est actif ou non
 
 // Update mets à jour l'état du système de particules (c'est-à-dire l'état de
 // chacune des particules) à chaque pas de temps. Elle est appellée exactement
@@ -91,6 +92,10 @@ func (s *System) Update() {
 							}
 						}
 					}
+				}
+				// Tourbillon
+				if WhirlwindState {
+					p.SpeedX, p.SpeedY = MakeWhirlwind(p)
 				}
 			}
 		}

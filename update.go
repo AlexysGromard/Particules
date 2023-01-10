@@ -41,6 +41,15 @@ func (g *game) Update() error {
 		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == particlesPage {
 			particles.Explosion(g.system.Content)
 		}
+		// Tourbillon
+		// Si T est appuyee, on appelle la fonction Tourbillon du systeme de particules
+		if ebiten.IsKeyPressed(ebiten.KeyT) {
+			particles.WhirlwindState = true
+		}
+		// Si T n'est plus appuyee, on appelle la fonction Tourbillon du systeme de particules
+		if !ebiten.IsKeyPressed(ebiten.KeyT) && particles.WhirlwindState {
+			particles.WhirlwindState = false
+		}
 	}
 	if config.General.FollowMouse {
 		// On recupere les coordonnees de la souris
