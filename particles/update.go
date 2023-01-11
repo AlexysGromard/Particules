@@ -81,44 +81,46 @@ func (s *System) Update() {
 				}
 
 				if config.General.Collision {
-					for j := i.Next(); j != nil; j = j.Next() {
-						q, ok2 := j.Value.(*Particle)
-						if ok2 {
-							if !(q.PositionX < 0-config.General.MarginOutsideScreen || q.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) {
-								if !((q.PositionY < 0-config.General.MarginOutsideScreen || q.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || q.Life <= 0) {
-									if math.Abs(p.PositionX-q.PositionX) <= p.ScaleX*10 && math.Abs(p.PositionY-q.PositionY) <= p.ScaleY*10 && q != p {
-										//q.ColorRed,q.ColorGreen,q.ColorBlue = 1,0,0
-										if config.General.WhatCollisionDo == 1 {
+					if config.General.CollisionAmongParticle {
+						for j := i.Next(); j != nil; j = j.Next() {
+							q, ok2 := j.Value.(*Particle)
+							if ok2 {
+								if !(q.PositionX < 0-config.General.MarginOutsideScreen || q.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) {
+									if !((q.PositionY < 0-config.General.MarginOutsideScreen || q.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || q.Life <= 0) {
+										if math.Abs(p.PositionX-q.PositionX) <= p.ScaleX*10 && math.Abs(p.PositionY-q.PositionY) <= p.ScaleY*10 && q != p {
+
 											q.SpeedX, q.SpeedY, p.SpeedX, p.SpeedY = p.SpeedX, p.SpeedY, q.SpeedX, q.SpeedY
+
+											angle1 := math.Atan2(p.PositionY-q.PositionY, p.PositionX-q.PositionX)
+
+											p.PositionX = p.PositionX + math.Cos(angle1)*p.ScaleX*0.1
+											p.PositionY = p.PositionY + math.Sin(angle1)*p.ScaleY*0.1
+											q.PositionX = q.PositionX + math.Cos(-angle1)*q.ScaleX*0.1
+											q.PositionY = q.PositionY + math.Sin(-angle1)*q.ScaleY*0.1
 										}
-
-										angle1 := math.Atan2(p.PositionY-q.PositionY, p.PositionX-q.PositionX)
-
-										p.PositionX = p.PositionX + math.Cos(angle1)*p.ScaleX*0.1
-										p.PositionY = p.PositionY + math.Sin(angle1)*p.ScaleY*0.1
-										q.PositionX = q.PositionX + math.Cos(-angle1)*q.ScaleX*0.1
-										q.PositionY = q.PositionY + math.Sin(-angle1)*q.ScaleY*0.1
 									}
+								} else {
+									break
 								}
-							} else {
-								break
 							}
 						}
 					}
-					if p.PositionX <= 0 || p.PositionX+p.ScaleX*10 >= float64(config.General.WindowSizeX) {
-						p.SpeedX = -p.SpeedX
-						if p.PositionX <= 0 {
-							p.PositionX = p.PositionX + p.ScaleX*0.1
-						} else {
-							p.PositionX = p.PositionX - p.ScaleX*0.1
+					if config.General.CollisionWithWall {
+						if p.PositionX <= 0 || p.PositionX+p.ScaleX*10 >= float64(config.General.WindowSizeX) {
+							p.SpeedX = -p.SpeedX
+							if p.PositionX <= 0 {
+								p.PositionX = p.PositionX + p.ScaleX*0.1
+							} else {
+								p.PositionX = p.PositionX - p.ScaleX*0.1
+							}
 						}
-					}
-					if p.PositionY <= 0 || p.PositionY+p.ScaleY*10 >= float64(config.General.WindowSizeY) {
-						p.SpeedY = -p.SpeedY
-						if p.PositionY <= 0 {
-							p.PositionY = p.PositionY + p.ScaleY*0.1
-						} else {
-							p.PositionY = p.PositionY - p.ScaleY*0.1
+						if p.PositionY <= 0 || p.PositionY+p.ScaleY*10 >= float64(config.General.WindowSizeY) {
+							p.SpeedY = -p.SpeedY
+							if p.PositionY <= 0 {
+								p.PositionY = p.PositionY + p.ScaleY*0.1
+							} else {
+								p.PositionY = p.PositionY - p.ScaleY*0.1
+							}
 						}
 					}
 				}
@@ -131,9 +133,11 @@ func (s *System) Update() {
 		i = suivant
 	}
 
-	//trier des particules
-	for i := s.Content.Front(); i != nil; i = i.Next() {
-		s.PlaceAccordingToPosition(i)
+	if config.General.Collision {
+		//trier des particules
+		for i := s.Content.Front(); i != nil; i = i.Next() {
+			s.PlaceAccordingToPosition(i)
+		}
 	}
 
 	//ajout des particule

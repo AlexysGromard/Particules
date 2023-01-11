@@ -45,8 +45,9 @@ type Config struct {
 	ChangeRotationAccordingTo int
 	ChangeOpacityAccordingTo  int
 
-	Collision       bool
-	WhatCollisionDo int
+	Collision              bool
+	CollisionAmongParticle bool
+	CollisionWithWall      bool
 	// Interaction
 	Interaction bool
 	FollowMouse bool

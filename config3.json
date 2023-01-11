@@ -45,7 +45,8 @@
 	"__comment": "(ChangeXXXAccordingTo) : 0 = Nothing, 1 = Position, 2 = Life",
 
 	"Collision": false,
-	"WhatCollisionDo": 1,
+	"CollisionAmongParticle": true,
+	"CollisionWithWall":true,
 	"Interaction": false,
 	"FollowMouse": false
 }
