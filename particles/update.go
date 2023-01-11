@@ -124,7 +124,7 @@ func (s *System) Update() {
 				}
 				// Tourbillon
 				if WhirlwindState {
-					p.SpeedX, p.SpeedY = MakeWhirlwind(p)
+					p.MakeWhirlwind()
 				}
 			}
 		}
