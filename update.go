@@ -14,8 +14,10 @@ import (
 func (g *game) Update() error {
 	// INTERACTION AVEC CONFIGURATION
 	// Si on appuie sur la touche espace, on change de page
-	if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == configurationsPage {
+	if ebiten.IsKeyPressed(ebiten.KeyEnter) && CurrentPage == configurationsPage {
 		CurrentPage = particlesPage
+	} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
+		CurrentPage = configurationsPage
 	}
 	if config.General.Interaction {
 		// INTERACTION AVEC PARTICULES
