@@ -91,9 +91,34 @@ func (s *System) Update() {
 										if config.General.WhatCollisionDo == 1 {
 											q.SpeedX, q.SpeedY, p.SpeedX, p.SpeedY = p.SpeedX, p.SpeedY, q.SpeedX, q.SpeedY
 										}
+
+										angle1 := math.Atan2(p.PositionY-q.PositionY, p.PositionX-q.PositionX)
+
+										p.PositionX = p.PositionX + math.Cos(angle1)*p.ScaleX*0.1
+										p.PositionY = p.PositionY + math.Sin(angle1)*p.ScaleY*0.1
+										q.PositionX = q.PositionX + math.Cos(-angle1)*q.ScaleX*0.1
+										q.PositionY = q.PositionY + math.Sin(-angle1)*q.ScaleY*0.1
 									}
 								}
+							} else {
+								break
 							}
+						}
+					}
+					if p.PositionX <= 0 || p.PositionX+p.ScaleX*10 >= float64(config.General.WindowSizeX) {
+						p.SpeedX = -p.SpeedX
+						if p.PositionX <= 0 {
+							p.PositionX = p.PositionX + p.ScaleX*0.1
+						} else {
+							p.PositionX = p.PositionX - p.ScaleX*0.1
+						}
+					}
+					if p.PositionY <= 0 || p.PositionY+p.ScaleY*10 >= float64(config.General.WindowSizeY) {
+						p.SpeedY = -p.SpeedY
+						if p.PositionY <= 0 {
+							p.PositionY = p.PositionY + p.ScaleY*0.1
+						} else {
+							p.PositionY = p.PositionY - p.ScaleY*0.1
 						}
 					}
 				}
@@ -104,6 +129,11 @@ func (s *System) Update() {
 			}
 		}
 		i = suivant
+	}
+
+	//trier des particules
+	for i := s.Content.Front(); i != nil; i = i.Next() {
+		s.PlaceAccordingToPosition(i)
 	}
 
 	//ajout des particule

@@ -21,14 +21,11 @@ func NewSystem() System {
 
 	//
 	Particles := System{Content: list.New(), DeadList: list.New()}
-	//DeadParticles = list.New()
 	//
 
 	for i := 0; i < config.General.InitNumParticles; i++ {
 		// Initialisation de la position de la particule
-
 		Particles.Add_Particule()
-
 	}
 
 	return Particles
