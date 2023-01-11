@@ -29,6 +29,8 @@ func (s *System) Add_Particule() {
 	var SpeedX, SpeedY float64
 	if config.General.SpawnOnAnObject {
 		SpeedX, SpeedY = SpeedAccordingToShape(config.General.SpeedType, PositionX, PositionY, CentreX, CentreY)
+	} else if config.General.SpeedType == 0 {
+		SpeedX, SpeedY = 0, 0
 	} else {
 		SpeedX, SpeedY = Random_Speed(config.General.SpeedType)
 	}

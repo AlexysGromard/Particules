@@ -5,7 +5,8 @@ import (
 	"project-particles/config"
 )
 
-var Part_particle float64 // cette variable correspond au partie de particule
+var Part_particle float64       // cette variable correspond au partie de particule
+var WhirlwindState bool = false // cette variable permet de savoir si le tourbillon est actif ou non
 
 // Update mets à jour l'état du système de particules (c'est-à-dire l'état de
 // chacune des particules) à chaque pas de temps. Elle est appellée exactement
@@ -16,7 +17,6 @@ func (s *System) Update() {
 	Part_particle += config.General.SpawnRate
 
 	i := s.Content.Front()
-	//suivant := s.Content.Front()
 
 	//actualisation des particules
 	for i != nil {
@@ -78,13 +78,6 @@ func (s *System) Update() {
 				//enregistre les particule morte
 				if (p.PositionX < 0-config.General.MarginOutsideScreen || p.PositionX > float64(config.General.WindowSizeX)+config.General.MarginOutsideScreen) || (p.PositionY < 0-config.General.MarginOutsideScreen || p.PositionY > float64(config.General.WindowSizeY)+config.General.MarginOutsideScreen) || p.Life <= 0 {
 					s.KillParticule(i)
-
-					//s.DeadList.PushFront(p)
-					//fmt.Println("---", s.DeadList)
-
-					//fmt.Println("---",s.Content, "Next() : ",i.Next())
-					//s.Content.Remove(i)
-					//fmt.Println(s.Content, "Next() : ",i.Next())
 				}
 
 				if config.General.Collision {
@@ -104,10 +97,15 @@ func (s *System) Update() {
 						}
 					}
 				}
+				// Tourbillon
+				if WhirlwindState {
+					p.SpeedX, p.SpeedY = MakeWhirlwind(p)
+				}
 			}
 		}
 		i = suivant
 	}
+
 	//ajout des particule
 	if Part_particle >= 1 {
 
@@ -124,5 +122,4 @@ func (s *System) Update() {
 		config.General.SpawnY = config.General.WindowSizeY / 2
 	}
 
-	//fmt.Println("Content : ", s.Content, "; DeadList : ", s.DeadList)
 }
