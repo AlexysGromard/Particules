@@ -2,8 +2,8 @@ package particles
 
 import "testing"
 
-func TestSpeedMode0(t *testing.T) {
-	maxSpeed, minSpeed := MinAndMaxSpeed(0)
+func TestSpeedModemoin1(t *testing.T) {
+	maxSpeed, minSpeed := MinAndMaxSpeed(-1)
 	if maxSpeed != 5 || minSpeed != 0 {
 		t.Error("maxSpeed et minSpeed devrait être à 5 et 0 mais ils sont à ", maxSpeed, " et ", minSpeed)
 	}

@@ -9,6 +9,11 @@ import (
 // Valeur d'entrée : un entier (mode de vitesse)
 // Valeur de sortie : deux flottants (vitesse de la particule x et y)
 func Random_Speed(SpeedMode int) (SpeedX, SpeedY float64) {
+
+	if SpeedMode == 0 {
+		return 0, 0
+	}
+
 	// Initialisation de l'intervalle vitesse de la particule
 	maxSpeed, minSpeed := MinAndMaxSpeed(SpeedMode)
 	// Initialisation de la direction de la particule

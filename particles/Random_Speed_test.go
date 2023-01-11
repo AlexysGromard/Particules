@@ -5,6 +5,12 @@ import (
 	"testing"
 )
 
+func TestRandom_Speedmoin1(t *testing.T) {
+	if !Vérification(-1) {
+		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
+	}
+}
+
 func TestRandom_Speed0(t *testing.T) {
 	if !Vérification(0) {
 		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
@@ -38,9 +44,9 @@ func Vérification(mode int) bool {
 	for i := 0; i < 100; i++ {
 		speedX, SpeedY = Random_Speed(mode)
 
-		v_Réelle = math.Sqrt(carrée(speedX) + carrée(SpeedY))
+		v_Réelle = math.Sqrt(carrée(speedX) + carrée(SpeedY)) //la fonction Sqrt du math accepte considère que Sqrt(0) == 0
 
-		if v_Réelle <= float64(min) || v_Réelle > float64(max) {
+		if mode != 0 && (v_Réelle <= float64(min) || v_Réelle >= float64(max)) {
 			return false
 		}
 	}

@@ -7,6 +7,7 @@ import "container/list"
 // évoluer durant votre projet.
 type System struct {
 	Content *list.List
+	DeadList *list.List
 }
 
 // Particle définit une particule.

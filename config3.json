@@ -10,7 +10,7 @@
 	"SpanwCenter": true,
 	"SpawnX": 400,
 	"SpawnY": 300,
-	"SpawnRate": 600,
+	"SpawnRate": 500,
 	"SpawnOnAnObject" : false,
 	"__comment_": "(SpawnObject) : circle, square",
 	"SpawnObject" : "circle",

@@ -25,10 +25,10 @@ func TestPossitionAccordingToSquare(t *testing.T) {
 	largeur := 20
 	posX, posY := PositionAccordingToShape("square", largeur, centreX, centreY)
 
-	DistanceOX := posX - centreX
-	DistanceOY := posY - centreY
+	DistanceOX := math.Abs(posX - centreX)
+	DistanceOY := math.Abs(posY - centreY)
 
 	if DistanceOX != float64(largeur)/2 && DistanceOY != float64(largeur)/2 {
-		t.Error("l'une des cordonner x ou y devrait être égale à ", largeur/2, " mais elle sont égale à PositionX = ", DistanceOX, " PossitionY = ", DistanceOX)
+		t.Error("l'une des cordonner x ou y devrait être égale à ", largeur/2, " mais elle sont égale à PositionX = ", DistanceOX, " PossitionY = ", DistanceOY)
 	}
 }

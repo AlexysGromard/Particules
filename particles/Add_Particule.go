@@ -1,7 +1,6 @@
 package particles
 
 import (
-	"container/list"
 	"project-particles/config"
 )
 
@@ -9,7 +8,7 @@ import (
 // si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
 
 //enter : DeadList (une liste de particule morte qui sont aussi dans le System)
-func (s *System) Add_Particule(DeadList *list.List) {
+func (s *System) Add_Particule() {
 
 	var CentreX, CentreY float64
 	CentreX, CentreY = float64(config.General.WindowSizeX)/2, float64(config.General.WindowSizeY)/2
@@ -43,7 +42,7 @@ func (s *System) Add_Particule(DeadList *list.List) {
 	}
 
 	//Ajoute de la paticule au System
-	ParticuleDead := DeadList.Front()
+	ParticuleDead := s.DeadList.Front()
 	if ParticuleDead != nil {
 		pd, ok := ParticuleDead.Value.(*Particle)
 		if ok {
@@ -61,7 +60,7 @@ func (s *System) Add_Particule(DeadList *list.List) {
 			pd.LifeInit = Life
 			pd.Life = Life
 
-			DeadList.Remove(ParticuleDead)
+			s.ResurrectParticule(ParticuleDead)
 		}
 
 	} else {

@@ -1,0 +1,18 @@
+package particles
+
+import (
+	"container/list"
+	"testing"
+)
+
+func TestResurrectParticule(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	sys.DeadList.PushFront(Basique_Particule())
+
+	sys.ResurrectParticule(sys.DeadList.Front())
+
+	if sys.Content.Len() != 1 || sys.DeadList.Len() != 0 {
+		t.Error("la liste Content devrait avoir 1 élément et DeadList 0 élément mais pour vous Content à ", sys.Content.Len(), " élément et DeadListe à ", sys.DeadList.Len(), " élément")
+	}
+}
