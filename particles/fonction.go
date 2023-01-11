@@ -2,10 +2,10 @@ package particles
 
 import (
 	"container/list"
-	"math/rand"
 	"project-particles/config"
 )
 
+/*
 // Explosion
 func abs(nb float64) float64 {
 	if nb < 0 {
@@ -21,12 +21,12 @@ func speed() (speedX, speedY float64) {
 		speedX, speedY = speed()
 	}
 	return speedX, speedY
-}
+}*/
 
 func Explosion(l *list.List) {
 	// On crée une explosion de particules
 	for i := 0; i < 100; i++ {
-		SpeedX, SpeedY := speed()
+		SpeedX, SpeedY := Random_Speed(3) //speed()
 		l.PushFront(&Particle{
 			PositionX: float64(config.General.SpawnX),
 			PositionY: float64(config.General.SpawnY),
