@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"image/color"
 	"project-particles/assets"
 	"project-particles/config"
+	"project-particles/configPage"
 	"project-particles/particles"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -24,7 +26,8 @@ var CurrentPage int
 // c'est précisé dans le sujet.
 func (g *game) Draw(screen *ebiten.Image) {
 	if CurrentPage == configurationsPage {
-
+		screen.Fill(color.RGBA{20, 26, 33, 255})
+		configPage.UpdateConfigPage(screen)
 	} else if CurrentPage == particlesPage {
 		for e := g.system.Content.Front(); e != nil; e = e.Next() {
 			p, ok := e.Value.(*particles.Particle)
