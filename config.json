@@ -10,7 +10,7 @@
 	"SpanwCenter": true,
 	"SpawnX": 400,
 	"SpawnY": 300,
-	"SpawnRate": 500,
+	"SpawnRate": 10,
 	"SpawnOnAnObject" : false,
 	"__comment_": "(SpawnObject) : circle, square",
 	"SpawnObject" : "circle",
@@ -25,8 +25,8 @@
 	"ColorBlue": 0.1,
 	"_comment": "(SpeedType) : 1 = Low, 2 = Medium, 3 = High",
 	"SpeedType" : 2,
-	"Gravity" : -0.1,
-	"HaveLife": true,
+	"Gravity" : 0,
+	"HaveLife": false,
 	"RandomLife": false,
 	"Life": 50,
 
@@ -47,6 +47,6 @@
 	"Collision": false,
 	"CollisionAmongParticle": true,
 	"CollisionWithWall":true,
-	"Interaction": false,
+	"Interaction": true,
 	"FollowMouse": false
 }
