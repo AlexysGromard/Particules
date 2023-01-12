@@ -32,7 +32,7 @@
 
 	"MarginOutsideScreen": 10,
 
-	"ChangeColorAccordingTo":2,
+	"ChangeColorAccordingTo":1,
 	"minColorRed":1, 
 	"minColorGreen":0,
 	"minColorBlue":0,

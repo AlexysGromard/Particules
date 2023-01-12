@@ -2,6 +2,7 @@ package configPage
 
 import (
 	"fmt"
+	"image/color"
 
 	"project-particles/config"
 
@@ -11,6 +12,8 @@ import (
 var (
 	accessParticlesButton *Button
 	checkbox              *Checkbox
+	texttest              *Text
+	texttest2             *Text
 )
 
 // FidnImage cherche une image grâce à son nom dans la liste des images
@@ -28,11 +31,19 @@ func findImage(images []Images, filename string) *ebiten.Image {
 
 // UpdateConfigPage est la fonction qui est appelée pour mettre à jour la page de configuration
 func UpdateConfigPage(screen *ebiten.Image) error {
-	fontFace, _ := loadFont(fontFaceRegular, 20)
+	// Load les fonts
+	err := loadFontRegular()
+	if err != nil {
+		return err
+	}
+	err = loadFontBold()
+	if err != nil {
+		return err
+	}
 	// Crée le boutton si il n'existe pas
 	if accessParticlesButton == nil {
 		images := []*ebiten.Image{findImage(ImageList, "button-idle.png"), findImage(ImageList, "button-pressed.png"), findImage(ImageList, "button-hover.png")}
-		accessParticlesButton = newButton(config.General.WindowSizeX-100-10, config.General.WindowSizeY-50-10, 100, 50, images, "Hello World", fontFace, func() { fmt.Println("test") })
+		accessParticlesButton = newButton(config.General.WindowSizeX-100-10, config.General.WindowSizeY-50-10, 100, 50, images, "Hello World", RobotoRegularFontF, func() { fmt.Println("test") })
 	}
 	// Met à jour l'état du bouton et l'affiche
 	accessParticlesButton.updateButton(screen)
@@ -46,6 +57,13 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	// Met à jour l'état de la checkbox et l'affiche
 	checkbox.updateCheckbox(screen)
 	checkbox.Draw(screen)
+
+	// Create text
+	if texttest == nil {
+		texttest = newText(70, 90, "Debug", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	// Draw text
+	texttest.Draw(screen)
 
 	return nil
 }
