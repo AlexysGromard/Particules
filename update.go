@@ -2,6 +2,7 @@ package main
 
 import (
 	"project-particles/config"
+	"project-particles/configPage"
 	"project-particles/particles"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -16,6 +17,8 @@ func (g *game) Update() error {
 	// Si on appuie sur la touche espace, on change de page
 	if ebiten.IsKeyPressed(ebiten.KeyEnter) && CurrentPage == configurationsPage {
 		CurrentPage = particlesPage
+		// Save la configuration
+		configPage.SaveConfig()
 	} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
 		CurrentPage = configurationsPage
 	}
