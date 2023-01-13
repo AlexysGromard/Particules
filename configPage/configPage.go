@@ -12,7 +12,7 @@ import (
 var (
 	welcomeTitle          *Text
 	accessParticlesButton *Button
-	textInut              *TextInput
+	textInut              *NumberInput
 	checkbox              *Checkbox
 	texttest              *Text
 	sliderTest            *Slider
@@ -66,7 +66,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 		textInut = newTextInput(10, 300, 200, 50, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "tool-tip.png"), &config.General.SpawnX, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	// Update text input
-	textInut.updateTextInput(screen)
+	textInut.updateNumberInput(screen)
 	textInut.Draw(screen)
 
 	// Crée la checkbox si elle n'existe pas

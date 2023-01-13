@@ -13,21 +13,21 @@ var (
 )
 
 // Création de la structure TextInput
-type TextInput struct {
+type NumberInput struct {
 	x, y, width, height int
 	imageNormal         *ebiten.Image
 	imageHover          *ebiten.Image
 	imagePressed        *ebiten.Image
 	hover               bool
 	pressed             bool
-	text                *int
+	number              *int
 	fontface            font.Face
 	color               color.Color
 	Text                *Text
 }
 
 // Draw
-func (t *TextInput) Draw(screen *ebiten.Image) {
+func (t *NumberInput) Draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if t.hover || t.pressed {
 		img = t.imageHover
@@ -42,7 +42,7 @@ func (t *TextInput) Draw(screen *ebiten.Image) {
 }
 
 // Update
-func (t *TextInput) updateTextInput(screen *ebiten.Image) {
+func (t *NumberInput) updateNumberInput(screen *ebiten.Image) {
 	x, y := ebiten.CursorPosition()
 	t.hover = false
 	// Si la souris est sur le bouton
@@ -60,7 +60,7 @@ func (t *TextInput) updateTextInput(screen *ebiten.Image) {
 	}
 	// Si t.pressed est vrai, on peut écrire dans le textInput
 	if t.pressed && !touchIsPressed {
-		var str string = strconv.Itoa(*t.text)
+		var str string = strconv.Itoa(*t.number)
 		if ebiten.IsKeyPressed(ebiten.Key0) || ebiten.IsKeyPressed(ebiten.KeyNumpad0) {
 			str += "0"
 			touchIsPressed = true
@@ -99,16 +99,16 @@ func (t *TextInput) updateTextInput(screen *ebiten.Image) {
 		} else if ebiten.IsKeyPressed(ebiten.KeyEnter) {
 			t.pressed = false
 		}
-		*t.text, _ = strconv.Atoi(str)
+		*t.number, _ = strconv.Atoi(str)
 	}
 	// Update text
-	t.Text.text = strconv.Itoa(*t.text)
+	t.Text.text = strconv.Itoa(*t.number)
 	t.Text.updateText(screen)
 }
 
 // Création d'un nouveau TextInput
-func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed *ebiten.Image, text *int, fontFace font.Face, color color.Color) *TextInput {
-	return &TextInput{
+func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed *ebiten.Image, number *int, fontFace font.Face, color color.Color) *NumberInput {
+	return &NumberInput{
 		x:            x,
 		y:            y,
 		width:        width,
@@ -116,9 +116,9 @@ func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed
 		imageNormal:  imageNormal,
 		imageHover:   imageHover,
 		imagePressed: imagePressed,
-		text:         text,
+		number:       number,
 		fontface:     fontFace,
 		color:        color,
-		Text:         newText(x+10, y+height/2-3, strconv.Itoa(*text), fontFace, color),
+		Text:         newText(x+10, y+height/2-3, strconv.Itoa(*number), fontFace, color),
 	}
 }
