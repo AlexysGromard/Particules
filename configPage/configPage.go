@@ -14,6 +14,7 @@ var (
 	accessParticlesButton *Button
 	checkbox              *Checkbox
 	texttest              *Text
+	sliderTest            *Slider
 )
 
 // FidnImage cherche une image grâce à son nom dans la liste des images
@@ -70,6 +71,15 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	}
 	// Draw text
 	texttest.Draw(screen)
+
+	// Create slider
+	if sliderTest == nil {
+		sliderTest = newSlider(10, 150, 200, 3, findImage(ImageList, "slider-track-idle.png"), findImage(ImageList, "slider-handle-idle.png"), findImage(ImageList, "slider-handle-hover.png"), findImage(ImageList, "slider-handle-disabled.png"), &config.General.Gravity, 0, 1)
+	}
+	// Update slider
+	sliderTest.updateSlider(screen)
+	// Draw slider
+	sliderTest.Draw(screen)
 
 	return nil
 }
