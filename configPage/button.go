@@ -1,6 +1,7 @@
 package configPage
 
 import (
+	"image"
 	"image/color"
 	"project-particles/config"
 
@@ -37,8 +38,9 @@ func (b *Button) Draw(screen *ebiten.Image) {
 	opt := &ebiten.DrawImageOptions{}
 	opt.GeoM.Translate(float64(b.x), float64(b.y))
 
-	screen.DrawImage(img, opt)
-	text.Draw(screen, b.text, b.font, b.textX, b.textY, color.White)
+	screen.DrawImage(nineSlice(img, b.width, b.height), opt)
+	// Draw text in the center of the button
+	text.Draw(screen, b.text, b.font, b.textX+33, b.textY+2, color.RGBA{185, 204, 216, 255})
 }
 
 // Mise à jour des bouttons
@@ -53,14 +55,17 @@ func (b *Button) Update(screen *ebiten.Image) {
 		b.hover = true
 		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 			b.pressed = true
+			b.onClick()
+		} else {
+			b.pressed = false
 		}
 	} else {
 		b.pressed = false
 	}
 	// Si le bouton en bas à gauche n'est plus à la bonne place en fonction de la taille d'écran
-	if b.x < config.General.WindowSizeX-b.width || b.x > config.General.WindowSizeX-b.width+10 || b.y < config.General.WindowSizeY-b.height || b.y > config.General.WindowSizeY-b.height+10 {
-		b.x = config.General.WindowSizeX - b.width - 10
-		b.y = config.General.WindowSizeY - b.height - 10
+	if b.x < config.General.WindowSizeX-b.width || b.x > config.General.WindowSizeX-b.width+30 || b.y < config.General.WindowSizeY-b.height || b.y > config.General.WindowSizeY-b.height+30 {
+		b.x = config.General.WindowSizeX - b.width - 30
+		b.y = config.General.WindowSizeY - b.height - 30
 		b.textX = b.x + 10
 		b.textY = b.y + b.height/2
 	}
@@ -83,4 +88,46 @@ func newButton(x, y, width, height int, images []*ebiten.Image, text string, fon
 		font:         font,
 		onClick:      onClick,
 	}
+}
+
+// Fonction de NineSlice
+// Cette fonction permet de découper une image en 9 parties pour pouvoir l'étirer sans que les bords ne se déforment
+// Entrées : image (image à découper), width, height (taille de l'image)
+func nineSlice(img *ebiten.Image, width, height int) *ebiten.Image {
+	w, h := img.Size()
+	// On découpe l'image en 9 parties
+	imgTab := make([]*ebiten.Image, 5)
+	// imgTab[0] = coin haut gauche
+	imgTab[0] = img.SubImage(image.Rect(0, 0, 23, 21)).(*ebiten.Image)
+	// imgTab[1] = centre
+	imgTab[1] = img.SubImage(image.Rect(24, 0, w-23, height)).(*ebiten.Image)
+	// imgTab[2] = coin haut droit
+	imgTab[2] = img.SubImage(image.Rect(w-23, 0, w, 20)).(*ebiten.Image)
+	// imgTab[3] = bord bas gauche
+	imgTab[3] = img.SubImage(image.Rect(0, h-21, 23, h)).(*ebiten.Image)
+	// imgTab[5] = coin bas droit
+	imgTab[4] = img.SubImage(image.Rect(w-23, h-21, w, h)).(*ebiten.Image)
+	// ON créée une nouvelle image
+	imgOut := ebiten.NewImage(width, height)
+	// On dessine les 9 parties de l'image sur la nouvelle image
+	opt := &ebiten.DrawImageOptions{}
+	// Mettre les 4 coins
+	// Partie en haut à gauche
+	opt.GeoM.Scale(1, 1)
+	opt.GeoM.Translate(0, 0)
+	imgOut.DrawImage(imgTab[0], opt)
+	// Partie en haut à droite
+	opt.GeoM.Translate(float64(width)-23, 0)
+	imgOut.DrawImage(imgTab[2], opt)
+	// Partie en bas à gauche
+	opt.GeoM.Translate(-float64(width)+23, float64(height)-30)
+	imgOut.DrawImage(imgTab[3], opt)
+	// Partie en bas à droite
+	opt.GeoM.Translate(float64(width)-23, 0)
+	imgOut.DrawImage(imgTab[4], opt)
+	// Mettre bord haut
+	opt.GeoM.Translate(-float64(width)+23+3.4, -20)
+	opt.GeoM.Scale(6.9, 1)
+	imgOut.DrawImage(imgTab[1], opt)
+	return imgOut
 }

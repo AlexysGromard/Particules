@@ -1,7 +1,6 @@
 package configPage
 
 import (
-	"fmt"
 	"image/color"
 
 	"project-particles/config"
@@ -55,7 +54,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	// Crée le boutton si il n'existe pas
 	if accessParticlesButton == nil {
 		images := []*ebiten.Image{findImage(ImageList, "button-idle.png"), findImage(ImageList, "button-pressed.png"), findImage(ImageList, "button-hover.png")}
-		accessParticlesButton = newButton(config.General.WindowSizeX-120-10, config.General.WindowSizeY-50-10, 120, 50, images, "Hello World", RobotoRegularFontF, func() { fmt.Println("test") })
+		accessParticlesButton = newButton(config.General.WindowSizeX-150-30, config.General.WindowSizeY-50-30, 150, 50, images, "Valider", RobotoRegularFontF, func() { SaveConfig() })
 	}
 	// Met à jour l'état du bouton et l'affiche
 	accessParticlesButton.Update(screen)
