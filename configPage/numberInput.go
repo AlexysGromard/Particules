@@ -42,7 +42,7 @@ func (t *NumberInput) Draw(screen *ebiten.Image) {
 }
 
 // Update
-func (t *NumberInput) updateNumberInput(screen *ebiten.Image) {
+func (t *NumberInput) Update(screen *ebiten.Image) {
 	x, y := ebiten.CursorPosition()
 	t.hover = false
 	// Si la souris est sur le bouton
@@ -103,7 +103,7 @@ func (t *NumberInput) updateNumberInput(screen *ebiten.Image) {
 	}
 	// Update text
 	t.Text.text = strconv.Itoa(*t.number)
-	t.Text.updateText(screen)
+	t.Text.Update(screen)
 }
 
 // Création d'un nouveau TextInput

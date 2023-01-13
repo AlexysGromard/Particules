@@ -44,7 +44,7 @@ func (b *Button) Draw(screen *ebiten.Image) {
 // Mise à jour des bouttons
 // Cette fonction regarde si la souris est sur un boutton et si elle est enfoncée
 // Elle regarde vérifie si le bouton en bas à droite est toujours à la bonne position (en fonction de l'affichage de la fenêtre)
-func (b *Button) updateButton(screen *ebiten.Image) {
+func (b *Button) Update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	b.hover = false

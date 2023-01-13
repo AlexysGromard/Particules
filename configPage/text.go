@@ -20,7 +20,7 @@ func (t *Text) Draw(screen *ebiten.Image) {
 	text.Draw(screen, t.text, t.fontFace, t.x, t.y, t.color)
 }
 
-func (t *Text) updateText(screen *ebiten.Image) {
+func (t *Text) Update(screen *ebiten.Image) {
 	// Mettre à jour le texte
 	text.Draw(screen, t.text, t.fontFace, t.x, t.y, t.color)
 }

@@ -34,7 +34,7 @@ func (c *Checkbox) Draw(screen *ebiten.Image) {
 // Cette fonction regarde si la souris est sur une checkbox et si elle est enfoncée
 // Elle regarde vérifie si la checkbox est cochée ou non
 // Si la checkbox est cochée, elle affiche l'image
-func (c *Checkbox) updateCheckbox(screen *ebiten.Image) {
+func (c *Checkbox) Update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	c.hover = false

@@ -58,7 +58,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 		accessParticlesButton = newButton(config.General.WindowSizeX-120-10, config.General.WindowSizeY-50-10, 120, 50, images, "Hello World", RobotoRegularFontF, func() { fmt.Println("test") })
 	}
 	// Met à jour l'état du bouton et l'affiche
-	accessParticlesButton.updateButton(screen)
+	accessParticlesButton.Update(screen)
 	accessParticlesButton.Draw(screen)
 
 	// Text input
@@ -66,7 +66,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 		textInut = newTextInput(10, 300, 200, 50, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "tool-tip.png"), &config.General.SpawnX, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	// Update text input
-	textInut.updateNumberInput(screen)
+	textInut.Update(screen)
 	textInut.Draw(screen)
 
 	// Crée la checkbox si elle n'existe pas
@@ -75,7 +75,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 		checkbox = newCheckbox(10, 70, 50, 50, images, config.General.Debug, func() { config.General.Debug = !config.General.Debug })
 	}
 	// Met à jour l'état de la checkbox et l'affiche
-	checkbox.updateCheckbox(screen)
+	checkbox.Update(screen)
 	checkbox.Draw(screen)
 
 	// Create text
@@ -90,7 +90,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 		sliderTest = newSlider(10, 150, 200, 3, findImage(ImageList, "slider-track-idle.png"), findImage(ImageList, "slider-handle-idle.png"), findImage(ImageList, "slider-handle-hover.png"), findImage(ImageList, "slider-handle-disabled.png"), &config.General.Gravity, 0, 1)
 	}
 	// Update slider
-	sliderTest.updateSlider(screen)
+	sliderTest.Update(screen)
 	// Draw slider
 	sliderTest.Draw(screen)
 

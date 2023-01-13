@@ -50,7 +50,7 @@ func (s *Slider) Draw(screen *ebiten.Image) {
 // Mise à jour des sliders
 // Cette fonction regarde si la souris est sur un slider et si elle est enfoncée
 // Si le slider est enfoncé, il est déplacé
-func (s *Slider) updateSlider(screen *ebiten.Image) {
+func (s *Slider) Update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	// Position de la souris par rapport au slider
