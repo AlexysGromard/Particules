@@ -41,9 +41,13 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	if err != nil {
 		return err
 	}
+	err = loadFontTitle()
+	if err != nil {
+		return err
+	}
 	// Titre de configuration
 	if welcomeTitle == nil {
-		welcomeTitle = newText(10, 25, "Configuration", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+		welcomeTitle = newText(10, 30, "Configuration", PageTitleF, color.RGBA{127, 139, 148, 255})
 	}
 	welcomeTitle.Draw(screen)
 

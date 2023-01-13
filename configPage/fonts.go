@@ -22,6 +22,9 @@ var (
 	// RobotoBold
 	RobotoBoldFont  *truetype.Font
 	RobotoBoldFontF font.Face
+	// PageTitle
+	PageTitle  *Text
+	PageTitleF font.Face
 )
 
 // loadFontRegular charge une police de caractères regular
@@ -54,6 +57,24 @@ func loadFontBold() error {
 	}
 	RobotoBoldFontF = truetype.NewFace(RobotoBoldFont, &truetype.Options{
 		Size:    20,
+		DPI:     72,
+		Hinting: font.HintingFull,
+	})
+	return nil
+}
+
+// LoadFontTitle
+func loadFontTitle() error {
+	b, err := ioutil.ReadFile(fontFaceBold)
+	if err != nil {
+		return err
+	}
+	RobotoBoldFont, err = truetype.Parse(b)
+	if err != nil {
+		return err
+	}
+	PageTitleF = truetype.NewFace(RobotoBoldFont, &truetype.Options{
+		Size:    25,
 		DPI:     72,
 		Hinting: font.HintingFull,
 	})
