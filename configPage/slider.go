@@ -39,6 +39,12 @@ func (s *Slider) Draw(screen *ebiten.Image) {
 	opt.GeoM.Scale(float64(4), 1)
 	opt.GeoM.Translate(float64(s.sliderXPosition), float64(s.y))
 	screen.DrawImage(img, opt)
+	// Si le slider est hover, alors cursor = pointer
+	if s.hover {
+		ebiten.SetCursorShape(ebiten.CursorShapePointer)
+	} else {
+		ebiten.SetCursorShape(ebiten.CursorShapeDefault)
+	}
 }
 
 // Mise à jour des sliders
