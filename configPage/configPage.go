@@ -10,10 +10,10 @@ import (
 )
 
 var (
+	welcomeTitle          *Text
 	accessParticlesButton *Button
 	checkbox              *Checkbox
 	texttest              *Text
-	texttest2             *Text
 )
 
 // FidnImage cherche une image grâce à son nom dans la liste des images
@@ -40,10 +40,16 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	if err != nil {
 		return err
 	}
+	// Titre de configuration
+	if welcomeTitle == nil {
+		welcomeTitle = newText(10, 25, "Configuration", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+	}
+	welcomeTitle.Draw(screen)
+
 	// Crée le boutton si il n'existe pas
 	if accessParticlesButton == nil {
 		images := []*ebiten.Image{findImage(ImageList, "button-idle.png"), findImage(ImageList, "button-pressed.png"), findImage(ImageList, "button-hover.png")}
-		accessParticlesButton = newButton(config.General.WindowSizeX-100-10, config.General.WindowSizeY-50-10, 100, 50, images, "Hello World", RobotoRegularFontF, func() { fmt.Println("test") })
+		accessParticlesButton = newButton(config.General.WindowSizeX-120-10, config.General.WindowSizeY-50-10, 120, 50, images, "Hello World", RobotoRegularFontF, func() { fmt.Println("test") })
 	}
 	// Met à jour l'état du bouton et l'affiche
 	accessParticlesButton.updateButton(screen)

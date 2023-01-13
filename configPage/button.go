@@ -1,9 +1,11 @@
 package configPage
 
 import (
+	"image/color"
 	"project-particles/config"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/hajimehoshi/ebiten/v2/text"
 	"golang.org/x/image/font"
 )
 
@@ -34,7 +36,9 @@ func (b *Button) Draw(screen *ebiten.Image) {
 	}
 	opt := &ebiten.DrawImageOptions{}
 	opt.GeoM.Translate(float64(b.x), float64(b.y))
+
 	screen.DrawImage(img, opt)
+	text.Draw(screen, b.text, b.font, b.textX, b.textY, color.White)
 }
 
 // Mise à jour des bouttons
@@ -55,8 +59,10 @@ func (b *Button) updateButton(screen *ebiten.Image) {
 	}
 	// Si le bouton en bas à gauche n'est plus à la bonne place en fonction de la taille d'écran
 	if b.x < config.General.WindowSizeX-b.width || b.x > config.General.WindowSizeX-b.width+10 || b.y < config.General.WindowSizeY-b.height || b.y > config.General.WindowSizeY-b.height+10 {
-		b.x = config.General.WindowSizeX - 100 - 10
-		b.y = config.General.WindowSizeY - 50 - 10
+		b.x = config.General.WindowSizeX - b.width - 10
+		b.y = config.General.WindowSizeY - b.height - 10
+		b.textX = b.x + 10
+		b.textY = b.y + b.height/2
 	}
 }
 
@@ -72,8 +78,8 @@ func newButton(x, y, width, height int, images []*ebiten.Image, text string, fon
 		imagePressed: images[1],
 		imageHover:   images[2],
 		text:         text,
-		textX:        x + width/2,
-		textY:        y + height/2,
+		textX:        x,
+		textY:        y,
 		font:         font,
 		onClick:      onClick,
 	}
