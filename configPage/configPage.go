@@ -8,6 +8,15 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+// NOTICE DES COMMPOSANTS
+// Text : positionX, positionY, text, PoliceDécriture, couleur(RGBA)
+// Button : positionX, positionY, largeur, hauteur, images []*ebiten.Image, text, PoliceDécriture, fonction à appeler
+// ----- images []*ebiten.Image = [0]normal, [1]pressed, [2]hover
+// Checkbox : positionX, positionY, largeur, hauteur, images []*ebiten.Image, valeur(checked), disabled, fonction à appeler
+// ----- images []*ebiten.Image = [0]normal, [1]hover, [2]disabled, [3]checked, [4]unchecked, [5]greyed(disabled)
+// Slider : positionX, positionY, largeur, hauteur, imageLigneSlider, imageDuSlider, imageDuSliderHover, imageDuSliderDisabled, valeur(pointeur vers var), valeurMin, valeurMax, disabled
+// numberInput : positionX, positionY, largeur, hauteur, imageNormal, imageHover, imageDisabled, disabled, number(pointeur), PoliceDécriture
+
 var (
 	welcomeTitle          *Text
 	accessParticlesButton *Button
