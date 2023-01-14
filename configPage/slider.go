@@ -81,7 +81,7 @@ func (s *Slider) Update(screen *ebiten.Image) {
 		}
 	}
 	// Mettre à jour la valeur du slider au pointeur
-	*s.value = float64(s.sliderXPosition-s.x) / float64(s.width) * s.maxValue
+	*s.value = s.maxValue * (float64(s.sliderXPosition-s.x) / float64(s.width))
 }
 
 // Création d'un slider
@@ -99,7 +99,7 @@ func newSlider(x, y, width, height int, imageSliderTrack, imageSlider, imageSlid
 		imageSliderDisabled: imageSliderDisabled,
 		value:               value,
 		minValue:            minValue,
-		maxValue:            maxValue,
+		maxValue:            maxValue + maxValue/4,
 		disabled:            disabled,
 	}
 }

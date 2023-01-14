@@ -124,7 +124,7 @@ func newTextInput(x, y, width, height int, imageNormal, imageHover, imageDisable
 		disabled:      disabled,
 		number:        number,
 		fontface:      fontFace,
-		Text:          newText(x+10, y+height/2-3, strconv.Itoa(*number), fontFace, color.RGBA{127, 139, 148, 255}),
+		Text:          newText(x+10, y+height/2+7, strconv.Itoa(*number), fontFace, color.RGBA{127, 139, 148, 255}),
 	}
 }
 
