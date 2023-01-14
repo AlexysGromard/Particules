@@ -1,6 +1,7 @@
 package configPage
 
 import (
+	"image"
 	"image/color"
 	"strconv"
 
@@ -22,7 +23,6 @@ type NumberInput struct {
 	pressed             bool
 	number              *int
 	fontface            font.Face
-	color               color.Color
 	Text                *Text
 }
 
@@ -38,7 +38,7 @@ func (t *NumberInput) Draw(screen *ebiten.Image) {
 	t.Text.Draw(screen)
 	opt := &ebiten.DrawImageOptions{}
 	opt.GeoM.Translate(float64(t.x), float64(t.y))
-	screen.DrawImage(img, opt)
+	screen.DrawImage(nineSliceInput(img, t.width, t.height), opt)
 }
 
 // Update
@@ -50,9 +50,11 @@ func (t *NumberInput) Update(screen *ebiten.Image) {
 		t.hover = true
 		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 			t.pressed = true
+			t.Text.color = color.RGBA{226, 199, 90, 255}
 		}
 	} else if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) && (x < t.x || x > t.x+t.width || y < t.y || y > t.y+t.height) {
 		t.pressed = false
+		t.Text.color = color.RGBA{127, 139, 148, 255}
 	}
 	// Verifie si aucune touche n'est appuyée
 	if !ebiten.IsKeyPressed(ebiten.Key0) && !ebiten.IsKeyPressed(ebiten.KeyNumpad0) && !ebiten.IsKeyPressed(ebiten.Key1) && !ebiten.IsKeyPressed(ebiten.KeyNumpad1) && !ebiten.IsKeyPressed(ebiten.Key2) && !ebiten.IsKeyPressed(ebiten.KeyNumpad2) && !ebiten.IsKeyPressed(ebiten.Key3) && !ebiten.IsKeyPressed(ebiten.KeyNumpad3) && !ebiten.IsKeyPressed(ebiten.Key4) && !ebiten.IsKeyPressed(ebiten.KeyNumpad4) && !ebiten.IsKeyPressed(ebiten.Key5) && !ebiten.IsKeyPressed(ebiten.KeyNumpad5) && !ebiten.IsKeyPressed(ebiten.Key6) && !ebiten.IsKeyPressed(ebiten.KeyNumpad6) && !ebiten.IsKeyPressed(ebiten.Key7) && !ebiten.IsKeyPressed(ebiten.KeyNumpad7) && !ebiten.IsKeyPressed(ebiten.Key8) && !ebiten.IsKeyPressed(ebiten.KeyNumpad8) && !ebiten.IsKeyPressed(ebiten.Key9) && !ebiten.IsKeyPressed(ebiten.KeyNumpad9) && !ebiten.IsKeyPressed(ebiten.KeyBackspace) {
@@ -107,7 +109,7 @@ func (t *NumberInput) Update(screen *ebiten.Image) {
 }
 
 // Création d'un nouveau TextInput
-func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed *ebiten.Image, number *int, fontFace font.Face, color color.Color) *NumberInput {
+func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed *ebiten.Image, number *int, fontFace font.Face) *NumberInput {
 	return &NumberInput{
 		x:            x,
 		y:            y,
@@ -118,7 +120,38 @@ func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed
 		imagePressed: imagePressed,
 		number:       number,
 		fontface:     fontFace,
-		color:        color,
-		Text:         newText(x+10, y+height/2-3, strconv.Itoa(*number), fontFace, color),
+		Text:         newText(x+10, y+height/2-3, strconv.Itoa(*number), fontFace, color.RGBA{127, 139, 148, 255}),
 	}
+}
+
+// Fonction de NineSlice
+// Cette fonction permet de découper une image en 9 parties pour pouvoir l'étirer sans que les bords ne se déforment
+// Entrées : image (image à découper), width, height (taille de l'image)
+func nineSliceInput(img *ebiten.Image, width, height int) *ebiten.Image {
+	w, h := img.Size()
+	// On découpe l'image en 9 parties
+	imgTab := make([]*ebiten.Image, 3)
+	// imgTab[0] = Gauche
+	imgTab[0] = img.SubImage(image.Rect(0, 0, 9, h)).(*ebiten.Image)
+	// imgTab[1] = Millieu
+	imgTab[1] = img.SubImage(image.Rect(9, 0, w-2, h)).(*ebiten.Image)
+	// imgTab[2] = coin haut droit
+	imgTab[2] = img.SubImage(image.Rect(w-2, 0, w, h)).(*ebiten.Image)
+	// ON créée une nouvelle image
+	imgOut := ebiten.NewImage(width, height)
+	// On dessine les 9 parties de l'image sur la nouvelle image
+	opt := &ebiten.DrawImageOptions{}
+	// Mettre les 4 coins
+	// Partie  à gauche
+	opt.GeoM.Scale(1, 1)
+	opt.GeoM.Translate(0, 0)
+	imgOut.DrawImage(imgTab[0], opt)
+	// Partie en haut à droite
+	opt.GeoM.Translate(float64(width)-23, 0)
+	imgOut.DrawImage(imgTab[2], opt)
+	// Partie au milieu
+	opt.GeoM.Scale(3.85, 1)
+	opt.GeoM.Translate(float64(-w*8-55), 0)
+	imgOut.DrawImage(imgTab[1], opt)
+	return imgOut
 }

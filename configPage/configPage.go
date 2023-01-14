@@ -62,7 +62,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Text input
 	if textInut == nil {
-		textInut = newTextInput(10, 300, 200, 50, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "tool-tip.png"), &config.General.SpawnX, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		textInut = newTextInput(10, 300, 100, 50, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "tool-tip.png"), &config.General.SpawnX, RobotoRegularFontF)
 	}
 	// Update text input
 	textInut.Update(screen)
