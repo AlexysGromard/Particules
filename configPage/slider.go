@@ -17,13 +17,16 @@ type Slider struct {
 	value               *float64
 	minValue            float64
 	maxValue            float64
+	disabled            bool
 }
 
 // Impression des sliders
 // Cette fonction met à jour l'affichage des sliders en fonction de leur état (hover, pressed, checked)
 func (s *Slider) Draw(screen *ebiten.Image) {
 	var img *ebiten.Image
-	if s.hover {
+	if s.disabled {
+		img = s.imageSliderDisabled
+	} else if s.hover {
 		img = s.imageSliderHover
 	} else {
 		img = s.imageSlider
@@ -57,7 +60,7 @@ func (s *Slider) Update(screen *ebiten.Image) {
 	difX := x - s.sliderXPosition
 	s.hover = false
 	// Si la souris est sur le slider
-	if (x >= s.sliderXPosition-difX && x <= s.sliderXPosition+5*4 && y >= s.y && y <= s.y+s.height+4) || s.pressed {
+	if ((x >= s.sliderXPosition-difX && x <= s.sliderXPosition+5*4 && y >= s.y && y <= s.y+s.height+4) || s.pressed) && !s.disabled {
 		s.hover = true
 		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 			s.pressed = true
@@ -83,7 +86,7 @@ func (s *Slider) Update(screen *ebiten.Image) {
 
 // Création d'un slider
 // Cette fonction crée un slider
-func newSlider(x, y, width, height int, imageSliderTrack, imageSlider, imageSliderHover, imageSliderDisabled *ebiten.Image, value *float64, minValue float64, maxValue float64) *Slider {
+func newSlider(x, y, width, height int, imageSliderTrack, imageSlider, imageSliderHover, imageSliderDisabled *ebiten.Image, value *float64, minValue float64, maxValue float64, disabled bool) *Slider {
 	return &Slider{
 		x:                   x,
 		y:                   y,
@@ -97,5 +100,6 @@ func newSlider(x, y, width, height int, imageSliderTrack, imageSlider, imageSlid
 		value:               value,
 		minValue:            minValue,
 		maxValue:            maxValue,
+		disabled:            disabled,
 	}
 }
