@@ -18,9 +18,10 @@ type NumberInput struct {
 	x, y, width, height int
 	imageNormal         *ebiten.Image
 	imageHover          *ebiten.Image
-	imagePressed        *ebiten.Image
+	imageDisabled       *ebiten.Image
 	hover               bool
 	pressed             bool
+	disabled            bool
 	number              *int
 	fontface            font.Face
 	Text                *Text
@@ -29,7 +30,9 @@ type NumberInput struct {
 // Draw
 func (t *NumberInput) Draw(screen *ebiten.Image) {
 	var img *ebiten.Image
-	if t.hover || t.pressed {
+	if t.disabled {
+		img = t.imageDisabled
+	} else if t.hover || t.pressed {
 		img = t.imageHover
 	} else {
 		img = t.imageNormal
@@ -46,7 +49,7 @@ func (t *NumberInput) Update(screen *ebiten.Image) {
 	x, y := ebiten.CursorPosition()
 	t.hover = false
 	// Si la souris est sur le bouton
-	if x > t.x && x < t.x+t.width && y > t.y && y < t.y+t.height {
+	if (x > t.x && x < t.x+t.width && y > t.y && y < t.y+t.height) && !t.disabled {
 		t.hover = true
 		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 			t.pressed = true
@@ -109,18 +112,19 @@ func (t *NumberInput) Update(screen *ebiten.Image) {
 }
 
 // Création d'un nouveau TextInput
-func newTextInput(x, y, width, height int, imageNormal, imageHover, imagePressed *ebiten.Image, number *int, fontFace font.Face) *NumberInput {
+func newTextInput(x, y, width, height int, imageNormal, imageHover, imageDisabled *ebiten.Image, disabled bool, number *int, fontFace font.Face) *NumberInput {
 	return &NumberInput{
-		x:            x,
-		y:            y,
-		width:        width,
-		height:       height,
-		imageNormal:  imageNormal,
-		imageHover:   imageHover,
-		imagePressed: imagePressed,
-		number:       number,
-		fontface:     fontFace,
-		Text:         newText(x+10, y+height/2-3, strconv.Itoa(*number), fontFace, color.RGBA{127, 139, 148, 255}),
+		x:             x,
+		y:             y,
+		width:         width,
+		height:        height,
+		imageNormal:   imageNormal,
+		imageHover:    imageHover,
+		imageDisabled: imageDisabled,
+		disabled:      disabled,
+		number:        number,
+		fontface:      fontFace,
+		Text:          newText(x+10, y+height/2-3, strconv.Itoa(*number), fontFace, color.RGBA{127, 139, 148, 255}),
 	}
 }
 
