@@ -22,7 +22,8 @@ import (
 // PageTitleF : Roboto Bold 25
 
 var (
-	welcomeTitle            *Text
+	welcomeTitle *Text
+	// windowConfiguration
 	windowConfiguration     *Text
 	debugButton             *Checkbox
 	DebugText               *Text
@@ -48,6 +49,26 @@ var (
 	spawnOnObjectSquareText *Text
 	spawnObjectWidth        *NumberInput
 	spawnObjectWidthText    *Text
+	//particulesPropertiesText
+	particulesPropertiesText *Text
+	rotation                 *Slider
+	rotationValue            *Value
+	rotationText             *Text
+	scaleX                   *Slider
+	scaleXValue              *Value
+	scaleXText               *Text
+	scaleY                   *Slider
+	scaleYValue              *Value
+	scaleYText               *Text
+	opacity                  *Slider
+	opacityValue             *Value
+	opacityText              *Text
+	colorRed                 *Slider
+	colorRedValue            *Value
+	colorRedText             *Text
+	colorGreen               *Slider
+	colorGreenValue          *Value
+	colorGreenText           *Text
 
 	accessParticlesButton *Button
 )
@@ -109,19 +130,19 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	}
 	// Titre de configuration
 	if welcomeTitle == nil {
-		welcomeTitle = newText(10, 30, "Configuration", PageTitleF, color.RGBA{127, 139, 148, 255})
+		welcomeTitle = newText(20, 30, "Configuration", PageTitleF, color.RGBA{127, 139, 148, 255})
 	}
 	welcomeTitle.Draw(screen)
 
 	// Titre de configuration de la fenêtre
 	if windowConfiguration == nil {
-		windowConfiguration = newText(10, 60, "Configuration de la fenêtre", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+		windowConfiguration = newText(20, 60, "Configuration de la fenêtre", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
 	}
 	windowConfiguration.Draw(screen)
 
 	// Checkbox debug
 	if debugButton == nil {
-		debugButton = newCheckbox(10, 75, 50, 30, checkboxImages, config.General.Debug, false, func() { config.General.Debug = !config.General.Debug })
+		debugButton = newCheckbox(20, 75, 50, 30, checkboxImages, config.General.Debug, false, func() { config.General.Debug = !config.General.Debug })
 	}
 	debugButton.Update(screen)
 	debugButton.Draw(screen)
@@ -132,71 +153,71 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Titre de génération de particules
 	if particleGeneration == nil {
-		particleGeneration = newText(10, 150, "Génération de particules", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+		particleGeneration = newText(20, 150, "Génération de particules", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
 	}
 	particleGeneration.Draw(screen)
 
 	// Nombre de particules initiales
 	if initNumParticles == nil {
-		initNumParticles = newTextInput(10, 165, 100, 30, numberInputImages, false, &config.General.InitNumParticles, RobotoRegularFontF)
+		initNumParticles = newTextInput(20, 165, 100, 30, numberInputImages, false, &config.General.InitNumParticles, RobotoRegularFontF)
 	}
 	initNumParticles.Update(screen)
 	initNumParticles.Draw(screen)
 	if initNumParticlesText == nil {
-		initNumParticlesText = newText(100, 185, "Nombre de particules initiales", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		initNumParticlesText = newText(110, 185, "Nombre de particules initiales", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	initNumParticlesText.Draw(screen)
 
 	// Checkbox random spawn
 	if randomSpawn == nil {
-		randomSpawn = newCheckbox(10, 200, 50, 30, checkboxImages, config.General.RandomSpawn, false, func() { config.General.RandomSpawn = !config.General.RandomSpawn })
+		randomSpawn = newCheckbox(20, 200, 50, 30, checkboxImages, config.General.RandomSpawn, false, func() { config.General.RandomSpawn = !config.General.RandomSpawn })
 	}
 	randomSpawn.Update(screen)
 	randomSpawn.Draw(screen)
 	if randomSpawnText == nil {
-		randomSpawnText = newText(100, 220, "Activer le spawn aléatoire", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		randomSpawnText = newText(110, 220, "Activer le spawn aléatoire", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	randomSpawnText.Draw(screen)
 
 	// Checkbox spawn center
 	if spawnCenter == nil {
-		spawnCenter = newCheckbox(10, 235, 50, 30, checkboxImages, config.General.SpawnCenter, config.General.RandomSpawn, func() { config.General.SpawnCenter = !config.General.SpawnCenter })
+		spawnCenter = newCheckbox(20, 235, 50, 30, checkboxImages, config.General.SpawnCenter, config.General.RandomSpawn, func() { config.General.SpawnCenter = !config.General.SpawnCenter })
 	}
 	spawnCenter.disabled = config.General.RandomSpawn
 	spawnCenter.Update(screen)
 	spawnCenter.Draw(screen)
 	if spawnCenterText == nil {
-		spawnCenterText = newText(100, 255, "Activer le spawn au centre", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnCenterText = newText(110, 255, "Activer le spawn au centre", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnCenterText.Draw(screen)
 
 	// Input de la position de spawnX
 	if spawnX == nil {
-		spawnX = newTextInput(10, 270, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnX, RobotoRegularFontF)
+		spawnX = newTextInput(20, 270, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnX, RobotoRegularFontF)
 	}
 	spawnX.disabled = config.General.SpawnCenter
 	spawnX.Update(screen)
 	spawnX.Draw(screen)
 	if spawnXText == nil {
-		spawnXText = newText(100, 290, "Position de spawn X", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnXText = newText(110, 290, "Position de spawn X", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnXText.Draw(screen)
 
 	// Input de la position de spawnY
 	if spawnY == nil {
-		spawnY = newTextInput(10, 305, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnY, RobotoRegularFontF)
+		spawnY = newTextInput(20, 305, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnY, RobotoRegularFontF)
 	}
 	spawnY.disabled = config.General.SpawnCenter
 	spawnY.Update(screen)
 	spawnY.Draw(screen)
 	if spawnYText == nil {
-		spawnYText = newText(100, 325, "Position de spawn Y", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnYText = newText(110, 325, "Position de spawn Y", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnYText.Draw(screen)
 
 	// Input SpawnRate Slider
 	if spawnRate == nil {
-		spawnRate = newSlider(10, 350, 100, 30, sliderImages, &config.General.SpawnRate, 0, 100, false)
+		spawnRate = newSlider(20, 350, 100, 5, sliderImages, &config.General.SpawnRate, 0, 100, false, true)
 	}
 	spawnRate.Update(screen)
 	spawnRate.Draw(screen)
@@ -205,43 +226,43 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	}
 	spawnRateText.Draw(screen)
 	if spawnRateValue == nil {
-		spawnRateValue = newValue(115, 360, &config.General.SpawnRate, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnRateValue = newValue(125, 360, &config.General.SpawnRate, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnRateValue.Update(screen)
 	spawnRateValue.Draw(screen)
 
 	// Checkbox SpawnOnAnObject
 	if spawnOnAnObject == nil {
-		spawnOnAnObject = newCheckbox(10, 375, 50, 30, checkboxImages, config.General.SpawnOnAnObject, false, func() { config.General.SpawnOnAnObject = !config.General.SpawnOnAnObject })
+		spawnOnAnObject = newCheckbox(20, 375, 50, 30, checkboxImages, config.General.SpawnOnAnObject, false, func() { config.General.SpawnOnAnObject = !config.General.SpawnOnAnObject })
 	}
 	spawnOnAnObject.Update(screen)
 	spawnOnAnObject.Draw(screen)
 	if spawnOnAnObjectText == nil {
-		spawnOnAnObjectText = newText(100, 395, "Activer le spawn sur un objet", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnOnAnObjectText = newText(110, 395, "Activer le spawn sur un objet", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnOnAnObjectText.Draw(screen)
 
 	// Checkbox SpawnObject = "circle"
 	if spawnOnObjectCircle == nil {
-		spawnOnObjectCircle = newCheckbox(30, 410, 50, 30, checkboxImages, config.General.SpawnObject == "circle", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "circle" })
+		spawnOnObjectCircle = newCheckbox(40, 410, 50, 30, checkboxImages, config.General.SpawnObject == "circle", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "circle" })
 	}
 	spawnOnObjectCircle.checked = config.General.SpawnObject == "circle"
 	spawnOnObjectCircle.Update(screen)
 	spawnOnObjectCircle.Draw(screen)
 	if spawnOnObjectCircleText == nil {
-		spawnOnObjectCircleText = newText(100, 430, "Cercle", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnOnObjectCircleText = newText(110, 430, "Cercle", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnOnObjectCircleText.Draw(screen)
 
 	// Checkbox SpawnObject = "square"
 	if spawnOnObjectSquare == nil {
-		spawnOnObjectSquare = newCheckbox(30, 445, 50, 30, checkboxImages, config.General.SpawnObject == "square", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "square" })
+		spawnOnObjectSquare = newCheckbox(40, 445, 50, 30, checkboxImages, config.General.SpawnObject == "square", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "square" })
 	}
 	spawnOnObjectSquare.checked = config.General.SpawnObject == "square"
 	spawnOnObjectSquare.Update(screen)
 	spawnOnObjectSquare.Draw(screen)
 	if spawnOnObjectSquareText == nil {
-		spawnOnObjectSquareText = newText(100, 465, "Carré", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnOnObjectSquareText = newText(110, 465, "Carré", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnOnObjectSquareText.Draw(screen)
 	// (Vérifie que SpawnOnAnObject est activé)
@@ -249,15 +270,117 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Input spawnObjectWidth number
 	if spawnObjectWidth == nil {
-		spawnObjectWidth = newTextInput(10, 480, 100, 30, numberInputImages, !config.General.SpawnOnAnObject, &config.General.SpawnObjectWidth, RobotoRegularFontF)
+		spawnObjectWidth = newTextInput(20, 480, 100, 30, numberInputImages, !config.General.SpawnOnAnObject, &config.General.SpawnObjectWidth, RobotoRegularFontF)
 	}
 	spawnObjectWidth.disabled = !config.General.SpawnOnAnObject
 	spawnObjectWidth.Update(screen)
 	spawnObjectWidth.Draw(screen)
 	if spawnObjectWidthText == nil {
-		spawnObjectWidthText = newText(100, 500, "Largeur de l'objet", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnObjectWidthText = newText(110, 500, "Largeur de l'objet", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnObjectWidthText.Draw(screen)
+
+	// Titre particulesPropertiesText
+	if particulesPropertiesText == nil {
+		particulesPropertiesText = newText(20, 550, "Propriétés des particules", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+	}
+	particulesPropertiesText.Draw(screen)
+
+	// Slider rotation
+	if rotation == nil {
+		rotation = newSlider(20, 575, 100, 5, sliderImages, &config.General.Rotation, 0, 3.14159*2, false, false)
+	}
+	rotation.Update(screen)
+	rotation.Draw(screen)
+	if rotationValue == nil {
+		rotationValue = newValue(125, 585, &config.General.Rotation, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	rotationValue.Update(screen)
+	rotationValue.Draw(screen)
+
+	if rotationText == nil {
+		rotationText = newText(175, 585, "Rotation", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	rotationText.Draw(screen)
+
+	// Slider ScaleX
+	if scaleX == nil {
+		scaleX = newSlider(20, 600, 100, 5, sliderImages, &config.General.ScaleX, 0, 5, false, true)
+	}
+	scaleX.Update(screen)
+	scaleX.Draw(screen)
+	if scaleXValue == nil {
+		scaleXValue = newValue(125, 610, &config.General.ScaleX, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	scaleXValue.Update(screen)
+	scaleXValue.Draw(screen)
+	if scaleXText == nil {
+		scaleXText = newText(175, 610, "ScaleX", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	scaleXText.Draw(screen)
+	// Slider ScaleY
+	if scaleY == nil {
+		scaleY = newSlider(20, 625, 100, 5, sliderImages, &config.General.ScaleY, 0, 5, false, true)
+	}
+	scaleY.Update(screen)
+	scaleY.Draw(screen)
+	if scaleYValue == nil {
+		scaleYValue = newValue(125, 635, &config.General.ScaleY, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	scaleYValue.Update(screen)
+	scaleYValue.Draw(screen)
+	if scaleYText == nil {
+		scaleYText = newText(175, 635, "ScaleY", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	scaleYText.Draw(screen)
+
+	// Opacity
+	if opacity == nil {
+		opacity = newSlider(20, 650, 100, 5, sliderImages, &config.General.Opacity, 0, 1, false, false)
+	}
+	opacity.Update(screen)
+	opacity.Draw(screen)
+	if opacityValue == nil {
+		opacityValue = newValue(125, 660, &config.General.Opacity, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	opacityValue.Update(screen)
+	opacityValue.Draw(screen)
+	if opacityText == nil {
+		opacityText = newText(175, 660, "Opacité", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	opacityText.Draw(screen)
+
+	// ColorRed
+	if colorRed == nil {
+		colorRed = newSlider(20, 675, 100, 5, sliderImages, &config.General.ColorRed, 0, 1, false, false)
+	}
+	colorRed.Update(screen)
+	colorRed.Draw(screen)
+	if colorRedValue == nil {
+		colorRedValue = newValue(125, 685, &config.General.ColorRed, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	colorRedValue.Update(screen)
+	colorRedValue.Draw(screen)
+	if colorRedText == nil {
+		colorRedText = newText(175, 685, "Rouge", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	colorRedText.Draw(screen)
+
+	// ColorGreen
+	if colorGreen == nil {
+		colorGreen = newSlider(20, 700, 100, 5, sliderImages, &config.General.ColorGreen, 0, 1, false, false)
+	}
+	colorGreen.Update(screen)
+	colorGreen.Draw(screen)
+	if colorGreenValue == nil {
+		colorGreenValue = newValue(125, 710, &config.General.ColorGreen, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	colorGreenValue.Update(screen)
+	colorGreenValue.Draw(screen)
+	if colorGreenText == nil {
+		colorGreenText = newText(175, 710, "Vert", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	colorGreenText.Draw(screen)
 
 	// Crée le boutton si il n'existe pas
 	if accessParticlesButton == nil {
