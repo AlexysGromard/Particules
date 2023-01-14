@@ -50,10 +50,6 @@ var (
 	spawnObjectWidthText    *Text
 
 	accessParticlesButton *Button
-	textInut              *NumberInput
-	checkbox              *Checkbox
-	texttest              *Text
-	sliderTest            *Slider
 )
 
 // FidnImage cherche une image grâce à son nom dans la liste des images
@@ -71,6 +67,33 @@ func findImage(images []Images, filename string) *ebiten.Image {
 
 // UpdateConfigPage est la fonction qui est appelée pour mettre à jour la page de configuration
 func UpdateConfigPage(screen *ebiten.Image) error {
+	// EbitenImages
+	var (
+		// Checkbox
+		checkboxImages = []*ebiten.Image{
+			findImage(ImageList, "checkbox-idle.png"),            // Default
+			findImage(ImageList, "checkbox-hover.png"),           // Hover
+			findImage(ImageList, "checkbox-disabled.png"),        // Disabled
+			findImage(ImageList, "checkbox-checked-idle.png"),    // Checked
+			findImage(ImageList, "checkbox-unchecked-idle.png"),  // Unchecked
+			findImage(ImageList, "checkbox-greyed-disabled.png")} // Greyed(Disabled)
+		// Button
+		buttonImages = []*ebiten.Image{
+			findImage(ImageList, "button-idle.png"),    // Default
+			findImage(ImageList, "button-pressed.png"), // Pressed
+			findImage(ImageList, "button-hover.png")}   // Hover
+		// Slider
+		sliderImages = []*ebiten.Image{
+			findImage(ImageList, "slider-track-idle.png"),      // Line
+			findImage(ImageList, "slider-handle-idle.png"),     // Default
+			findImage(ImageList, "slider-handle-hover.png"),    // Hover
+			findImage(ImageList, "slider-handle-disabled.png")} // Disabled
+		// NumberInput
+		numberInputImages = []*ebiten.Image{
+			findImage(ImageList, "text-input-idle.png"),     // Default
+			findImage(ImageList, "text-input-hover.png"),    // Hover
+			findImage(ImageList, "text-input-disabled.png")} // Disabled
+	)
 	// Load les fonts
 	err := loadFontRegular()
 	if err != nil {
@@ -98,8 +121,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Checkbox debug
 	if debugButton == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
-		debugButton = newCheckbox(10, 75, 50, 30, images, config.General.Debug, false, func() { config.General.Debug = !config.General.Debug })
+		debugButton = newCheckbox(10, 75, 50, 30, checkboxImages, config.General.Debug, false, func() { config.General.Debug = !config.General.Debug })
 	}
 	debugButton.Update(screen)
 	debugButton.Draw(screen)
@@ -116,7 +138,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Nombre de particules initiales
 	if initNumParticles == nil {
-		initNumParticles = newTextInput(10, 165, 100, 30, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "text-input-disabled.png"), false, &config.General.InitNumParticles, RobotoRegularFontF)
+		initNumParticles = newTextInput(10, 165, 100, 30, numberInputImages, false, &config.General.InitNumParticles, RobotoRegularFontF)
 	}
 	initNumParticles.Update(screen)
 	initNumParticles.Draw(screen)
@@ -127,8 +149,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Checkbox random spawn
 	if randomSpawn == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
-		randomSpawn = newCheckbox(10, 200, 50, 30, images, config.General.RandomSpawn, false, func() { config.General.RandomSpawn = !config.General.RandomSpawn })
+		randomSpawn = newCheckbox(10, 200, 50, 30, checkboxImages, config.General.RandomSpawn, false, func() { config.General.RandomSpawn = !config.General.RandomSpawn })
 	}
 	randomSpawn.Update(screen)
 	randomSpawn.Draw(screen)
@@ -139,8 +160,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Checkbox spawn center
 	if spawnCenter == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
-		spawnCenter = newCheckbox(10, 235, 50, 30, images, config.General.SpawnCenter, config.General.RandomSpawn, func() { config.General.SpawnCenter = !config.General.SpawnCenter })
+		spawnCenter = newCheckbox(10, 235, 50, 30, checkboxImages, config.General.SpawnCenter, config.General.RandomSpawn, func() { config.General.SpawnCenter = !config.General.SpawnCenter })
 	}
 	spawnCenter.disabled = config.General.RandomSpawn
 	spawnCenter.Update(screen)
@@ -152,7 +172,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Input de la position de spawnX
 	if spawnX == nil {
-		spawnX = newTextInput(10, 270, 100, 30, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "text-input-disabled.png"), config.General.SpawnCenter, &config.General.SpawnX, RobotoRegularFontF)
+		spawnX = newTextInput(10, 270, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnX, RobotoRegularFontF)
 	}
 	spawnX.disabled = config.General.SpawnCenter
 	spawnX.Update(screen)
@@ -164,7 +184,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Input de la position de spawnY
 	if spawnY == nil {
-		spawnY = newTextInput(10, 305, 100, 30, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "text-input-disabled.png"), config.General.SpawnCenter, &config.General.SpawnY, RobotoRegularFontF)
+		spawnY = newTextInput(10, 305, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnY, RobotoRegularFontF)
 	}
 	spawnY.disabled = config.General.SpawnCenter
 	spawnY.Update(screen)
@@ -176,7 +196,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Input SpawnRate Slider
 	if spawnRate == nil {
-		spawnRate = newSlider(10, 350, 100, 30, findImage(ImageList, "slider-track-idle.png"), findImage(ImageList, "slider-handle-idle.png"), findImage(ImageList, "slider-handle-hover.png"), findImage(ImageList, "slider-handle-disabled.png"), &config.General.SpawnRate, 0, 100, false)
+		spawnRate = newSlider(10, 350, 100, 30, sliderImages, &config.General.SpawnRate, 0, 100, false)
 	}
 	spawnRate.Update(screen)
 	spawnRate.Draw(screen)
@@ -192,8 +212,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Checkbox SpawnOnAnObject
 	if spawnOnAnObject == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
-		spawnOnAnObject = newCheckbox(10, 375, 50, 30, images, config.General.SpawnOnAnObject, false, func() { config.General.SpawnOnAnObject = !config.General.SpawnOnAnObject })
+		spawnOnAnObject = newCheckbox(10, 375, 50, 30, checkboxImages, config.General.SpawnOnAnObject, false, func() { config.General.SpawnOnAnObject = !config.General.SpawnOnAnObject })
 	}
 	spawnOnAnObject.Update(screen)
 	spawnOnAnObject.Draw(screen)
@@ -204,8 +223,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Checkbox SpawnObject = "circle"
 	if spawnOnObjectCircle == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
-		spawnOnObjectCircle = newCheckbox(30, 410, 50, 30, images, config.General.SpawnObject == "circle", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "circle" })
+		spawnOnObjectCircle = newCheckbox(30, 410, 50, 30, checkboxImages, config.General.SpawnObject == "circle", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "circle" })
 	}
 	spawnOnObjectCircle.checked = config.General.SpawnObject == "circle"
 	spawnOnObjectCircle.Update(screen)
@@ -217,8 +235,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Checkbox SpawnObject = "square"
 	if spawnOnObjectSquare == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
-		spawnOnObjectSquare = newCheckbox(30, 445, 50, 30, images, config.General.SpawnObject == "square", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "square" })
+		spawnOnObjectSquare = newCheckbox(30, 445, 50, 30, checkboxImages, config.General.SpawnObject == "square", !config.General.SpawnOnAnObject, func() { config.General.SpawnObject = "square" })
 	}
 	spawnOnObjectSquare.checked = config.General.SpawnObject == "square"
 	spawnOnObjectSquare.Update(screen)
@@ -232,7 +249,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Input spawnObjectWidth number
 	if spawnObjectWidth == nil {
-		spawnObjectWidth = newTextInput(10, 480, 100, 30, findImage(ImageList, "text-input-idle.png"), findImage(ImageList, "text-input-hover.png"), findImage(ImageList, "text-input-disabled.png"), !config.General.SpawnOnAnObject, &config.General.SpawnObjectWidth, RobotoRegularFontF)
+		spawnObjectWidth = newTextInput(10, 480, 100, 30, numberInputImages, !config.General.SpawnOnAnObject, &config.General.SpawnObjectWidth, RobotoRegularFontF)
 	}
 	spawnObjectWidth.disabled = !config.General.SpawnOnAnObject
 	spawnObjectWidth.Update(screen)
@@ -244,8 +261,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Crée le boutton si il n'existe pas
 	if accessParticlesButton == nil {
-		images := []*ebiten.Image{findImage(ImageList, "button-idle.png"), findImage(ImageList, "button-pressed.png"), findImage(ImageList, "button-hover.png")}
-		accessParticlesButton = newButton(config.General.WindowSizeX-150-30, config.General.WindowSizeY-50-30, 150, 50, images, "Valider", RobotoRegularFontF, func() { SaveConfig() })
+		accessParticlesButton = newButton(config.General.WindowSizeX-150-30, config.General.WindowSizeY-50-30, 150, 50, buttonImages, "Valider", RobotoRegularFontF, func() { SaveConfig() })
 	}
 	// Met à jour l'état du bouton et l'affiche
 	accessParticlesButton.Update(screen)

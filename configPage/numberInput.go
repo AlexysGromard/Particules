@@ -112,15 +112,15 @@ func (t *NumberInput) Update(screen *ebiten.Image) {
 }
 
 // Création d'un nouveau TextInput
-func newTextInput(x, y, width, height int, imageNormal, imageHover, imageDisabled *ebiten.Image, disabled bool, number *int, fontFace font.Face) *NumberInput {
+func newTextInput(x, y, width, height int, images []*ebiten.Image, disabled bool, number *int, fontFace font.Face) *NumberInput {
 	return &NumberInput{
 		x:             x,
 		y:             y,
 		width:         width,
 		height:        height,
-		imageNormal:   imageNormal,
-		imageHover:    imageHover,
-		imageDisabled: imageDisabled,
+		imageNormal:   images[0],
+		imageHover:    images[1],
+		imageDisabled: images[2],
 		disabled:      disabled,
 		number:        number,
 		fontface:      fontFace,

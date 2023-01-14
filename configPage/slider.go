@@ -86,17 +86,17 @@ func (s *Slider) Update(screen *ebiten.Image) {
 
 // Création d'un slider
 // Cette fonction crée un slider
-func newSlider(x, y, width, height int, imageSliderTrack, imageSlider, imageSliderHover, imageSliderDisabled *ebiten.Image, value *float64, minValue float64, maxValue float64, disabled bool) *Slider {
+func newSlider(x, y, width, height int, images []*ebiten.Image, value *float64, minValue float64, maxValue float64, disabled bool) *Slider {
 	return &Slider{
 		x:                   x,
 		y:                   y,
 		width:               width,
 		height:              height,
 		sliderXPosition:     x + int(float64(width)*(*value/maxValue)),
-		imageSliderTrack:    imageSliderTrack,
-		imageSlider:         imageSlider,
-		imageSliderHover:    imageSliderHover,
-		imageSliderDisabled: imageSliderDisabled,
+		imageSliderTrack:    images[0],
+		imageSlider:         images[1],
+		imageSliderHover:    images[2],
+		imageSliderDisabled: images[3],
 		value:               value,
 		minValue:            minValue,
 		maxValue:            maxValue + maxValue/4,
