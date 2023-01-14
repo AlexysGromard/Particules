@@ -70,8 +70,8 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Crée la checkbox si elle n'existe pas
 	if checkbox == nil {
-		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png")}
-		checkbox = newCheckbox(10, 70, 50, 50, images, config.General.Debug, func() { config.General.Debug = !config.General.Debug })
+		images := []*ebiten.Image{findImage(ImageList, "checkbox-idle.png"), findImage(ImageList, "checkbox-hover.png"), findImage(ImageList, "checkbox-disabled.png"), findImage(ImageList, "checkbox-checked-idle.png"), findImage(ImageList, "checkbox-unchecked-idle.png"), findImage(ImageList, "checkbox-greyed-disabled.png")}
+		checkbox = newCheckbox(10, 70, 50, 50, images, config.General.Debug, true, func() { config.General.Debug = !config.General.Debug })
 	}
 	// Met à jour l'état de la checkbox et l'affiche
 	checkbox.Update(screen)

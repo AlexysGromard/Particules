@@ -7,12 +7,15 @@ type Checkbox struct {
 	x, y, width, height int
 	imageNormal         *ebiten.Image
 	imageHover          *ebiten.Image
+	imageDisabled       *ebiten.Image
 	circleTrue          *ebiten.Image
 	circleFalse         *ebiten.Image
+	circleDisabled      *ebiten.Image
 	checked             bool
 	hover               bool
 	pressed             bool
 	justPressed         bool
+	disabled            bool
 	onClick             func()
 }
 
@@ -20,8 +23,10 @@ type Checkbox struct {
 // Cette fonction met à jour l'affichage des checkbox en fonction de leur état (hover, pressed, checked)
 func (c *Checkbox) Draw(screen *ebiten.Image) {
 	var img *ebiten.Image
-	if c.hover {
+	if c.hover && !c.disabled {
 		img = c.imageHover
+	} else if c.disabled {
+		img = c.imageDisabled
 	} else {
 		img = c.imageNormal
 	}
@@ -39,7 +44,7 @@ func (c *Checkbox) Update(screen *ebiten.Image) {
 	x, y := ebiten.CursorPosition()
 	c.hover = false
 	// Si la souris est sur la checkbox
-	if x > c.x && x < c.x+c.width && y > c.y && y < c.y+c.height {
+	if x > c.x && x < c.x+c.width && y > c.y && y < c.y+c.height && !c.disabled {
 		c.hover = true
 		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
 			if !c.justPressed {
@@ -54,7 +59,12 @@ func (c *Checkbox) Update(screen *ebiten.Image) {
 		}
 	}
 	// Si la checkbox est cochée
-	if c.checked {
+	if c.disabled {
+		// Afficher l'image disabled
+		opt := &ebiten.DrawImageOptions{}
+		opt.GeoM.Translate(float64(c.x), float64(c.y))
+		screen.DrawImage(c.circleDisabled, opt)
+	} else if c.checked {
 		// Afficher l'image de droite
 		opt := &ebiten.DrawImageOptions{}
 		opt.GeoM.Translate(float64(c.x), float64(c.y))
@@ -70,17 +80,20 @@ func (c *Checkbox) Update(screen *ebiten.Image) {
 
 // NewCheckbox crée une nouvelle checkbox en fonction des paramètres
 // Entrées : x,y (position), width, height (taille), images (liste des images), checked (état de la checkbox), onClick (fonction à appeler quand on clique sur la checkbox)
-func newCheckbox(x, y, width, height int, images []*ebiten.Image, checked bool, onClick func()) *Checkbox {
+func newCheckbox(x, y, width, height int, images []*ebiten.Image, checked bool, disabled bool, onClick func()) *Checkbox {
 	return &Checkbox{
-		x:           x,
-		y:           y,
-		width:       width,
-		height:      height,
-		imageNormal: images[0],
-		imageHover:  images[1],
-		circleTrue:  images[2],
-		circleFalse: images[3],
-		checked:     checked,
-		onClick:     onClick,
+		x:              x,
+		y:              y,
+		width:          width,
+		height:         height,
+		imageNormal:    images[0],
+		imageHover:     images[1],
+		imageDisabled:  images[2],
+		circleTrue:     images[3],
+		circleFalse:    images[4],
+		circleDisabled: images[5],
+		checked:        checked,
+		disabled:       disabled,
+		onClick:        onClick,
 	}
 }
