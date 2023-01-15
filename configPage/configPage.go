@@ -88,8 +88,8 @@ var (
 	lifeText       *Text
 	// Gestion de l'écran
 	screenManagement         *Text
-	marginOutsideScreen      *SliderF
-	marginOutsideScreenValue *ValueF
+	marginOutsideScreen      *SliderI
+	marginOutsideScreenValue *ValueI
 	marginOutsideScreenText  *Text
 
 	accessParticlesButton *Button
@@ -231,8 +231,8 @@ func createItems() {
 	lifeText = newText(520, 225, "Durée de vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	// Partie "Gestion de l'écran"
 	screenManagement = newText(430, 280, "Gestion de l'écran", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
-	marginOutsideScreen = newSliderFloat(430, 305, 100, 5, sliderImages, &config.General.MarginOutsideScreen, -30, 30, false, true)
-	marginOutsideScreenValue = newValueFloat(535, 315, &config.General.MarginOutsideScreen, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	marginOutsideScreen = newSliderInt(430, 305, 100, 5, sliderImages, &config.General.MarginOutsideScreen, -30, 30, false)
+	marginOutsideScreenValue = newValueInt(535, 315, &config.General.MarginOutsideScreen, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	marginOutsideScreenText = newText(585, 315, "Marge hors écran", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	accessParticlesButton = newButton(config.General.WindowSizeX-150-30, config.General.WindowSizeY-50-30, 150, 50, buttonImages, "Valider", RobotoRegularFontF, func() { SaveConfig() })
 }
