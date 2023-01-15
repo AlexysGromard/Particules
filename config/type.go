@@ -12,32 +12,42 @@ type Config struct {
 	WindowSizeX, WindowSizeY int
 	ParticleImage            string
 	Debug                    bool
-	InitNumParticles         int
-	RandomSpawn              bool
-	SpanwCenter              bool
-	SpawnX, SpawnY           int
-	SpawnRate                float64
-	SpawnOnAnObject          bool
-	SpawnObject              string
-	SpawnObjectWidth         int
+
+	InitNumParticles int
+	RandomSpawn      bool
+	SpanwCenter      bool
+	SpawnX, SpawnY   int
+	SpawnRate        float64
+	SpawnOnAnObject  bool
+	SpawnObject      string
+	SpawnObjectWidth int
 	// Particule properties
 	Rotation                        float64
 	ScaleX, ScaleY                  float64
 	Opacity                         float64
 	ColorRed, ColorGreen, ColorBlue float64
 	SpeedType                       int
-	KillParticlesOutside            bool
 	Gravity                         float64
-	MarginOutsideScreen             float64
 	HaveLife                        bool
 	RandomLife                      bool
 	Life                            int
-	ChangeColorAccordingTo          int
-	ChangeScaleAccordingTo          int
-	ChangeRotationAccordingTo       int
-	ChangeOpacityAccordingTo        int
-	Collision                       bool
-	WhatCollisionDo                 int
+
+	MarginOutsideScreen int
+
+	ChangeColorAccordingTo    int
+	MinColorRed               float64
+	MinColorGreen             float64
+	MinColorBlue              float64
+	MaxColorRed               float64
+	MaxColorGreen             float64
+	MaxColorBlue              float64
+	ChangeScaleAccordingTo    int
+	ChangeRotationAccordingTo int
+	ChangeOpacityAccordingTo  int
+
+	Collision              bool
+	CollisionAmongParticle bool
+	CollisionWithWall      bool
 	// Interaction
 	Interaction bool
 	FollowMouse bool

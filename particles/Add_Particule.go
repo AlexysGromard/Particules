@@ -1,13 +1,13 @@
 package particles
 
 import (
-	//"container/list"
-
 	"project-particles/config"
-	//"fmt"
 )
 
 // cette fonction crée des particules en fonction des paramètre indiqué dans "config.json"
+// si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
+
+//enter : DeadList (une liste de particule morte qui sont aussi dans le System)
 func (s *System) Add_Particule() {
 
 	var CentreX, CentreY float64
@@ -25,9 +25,12 @@ func (s *System) Add_Particule() {
 		PositionY = float64(config.General.SpawnY)
 	}
 
+	// Initialisation de la Vitesse de la partucle
 	var SpeedX, SpeedY float64
 	if config.General.SpawnOnAnObject {
 		SpeedX, SpeedY = SpeedAccordingToShape(config.General.SpeedType, PositionX, PositionY, CentreX, CentreY)
+	} else if config.General.SpeedType == 0 {
+		SpeedX, SpeedY = 0, 0
 	} else {
 		SpeedX, SpeedY = Random_Speed(config.General.SpeedType)
 	}
@@ -35,12 +38,13 @@ func (s *System) Add_Particule() {
 	// Initialisation de la vie de la particule
 	var Life int
 	if config.General.HaveLife && config.General.RandomLife {
-		Life = Random_Life()
+		Life = Random_Life(50)
 	} else {
 		Life = config.General.Life
 	}
 
-	ParticuleDead := DeadParticles.Content.Front()
+	//Ajoute de la paticule au System
+	ParticuleDead := s.DeadList.Front()
 	if ParticuleDead != nil {
 		pd, ok := ParticuleDead.Value.(*Particle)
 		if ok {
@@ -55,24 +59,25 @@ func (s *System) Add_Particule() {
 			pd.Opacity = config.General.Opacity
 			pd.SpeedX = SpeedX
 			pd.SpeedY = SpeedY
+			pd.LifeInit = Life
 			pd.Life = Life
 
-			DeadParticles.Content.Remove(ParticuleDead)
+			s.ResurrectParticule(ParticuleDead,config.General.CollisionAmongParticle)
 		}
 
 	} else {
-		s.Content.PushFront(&Particle{
+		NouvelleParticule := &Particle{
 			PositionX: PositionX,
 			PositionY: PositionY,
 			Rotation:  config.General.Rotation,
 			ScaleX:    config.General.ScaleX, ScaleY: config.General.ScaleY,
 			ColorRed: config.General.ColorRed, ColorGreen: config.General.ColorGreen, ColorBlue: config.General.ColorBlue,
-			Opacity: config.General.Opacity,
-			SpeedX:  SpeedX,
-			SpeedY:  SpeedY,
-			Life:    Life,
-		})
-	}
+			Opacity:  config.General.Opacity,
+			SpeedX:   SpeedX,
+			SpeedY:   SpeedY,
+			LifeInit: Life, Life: Life,
+		}
 
-	//fmt.Println(DeadParticles.Content)
+		s.InsertionAccordingToPositionX(NouvelleParticule,config.General.CollisionAmongParticle)
+	}
 }

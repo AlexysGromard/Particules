@@ -4,6 +4,7 @@ import (
 	"log"
 	"project-particles/assets"
 	"project-particles/config"
+	"project-particles/configPage"
 	"project-particles/particles"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -23,6 +24,9 @@ func main() {
 	ebiten.SetWindowTitle(config.General.WindowTitle)
 	ebiten.SetWindowSize(config.General.WindowSizeX, config.General.WindowSizeY)
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
+
+	// Chargement des images de configuration
+	configPage.LoadImages()
 
 	g := game{system: particles.NewSystem()}
 

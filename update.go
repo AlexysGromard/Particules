@@ -2,6 +2,7 @@ package main
 
 import (
 	"project-particles/config"
+	"project-particles/configPage"
 	"project-particles/particles"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -12,7 +13,17 @@ import (
 // la bibliothèque Ebiten. Cette fonction ne devrait pas être modifiée sauf
 // pour les deux dernières extensions.
 func (g *game) Update() error {
+	// INTERACTION AVEC CONFIGURATION
+	// Si on appuie sur la touche espace, on change de page
+	if ebiten.IsKeyPressed(ebiten.KeyEnter) && CurrentPage == configurationsPage {
+		CurrentPage = particlesPage
+		// Save la configuration
+		configPage.SaveConfig()
+	} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
+		CurrentPage = configurationsPage
+	}
 	if config.General.Interaction {
+		// INTERACTION AVEC PARTICULES
 		// Deplacement de la zone de spawn
 		// Si fleche haut est appuyee, on diminue la coordonnee Y de la zone de spawn
 		if ebiten.IsKeyPressed(ebiten.KeyUp) && config.General.SpawnY > 0 {
@@ -30,11 +41,19 @@ func (g *game) Update() error {
 		if ebiten.IsKeyPressed(ebiten.KeyRight) && config.General.SpawnX < config.General.WindowSizeX {
 			config.General.SpawnX += 3
 		}
-
 		// Explosion
 		// Si espace est appuyee, on appelle la fonction Explosion du systeme de particules
-		if ebiten.IsKeyPressed(ebiten.KeySpace) {
+		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == particlesPage {
 			particles.Explosion(g.system.Content)
+		}
+		// Tourbillon
+		// Si T est appuyee, on appelle la fonction Tourbillon du systeme de particules
+		if ebiten.IsKeyPressed(ebiten.KeyT) {
+			particles.WhirlwindState = true
+		}
+		// Si T n'est plus appuyee, on appelle la fonction Tourbillon du systeme de particules
+		if !ebiten.IsKeyPressed(ebiten.KeyT) && particles.WhirlwindState {
+			particles.WhirlwindState = false
 		}
 	}
 	if config.General.FollowMouse {
