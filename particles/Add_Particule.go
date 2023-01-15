@@ -7,7 +7,7 @@ import (
 // cette fonction crée des particules en fonction des paramètre indiqué dans "config.json"
 // si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
 
-//enter : DeadList (une liste de particule morte qui sont aussi dans le System)
+// enter : DeadList (une liste de particule morte qui sont aussi dans le System)
 func (s *System) Add_Particule() {
 
 	var CentreX, CentreY float64
@@ -62,7 +62,7 @@ func (s *System) Add_Particule() {
 			pd.LifeInit = Life
 			pd.Life = Life
 
-			s.ResurrectParticule(ParticuleDead,config.General.CollisionAmongParticle)
+			s.ResurrectParticule(ParticuleDead, float64(config.General.WindowSizeX)/2, config.General.Collision, config.General.CollisionAmongParticle)
 		}
 
 	} else {
@@ -78,6 +78,6 @@ func (s *System) Add_Particule() {
 			LifeInit: Life, Life: Life,
 		}
 
-		s.InsertionAccordingToPositionX(NouvelleParticule,config.General.CollisionAmongParticle)
+		s.InsertionAccordingToPositionX(NouvelleParticule, float64(config.General.WindowSizeX)/2, config.General.Collision, config.General.CollisionAmongParticle)
 	}
 }

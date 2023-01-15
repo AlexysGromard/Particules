@@ -38,7 +38,7 @@ func (g *game) Draw(screen *ebiten.Image) {
 				options.GeoM.Translate(p.PositionX, p.PositionY)
 				options.ColorM.Scale(p.ColorRed, p.ColorGreen, p.ColorBlue, p.Opacity)
 				screen.DrawImage(assets.ParticleImage, &options)
-				
+
 			}
 		}
 	}
