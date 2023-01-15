@@ -15,7 +15,7 @@ type Config struct {
 
 	InitNumParticles int
 	RandomSpawn      bool
-	SpanwCenter      bool
+	SpawnCenter      bool
 	SpawnX, SpawnY   int
 	SpawnRate        float64
 	SpawnOnAnObject  bool

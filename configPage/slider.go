@@ -18,6 +18,7 @@ type Slider struct {
 	minValue            float64
 	maxValue            float64
 	disabled            bool
+	round               bool
 }
 
 // Impression des sliders
@@ -81,25 +82,30 @@ func (s *Slider) Update(screen *ebiten.Image) {
 		}
 	}
 	// Mettre à jour la valeur du slider au pointeur
-	*s.value = float64(s.sliderXPosition-s.x) / float64(s.width) * s.maxValue
+	*s.value = s.minValue + (float64(s.sliderXPosition-s.x)/float64(s.width))*s.maxValue
+	// Arrondir la valeur du slider
+	if s.round {
+		*s.value = float64(int(*s.value))
+	}
 }
 
 // Création d'un slider
 // Cette fonction crée un slider
-func newSlider(x, y, width, height int, imageSliderTrack, imageSlider, imageSliderHover, imageSliderDisabled *ebiten.Image, value *float64, minValue float64, maxValue float64, disabled bool) *Slider {
+func newSlider(x, y, width, height int, images []*ebiten.Image, value *float64, minValue float64, maxValue float64, disabled bool, round bool) *Slider {
 	return &Slider{
 		x:                   x,
 		y:                   y,
 		width:               width,
 		height:              height,
-		sliderXPosition:     x + int(float64(width)*(*value/maxValue)),
-		imageSliderTrack:    imageSliderTrack,
-		imageSlider:         imageSlider,
-		imageSliderHover:    imageSliderHover,
-		imageSliderDisabled: imageSliderDisabled,
+		sliderXPosition:     x + int(*value/float64(maxValue+maxValue/4)*float64(width)),
+		imageSliderTrack:    images[0],
+		imageSlider:         images[1],
+		imageSliderHover:    images[2],
+		imageSliderDisabled: images[3],
 		value:               value,
 		minValue:            minValue,
-		maxValue:            maxValue,
+		maxValue:            maxValue + maxValue/4,
 		disabled:            disabled,
+		round:               round,
 	}
 }

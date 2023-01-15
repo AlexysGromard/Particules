@@ -23,7 +23,11 @@ func main() {
 
 	ebiten.SetWindowTitle(config.General.WindowTitle)
 	ebiten.SetWindowSize(config.General.WindowSizeX, config.General.WindowSizeY)
+	_, _, maxW, maxH := ebiten.WindowSizeLimits()
+	ebiten.SetWindowSizeLimits(800, 600, maxW, maxH)
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
+
+	// Taille minimum de la fentre
 
 	// Chargement des images de configuration
 	configPage.LoadImages()
