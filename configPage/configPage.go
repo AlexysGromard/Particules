@@ -38,9 +38,9 @@ var (
 	spawnXText              *Text
 	spawnY                  *NumberInput
 	spawnYText              *Text
-	spawnRate               *Slider
+	spawnRate               *SliderF
 	spawnRateText           *Text
-	spawnRateValue          *Value
+	spawnRateValue          *ValueF
 	spawnOnAnObject         *Checkbox
 	spawnOnAnObjectText     *Text
 	spawnOnObjectCircle     *Checkbox
@@ -51,24 +51,43 @@ var (
 	spawnObjectWidthText    *Text
 	//particulesPropertiesText
 	particulesPropertiesText *Text
-	rotation                 *Slider
-	rotationValue            *Value
+	rotation                 *SliderF
+	rotationValue            *ValueF
 	rotationText             *Text
-	scaleX                   *Slider
-	scaleXValue              *Value
+	scaleX                   *SliderF
+	scaleXValue              *ValueF
 	scaleXText               *Text
-	scaleY                   *Slider
-	scaleYValue              *Value
+	scaleY                   *SliderF
+	scaleYValue              *ValueF
 	scaleYText               *Text
-	opacity                  *Slider
-	opacityValue             *Value
+	opacity                  *SliderF
+	opacityValue             *ValueF
 	opacityText              *Text
-	colorRed                 *Slider
-	colorRedValue            *Value
+	colorRed                 *SliderF
+	colorRedValue            *ValueF
 	colorRedText             *Text
-	colorGreen               *Slider
-	colorGreenValue          *Value
+	colorGreen               *SliderF
+	colorGreenValue          *ValueF
 	colorGreenText           *Text
+	// Comportement des particules
+	behaviorText   *Text
+	speedType      *SliderI
+	speedTypeValue *ValueI
+	speedTypeText  *Text
+	gravity        *SliderF
+	gravityValue   *ValueF
+	gravityText    *Text
+	haveLife       *Checkbox
+	haveLifeText   *Text
+	randomLife     *Checkbox
+	randomLifeText *Text
+	life           *NumberInput
+	lifeText       *Text
+	// Gestion de l'écran
+	screenManagement         *Text
+	marginOutsideScreen      *SliderF
+	marginOutsideScreenValue *ValueF
+	marginOutsideScreenText  *Text
 
 	accessParticlesButton *Button
 )
@@ -217,7 +236,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Input SpawnRate Slider
 	if spawnRate == nil {
-		spawnRate = newSlider(20, 350, 100, 5, sliderImages, &config.General.SpawnRate, 0, 100, false, true)
+		spawnRate = newSliderFloat(20, 350, 100, 5, sliderImages, &config.General.SpawnRate, 0, 100, false, true)
 	}
 	spawnRate.Update(screen)
 	spawnRate.Draw(screen)
@@ -226,7 +245,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	}
 	spawnRateText.Draw(screen)
 	if spawnRateValue == nil {
-		spawnRateValue = newValue(125, 360, &config.General.SpawnRate, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		spawnRateValue = newValueFloat(125, 360, &config.General.SpawnRate, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	spawnRateValue.Update(screen)
 	spawnRateValue.Draw(screen)
@@ -288,12 +307,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Slider rotation
 	if rotation == nil {
-		rotation = newSlider(20, 575, 100, 5, sliderImages, &config.General.Rotation, 0, 3.14159*2, false, false)
+		rotation = newSliderFloat(20, 575, 100, 5, sliderImages, &config.General.Rotation, -3.14159, 3.14159, false, false)
 	}
 	rotation.Update(screen)
 	rotation.Draw(screen)
 	if rotationValue == nil {
-		rotationValue = newValue(125, 585, &config.General.Rotation, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		rotationValue = newValueFloat(125, 585, &config.General.Rotation, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	rotationValue.Update(screen)
 	rotationValue.Draw(screen)
@@ -305,12 +324,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Slider ScaleX
 	if scaleX == nil {
-		scaleX = newSlider(20, 600, 100, 5, sliderImages, &config.General.ScaleX, 0, 5, false, true)
+		scaleX = newSliderFloat(20, 600, 100, 5, sliderImages, &config.General.ScaleX, 0, 5, false, true)
 	}
 	scaleX.Update(screen)
 	scaleX.Draw(screen)
 	if scaleXValue == nil {
-		scaleXValue = newValue(125, 610, &config.General.ScaleX, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		scaleXValue = newValueFloat(125, 610, &config.General.ScaleX, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	scaleXValue.Update(screen)
 	scaleXValue.Draw(screen)
@@ -320,12 +339,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	scaleXText.Draw(screen)
 	// Slider ScaleY
 	if scaleY == nil {
-		scaleY = newSlider(20, 625, 100, 5, sliderImages, &config.General.ScaleY, 0, 5, false, true)
+		scaleY = newSliderFloat(20, 625, 100, 5, sliderImages, &config.General.ScaleY, 0, 5, false, true)
 	}
 	scaleY.Update(screen)
 	scaleY.Draw(screen)
 	if scaleYValue == nil {
-		scaleYValue = newValue(125, 635, &config.General.ScaleY, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		scaleYValue = newValueFloat(125, 635, &config.General.ScaleY, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	scaleYValue.Update(screen)
 	scaleYValue.Draw(screen)
@@ -336,12 +355,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// Opacity
 	if opacity == nil {
-		opacity = newSlider(20, 650, 100, 5, sliderImages, &config.General.Opacity, 0, 1, false, false)
+		opacity = newSliderFloat(20, 650, 100, 5, sliderImages, &config.General.Opacity, 0, 1, false, false)
 	}
 	opacity.Update(screen)
 	opacity.Draw(screen)
 	if opacityValue == nil {
-		opacityValue = newValue(125, 660, &config.General.Opacity, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		opacityValue = newValueFloat(125, 660, &config.General.Opacity, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	opacityValue.Update(screen)
 	opacityValue.Draw(screen)
@@ -352,12 +371,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// ColorRed
 	if colorRed == nil {
-		colorRed = newSlider(20, 675, 100, 5, sliderImages, &config.General.ColorRed, 0, 1, false, false)
+		colorRed = newSliderFloat(20, 675, 100, 5, sliderImages, &config.General.ColorRed, 0, 1, false, false)
 	}
 	colorRed.Update(screen)
 	colorRed.Draw(screen)
 	if colorRedValue == nil {
-		colorRedValue = newValue(125, 685, &config.General.ColorRed, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		colorRedValue = newValueFloat(125, 685, &config.General.ColorRed, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	colorRedValue.Update(screen)
 	colorRedValue.Draw(screen)
@@ -368,12 +387,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// ColorGreen
 	if colorGreen == nil {
-		colorGreen = newSlider(20, 700, 100, 5, sliderImages, &config.General.ColorGreen, 0, 1, false, false)
+		colorGreen = newSliderFloat(20, 700, 100, 5, sliderImages, &config.General.ColorGreen, 0, 1, false, false)
 	}
 	colorGreen.Update(screen)
 	colorGreen.Draw(screen)
 	if colorGreenValue == nil {
-		colorGreenValue = newValue(125, 710, &config.General.ColorGreen, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+		colorGreenValue = newValueFloat(125, 710, &config.General.ColorGreen, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	colorGreenValue.Update(screen)
 	colorGreenValue.Draw(screen)
@@ -381,6 +400,102 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 		colorGreenText = newText(175, 710, "Vert", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	}
 	colorGreenText.Draw(screen)
+
+	// Comportement des particules
+	// Titre
+	if behaviorText == nil {
+		behaviorText = newText(430, 60, "Comportement des particules", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+	}
+	behaviorText.Draw(screen)
+
+	// SpeedType (sliderI)
+	if speedType == nil {
+		speedType = newSliderInt(430, 85, 100, 5, sliderImages, &config.General.SpeedType, 0, 3, false)
+	}
+	speedType.Update(screen)
+	speedType.Draw(screen)
+	if speedTypeValue == nil {
+		speedTypeValue = newValueInt(535, 95, &config.General.SpeedType, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	speedTypeValue.Update(screen)
+	speedTypeValue.Draw(screen)
+	if speedTypeText == nil {
+		speedTypeText = newText(585, 95, "Type de vitesse", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	speedTypeText.Draw(screen)
+
+	// Gravity (sliderF)
+	if gravity == nil {
+		gravity = newSliderFloat(430, 110, 100, 5, sliderImages, &config.General.Gravity, 0, 1, false, false)
+	}
+	gravity.Update(screen)
+	gravity.Draw(screen)
+	if gravityValue == nil {
+		gravityValue = newValueFloat(535, 120, &config.General.Gravity, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	gravityValue.Update(screen)
+	gravityValue.Draw(screen)
+	if gravityText == nil {
+		gravityText = newText(585, 120, "Gravité", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	gravityText.Draw(screen)
+
+	// haveLife Checkbox
+	if haveLife == nil {
+		haveLife = newCheckbox(430, 135, 50, 30, checkboxImages, config.General.HaveLife, false, func() { config.General.HaveLife = !config.General.HaveLife })
+	}
+	haveLife.Update(screen)
+	haveLife.Draw(screen)
+	if haveLifeText == nil {
+		haveLifeText = newText(520, 155, "Avec vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	haveLifeText.Draw(screen)
+
+	// randomLife Checkbox
+	if randomLife == nil {
+		randomLife = newCheckbox(430, 170, 50, 30, checkboxImages, config.General.RandomLife, !config.General.HaveLife, func() { config.General.RandomLife = !config.General.RandomLife })
+	}
+	randomLife.disabled = !config.General.HaveLife
+	randomLife.Update(screen)
+	randomLife.Draw(screen)
+	if randomLifeText == nil {
+		randomLifeText = newText(520, 190, "Vie aléatoire", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	randomLifeText.Draw(screen)
+
+	// Life numberInput
+	if life == nil {
+		life = newTextInput(430, 205, 100, 30, numberInputImages, !config.General.HaveLife, &config.General.Life, RobotoRegularFontF)
+	}
+	life.disabled = (config.General.HaveLife && config.General.RandomLife) || !config.General.HaveLife
+	life.Update(screen)
+	life.Draw(screen)
+	if lifeText == nil {
+		lifeText = newText(520, 225, "Durée de vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	lifeText.Draw(screen)
+
+	// screenManagement title
+	if screenManagement == nil {
+		screenManagement = newText(430, 280, "Gestion de l'écran", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+	}
+	screenManagement.Draw(screen)
+
+	// marginOutsideScreen slider
+	if marginOutsideScreen == nil {
+		marginOutsideScreen = newSliderFloat(430, 305, 100, 5, sliderImages, &config.General.MarginOutsideScreen, -30, 30, false, true)
+	}
+	marginOutsideScreen.Update(screen)
+	marginOutsideScreen.Draw(screen)
+	if marginOutsideScreenValue == nil {
+		marginOutsideScreenValue = newValueFloat(535, 315, &config.General.MarginOutsideScreen, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	marginOutsideScreenValue.Update(screen)
+	marginOutsideScreenValue.Draw(screen)
+	if marginOutsideScreenText == nil {
+		marginOutsideScreenText = newText(585, 315, "Marge hors écran", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	}
+	marginOutsideScreenText.Draw(screen)
 
 	// Crée le boutton si il n'existe pas
 	if accessParticlesButton == nil {
