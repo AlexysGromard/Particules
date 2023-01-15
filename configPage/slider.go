@@ -185,7 +185,7 @@ func newSliderInt(x, y, width, height int, images []*ebiten.Image, value *int, m
 		imageSliderDisabled: images[3],
 		value:               value,
 		minValue:            minValue,
-		maxValue:            (maxValue - minValue) + (maxValue-minValue)*0.25,
+		maxValue:            maxValue,
 		disabled:            disabled,
 	}
 }
