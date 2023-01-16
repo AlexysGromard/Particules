@@ -189,10 +189,3 @@ func newSliderInt(x, y, width, height int, images []*ebiten.Image, value *int, m
 		disabled:            disabled,
 	}
 }
-
-func abs(n float64) float64 {
-	if n < 0 {
-		return -n
-	}
-	return n
-}
