@@ -8,11 +8,31 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
+var configPageScrollY int
+
 // Update se charge d'appeler la fonction Update du système de particules
 // g.system. Elle est appelée automatiquement exactement 60 fois par seconde par
 // la bibliothèque Ebiten. Cette fonction ne devrait pas être modifiée sauf
 // pour les deux dernières extensions.
 func (g *game) Update() error {
+	// Scroll sur la page de configuration
+	if CurrentPage == configurationsPage && config.General.WindowSizeY < 800 {
+		_, y := ebiten.Wheel()
+		hiddenElementsSizeY := 1000 - config.General.WindowSizeY
+		if y > 0 && configPageScrollY < 0 || y < 0 && configPageScrollY > -hiddenElementsSizeY {
+			configPageScrollY += int(y * 8)
+			configPage.ScrollY = int(y * 8)
+		} else {
+			configPage.ScrollY = 0
+		}
+	} else if configPageScrollY != 0 {
+		// Remettre les valeurs par défaut
+		configPage.ScrollY -= configPageScrollY
+		configPageScrollY = 0
+	} else {
+		configPage.ScrollY = 0
+	}
+
 	// INTERACTION AVEC CONFIGURATION
 	// Si on appuie sur la touche espace, on change de page
 	if ebiten.IsKeyPressed(ebiten.KeyEnter) && CurrentPage == configurationsPage {

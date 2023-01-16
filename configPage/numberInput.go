@@ -38,6 +38,7 @@ func (t *NumberInput) Draw(screen *ebiten.Image) {
 		img = t.imageNormal
 	}
 	// Draw text
+	t.Text.y = t.y + t.height/2 + 7
 	t.Text.Draw(screen)
 	opt := &ebiten.DrawImageOptions{}
 	opt.GeoM.Translate(float64(t.x), float64(t.y))
