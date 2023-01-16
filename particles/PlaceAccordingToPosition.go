@@ -4,14 +4,17 @@ import (
 	"container/list"
 )
 
-func (s *System) PlaceAccordingToPosition(e *list.Element) {
+func (s *System) PlaceAccordingToPosition() {
+	i := s.Content.Front()
+	for i != nil{
+		suivant := i.Next()
 
-	Devant   := e.Next()
-	Derrière := e.Prev()
-		
-	rec(s,e,Derrière,Devant)
+		Devant   := i.Next()
+		Derrière := i.Prev()		
+		rec(s,i,Derrière,Devant)
 
-
+		i = suivant
+	}
 }
 
 func rec(s *System,e,Derrière, Devant *list.Element){

@@ -2,6 +2,7 @@ package particles
 
 import (
 	"math/rand"
+
 )
 
 // La fonction Random_Position permet de définir la position de la particule aléatoirement

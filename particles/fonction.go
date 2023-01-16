@@ -5,28 +5,10 @@ import (
 	"project-particles/config"
 )
 
-/*
-// Explosion
-func abs(nb float64) float64 {
-	if nb < 0 {
-		return -nb
-	}
-	return nb
-}
-
-func speed() (speedX, speedY float64) {
-	speedX = (float64(rand.Intn(5)) + rand.Float64()) * float64(rand.Intn(2)*2-1)
-	speedY = (float64(rand.Intn(5)) + rand.Float64()) * float64(rand.Intn(2)*2-1)
-	if abs(speedX)+abs(speedY) <= 2.5 {
-		speedX, speedY = speed()
-	}
-	return speedX, speedY
-}*/
-
 func Explosion(l *list.List) {
 	// On crée une explosion de particules
 	for i := 0; i < 100; i++ {
-		SpeedX, SpeedY := Random_Speed(3) //speed()
+		SpeedX, SpeedY := Random_Speed(3)
 		l.PushFront(&Particle{
 			PositionX: float64(config.General.SpawnX),
 			PositionY: float64(config.General.SpawnY),
@@ -40,7 +22,3 @@ func Explosion(l *list.List) {
 		})
 	}
 }
-
-//question ?
-//According : je veux utiliser le même programme mais j'utilise un paramêtre
-//DeadListe : je le fais correctement ?

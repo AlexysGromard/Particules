@@ -1,5 +1,7 @@
 package particles
 
+//import 	"project-particles/particles"
+
 // MinAndMaxSpeed retourne la vitesse minimale et maximale en fonction du mode de vitesse
 // choisi par l'utilisateur.
 // Valeur d'entree : un entier compris entre 0 et 3

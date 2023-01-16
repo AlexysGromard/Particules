@@ -1,10 +1,18 @@
 package particles
 
-import "container/list"
+import (
+	"container/list"
+
+)
 
 func (s *System) ResurrectParticule(e *list.Element, Xmoitier float64, Collision, CollisionAmongParticle bool) {
 	p, _ := e.Value.(*Particle)
-
-	s.InsertionAccordingToPositionX(p, Xmoitier, Collision, CollisionAmongParticle)
+	if Collision && CollisionAmongParticle{
+		s.InsertionAccordingToPositionX(p, Xmoitier)
+		
+	}else{
+		s.Content.PushFront(p)
+	}
 	s.DeadList.Remove(e)
 }
+	

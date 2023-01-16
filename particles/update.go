@@ -46,7 +46,7 @@ func (s *System) Update() {
 
 				//tue les particules morte
 				if (p.ParticleOutsideXLimit(config.General.WindowSizeX,config.General.MarginOutsideScreen)) || (p.ParticleOutsideYLimit(config.General.WindowSizeY,config.General.MarginOutsideScreen) )|| p.Life <= 0 {
-				s.KillParticule(i)
+					s.KillParticule(i)
 				}
 
 				// Modifciation des parametre Couleur, Scale, Rotation, Opacity en fonction de mode choisie dans "config.json"
@@ -150,12 +150,12 @@ func (s *System) Update() {
 
 	if config.General.Collision {
 		//trier des particules
-		i := s.Content.Front()
-		for i != nil{
-			suivant := i.Next()
-			s.PlaceAccordingToPosition(i)
-			i = suivant
-		}
+		//i := s.Content.Front()
+		//for i != nil{
+		//	suivant := i.Next()
+		s.PlaceAccordingToPosition()//i)
+		//	i = suivant
+		//}
 	}
 
 	//ajout des particule

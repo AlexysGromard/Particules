@@ -3,7 +3,7 @@ package particles
 import (
 	"testing"
 	"container/list"
-	)
+)
 
 func TestKillParticule(t *testing.T){
 	sys := System{Content: list.New(), DeadList: list.New()}

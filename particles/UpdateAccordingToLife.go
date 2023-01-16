@@ -1,5 +1,6 @@
 package particles
 
+
 //cette fonction renvois une valeur en fonction de la Vie de la patucle
 
 //entrer : ValeurMin la valeur minimal que peux retrouner la fonction

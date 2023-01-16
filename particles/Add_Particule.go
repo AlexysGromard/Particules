@@ -9,7 +9,7 @@ import (
 
 // enter : DeadList (une liste de particule morte qui sont aussi dans le System)
 func (s *System) Add_Particule() {
-
+	
 	var CentreX, CentreY float64
 	CentreX, CentreY = float64(config.General.WindowSizeX)/2, float64(config.General.WindowSizeY)/2
 
@@ -78,6 +78,10 @@ func (s *System) Add_Particule() {
 			LifeInit: Life, Life: Life,
 		}
 
-		s.InsertionAccordingToPositionX(NouvelleParticule, float64(config.General.WindowSizeX)/2, config.General.Collision, config.General.CollisionAmongParticle)
+		if config.General.Collision && config.General.CollisionAmongParticle{
+			s.InsertionAccordingToPositionX(NouvelleParticule, float64(config.General.WindowSizeX)/2)
+		} else {
+			s.Content.PushFront(NouvelleParticule)
+		}
 	}
 }

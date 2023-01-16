@@ -2,6 +2,7 @@ package particles
 
 import (
 	"math/rand"
+
 )
 
 // La fonction Random_Life permet de définir la durée de vie de la particule aléatoirement
