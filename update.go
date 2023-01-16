@@ -18,7 +18,7 @@ func (g *game) Update() error {
 	// Scroll sur la page de configuration
 	if CurrentPage == configurationsPage && config.General.WindowSizeY < 800 {
 		_, y := ebiten.Wheel()
-		hiddenElementsSizeY := 1000 - config.General.WindowSizeY
+		hiddenElementsSizeY := 1050 - config.General.WindowSizeY
 		if y > 0 && configPageScrollY < 0 || y < 0 && configPageScrollY > -hiddenElementsSizeY {
 			configPageScrollY += int(y * 8)
 			configPage.ScrollY = int(y * 8)

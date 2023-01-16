@@ -75,6 +75,20 @@ var (
 	colorBlue                *SliderF
 	colorBlueValue           *ValueF
 	colorBlueText            *Text
+	// Partie collisions
+	collisionsText             *Text
+	collision                  *Checkbox
+	collisionText              *Text
+	collisionAmongParticle     *Checkbox
+	collisionAmongParticleText *Text
+	collisionWithWall          *Checkbox
+	collisionWithWallText      *Text
+	// Interactions
+	interactionsText *Text
+	interaction      *Checkbox
+	interactionText  *Text
+	followMouse      *Checkbox
+	followMouseText  *Text
 	// Comportement des particules
 	behaviorText   *Text
 	speedType      *SliderI
@@ -262,6 +276,20 @@ func createItems() {
 	colorBlue = newSliderFloat(20, 725, 100, 5, sliderImages, &config.General.ColorBlue, 0, 1, false, false)
 	colorBlueValue = newValueFloat(125, 735, &config.General.ColorBlue, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	colorBlueText = newText(175, 735, "Bleu", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	// Partie Collisions
+	collisionsText = newText(20, 785, "Collisions", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+	collision = newCheckbox(20, 810, 50, 30, checkboxImages, config.General.Collision, false, func() { config.General.Collision = !config.General.Collision })
+	collisionText = newText(110, 830, "Activer les collisions", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	collisionAmongParticle = newCheckbox(20, 845, 50, 30, checkboxImages, config.General.CollisionAmongParticle, !config.General.Collision, func() { config.General.CollisionAmongParticle = !config.General.CollisionAmongParticle })
+	collisionAmongParticleText = newText(110, 865, "Entre les particules", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	collisionWithWall = newCheckbox(20, 880, 50, 30, checkboxImages, config.General.CollisionWithWall, !config.General.Collision, func() { config.General.CollisionWithWall = !config.General.CollisionWithWall })
+	collisionWithWallText = newText(110, 900, "Avec les murs", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	// Interactions
+	interactionsText = newText(20, 950, "Interactions", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
+	interaction = newCheckbox(20, 975, 50, 30, checkboxImages, config.General.Interaction, false, func() { config.General.Interaction = !config.General.Interaction })
+	interactionText = newText(110, 995, "Activer les interactions", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	followMouse = newCheckbox(20, 1010, 50, 30, checkboxImages, config.General.FollowMouse, !config.General.Interaction, func() { config.General.FollowMouse = !config.General.FollowMouse })
+	followMouseText = newText(110, 1030, "Suivre la souris", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	// Partie "Comportement des particules"
 	behaviorText = newText(430, 60, "Comportement des particules", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
 	speedType = newSliderInt(430, 85, 100, 5, sliderImages, &config.General.SpeedType, 0, 3, false)
@@ -562,6 +590,70 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	colorBlueText.y += int(ScrollY)
 	colorBlueText.Draw(screen)
+
+	// Partie collisions
+	// collisionsText
+	collisionsText.y += int(ScrollY)
+	collisionsText.Draw(screen)
+
+	// collision
+	collision.Update(screen)
+	collision.y += int(ScrollY)
+	collision.Draw(screen)
+
+	collisionText.y += int(ScrollY)
+	collisionText.Draw(screen)
+
+	if !collision.checked {
+		collisionAmongParticle.disabled = true
+		collisionWithWall.disabled = true
+	} else {
+		collisionAmongParticle.disabled = false
+		collisionWithWall.disabled = false
+	}
+
+	// CollisionAmongParticle
+	collisionAmongParticle.Update(screen)
+	collisionAmongParticle.y += int(ScrollY)
+	collisionAmongParticle.Draw(screen)
+
+	collisionAmongParticleText.y += int(ScrollY)
+	collisionAmongParticleText.Draw(screen)
+
+	// CollisionWithWall
+	collisionWithWall.Update(screen)
+	collisionWithWall.y += int(ScrollY)
+	collisionWithWall.Draw(screen)
+
+	collisionWithWallText.y += int(ScrollY)
+	collisionWithWallText.Draw(screen)
+
+	// Partie interaction
+	// interactionText
+	interactionsText.y += int(ScrollY)
+	interactionsText.Draw(screen)
+
+	// interaction
+	interaction.Update(screen)
+	interaction.y += int(ScrollY)
+	interaction.Draw(screen)
+
+	interactionText.y += int(ScrollY)
+	interactionText.Draw(screen)
+
+	if !interaction.checked {
+		followMouse.disabled = true
+	} else {
+		followMouse.disabled = false
+	}
+
+	// FollowMouse
+	followMouse.Update(screen)
+	followMouse.y += int(ScrollY)
+	followMouse.Draw(screen)
+
+	followMouseText.y += int(ScrollY)
+	followMouseText.Draw(screen)
 
 	// Comportement des particules
 	// Titre
