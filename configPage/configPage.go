@@ -2,7 +2,6 @@ package configPage
 
 import (
 	"image/color"
-	"log"
 	"os"
 	"project-particles/config"
 
@@ -150,7 +149,6 @@ var (
 	changeOpacityAccordingToPositionText *Text
 	changeOpacityAccordingToLife         *Checkbox
 	changeOpacityAccordingToLifeText     *Text
-
 	// Boutons
 	PlayButton            *Button
 	accessParticlesButton *Button
@@ -193,20 +191,21 @@ func loadImages() {
 		findImage(ImageList, "text-input-disabled.png")} // Disabled
 }
 
-func loadFont() {
+func loadFont(path string) error {
 	// Liste des polices
-	err := loadFontRegular("./assets/fonts/Roboto-Regular.ttf")
+	err := loadFontRegular(path + "Roboto-Regular.ttf")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
-	err = loadFontBold("./assets/fonts/Roboto-Bold.ttf")
+	err = loadFontBold(path + "Roboto-Bold.ttf")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
-	err = loadFontTitle("./assets/fonts/Roboto-Bold.ttf")
+	err = loadFontTitle(path + "Roboto-Bold.ttf")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+	return nil
 }
 
 // Creation des éléments de la page de configuration
@@ -375,7 +374,7 @@ func createItems() {
 	})
 	changeOpacityAccordingToLifeText = newText(520, 935, "En fonction de la vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	PlayButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-130, 170, 50, buttonImages, "Jouer", RobotoRegularFontF, func() {})
-	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig() })
+	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig("./config.json") })
 	leaveGamebutton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-30, 170, 50, buttonImages, "Quitter", RobotoRegularFontF, func() { os.Exit(0) })
 }
 
@@ -389,7 +388,10 @@ var (
 func UpdateConfigPage(screen *ebiten.Image) error {
 	if !itemsCreated {
 		loadImages()
-		loadFont()
+		err := loadFont("./assets/fonts/")
+		if err != nil {
+			return err
+		}
 		createItems()
 		itemsCreated = true
 	}
