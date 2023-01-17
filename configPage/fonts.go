@@ -9,12 +9,15 @@ import (
 
 // Importer les deux polices de caractères
 
+// Chemin des fonts
+// (Les valeurs ne peuvent pas être modifiées)
 const (
 	// Chemin des fonts
 	fontFaceRegular = "assets/fonts/Roboto-Regular.ttf"
 	fontFaceBold    = "assets/fonts/Roboto-Bold.ttf"
 )
 
+// Variables globales des polices de caractères
 var (
 	// RobotoRegular
 	RobotoRegularFont  *truetype.Font
@@ -28,15 +31,20 @@ var (
 )
 
 // loadFontRegular charge une police de caractères regular
+// Taille de la police: 20
+// Type de police: regular
 func loadFontRegular() error {
-	b, err := os.ReadFile(fontFaceRegular)
+	// Charge le fichier de la police de caractères .ttf
+	file, err := os.ReadFile(fontFaceRegular)
 	if err != nil {
 		return err
 	}
-	RobotoRegularFont, err = truetype.Parse(b)
+	// Analyse et charge la police de caractères dans la variable
+	RobotoRegularFont, err = truetype.Parse(file)
 	if err != nil {
 		return err
 	}
+	// Création de la police de caractères
 	RobotoRegularFontF = truetype.NewFace(RobotoRegularFont, &truetype.Options{
 		Size:    20,
 		DPI:     72,
@@ -46,15 +54,20 @@ func loadFontRegular() error {
 }
 
 // LoadFontBold charge une police de caractères bold
+// Taille de la police: 20
+// Type de police: bold
 func loadFontBold() error {
-	b, err := os.ReadFile(fontFaceBold)
+	// Charge le fichier de la police de caractères .ttf
+	file, err := os.ReadFile(fontFaceBold)
 	if err != nil {
 		return err
 	}
-	RobotoBoldFont, err = truetype.Parse(b)
+	// Analyse et charge la police de caractères dans la variable
+	RobotoBoldFont, err = truetype.Parse(file)
 	if err != nil {
 		return err
 	}
+	// Création de la police de caractères
 	RobotoBoldFontF = truetype.NewFace(RobotoBoldFont, &truetype.Options{
 		Size:    20,
 		DPI:     72,
@@ -63,16 +76,21 @@ func loadFontBold() error {
 	return nil
 }
 
-// LoadFontTitle
+// LoadFontTitle charge une police de caractères bold
+// Taille de la police: 25
+// Type de police: bold
 func loadFontTitle() error {
-	b, err := os.ReadFile(fontFaceBold)
+	// Charge le fichier de la police de caractères .ttf
+	file, err := os.ReadFile(fontFaceBold)
 	if err != nil {
 		return err
 	}
-	RobotoBoldFont, err = truetype.Parse(b)
+	// Analyse et charge la police de caractères dans la variable
+	RobotoBoldFont, err = truetype.Parse(file)
 	if err != nil {
 		return err
 	}
+	// Création de la police de caractères
 	PageTitleF = truetype.NewFace(RobotoBoldFont, &truetype.Options{
 		Size:    25,
 		DPI:     72,
