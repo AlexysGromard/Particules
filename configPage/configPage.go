@@ -375,7 +375,7 @@ func createItems() {
 	})
 	changeOpacityAccordingToLifeText = newText(520, 935, "En fonction de la vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	PlayButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-130, 170, 50, buttonImages, "Jouer", RobotoRegularFontF, func() {})
-	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig() })
+	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig("./config.json") })
 	leaveGamebutton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-30, 170, 50, buttonImages, "Quitter", RobotoRegularFontF, func() { os.Exit(0) })
 }
 
