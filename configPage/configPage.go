@@ -195,15 +195,15 @@ func loadImages() {
 
 func loadFont() {
 	// Liste des polices
-	err := loadFontRegular()
+	err := loadFontRegular("./assets/fonts/Roboto-Regular.ttf")
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = loadFontBold()
+	err = loadFontBold("./assets/fonts/Roboto-Bold.ttf")
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = loadFontTitle()
+	err = loadFontTitle("./assets/fonts/Roboto-Bold.ttf")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -231,7 +231,7 @@ func createItems() {
 	spawnXText = newText(110, 290, "Position de spawn X", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	spawnY = newTextInput(20, 305, 100, 30, numberInputImages, config.General.SpawnCenter, &config.General.SpawnY, RobotoRegularFontF)
 	spawnYText = newText(110, 325, "Position de spawn Y", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
-	spawnRate = newSliderFloat(20, 350, 100, 5, sliderImages, &config.General.SpawnRate, 0, 100, false, true)
+	spawnRate = newSliderFloat(20, 350, 100, 5, sliderImages, &config.General.SpawnRate, 0, 500, false, true)
 	spawnRateText = newText(165, 360, "Fréquence de génération", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	spawnRateValue = newValueFloat(125, 360, &config.General.SpawnRate, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	spawnOnAnObject = newCheckbox(20, 375, 50, 30, checkboxImages, config.General.SpawnOnAnObject, false, func() { config.General.SpawnOnAnObject = !config.General.SpawnOnAnObject })

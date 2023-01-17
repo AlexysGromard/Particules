@@ -7,16 +7,6 @@ import (
 	"golang.org/x/image/font"
 )
 
-// Importer les deux polices de caractères
-
-// Chemin des fonts
-// (Les valeurs ne peuvent pas être modifiées)
-const (
-	// Chemin des fonts
-	fontFaceRegular = "../assets/fonts/Roboto-Regular.ttf"
-	fontFaceBold    = "../assets/fonts/Roboto-Bold.ttf"
-)
-
 // Variables globales des polices de caractères
 var (
 	// RobotoRegular
@@ -33,9 +23,9 @@ var (
 // loadFontRegular charge une police de caractères regular
 // Taille de la police: 20
 // Type de police: regular
-func loadFontRegular() error {
+func loadFontRegular(path string) error {
 	// Charge le fichier de la police de caractères .ttf
-	file, err := os.ReadFile(fontFaceRegular)
+	file, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
@@ -56,9 +46,9 @@ func loadFontRegular() error {
 // LoadFontBold charge une police de caractères bold
 // Taille de la police: 20
 // Type de police: bold
-func loadFontBold() error {
+func loadFontBold(path string) error {
 	// Charge le fichier de la police de caractères .ttf
-	file, err := os.ReadFile(fontFaceBold)
+	file, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
@@ -79,9 +69,9 @@ func loadFontBold() error {
 // LoadFontTitle charge une police de caractères bold
 // Taille de la police: 25
 // Type de police: bold
-func loadFontTitle() error {
+func loadFontTitle(path string) error {
 	// Charge le fichier de la police de caractères .ttf
-	file, err := os.ReadFile(fontFaceBold)
+	file, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
