@@ -3,8 +3,6 @@ package configPage
 import (
 	"image"
 	_ "image/png"
-	"io/ioutil"
-	"log"
 	"os"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -23,21 +21,22 @@ var ImageList = []Images{}
 // Elle ouvre le dossier avec le module OS. Elle boucle sur toutes les images et les ajoute à une slice
 // Entrée: aucun
 // Sortie: aucun
-func LoadImages() {
+func LoadImages() error {
 	// Get folder files
-	files, err := ioutil.ReadDir("./assets/graphics")
+	files, err := os.ReadDir("./assets/graphics")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	for _, f := range files {
 		// Get image from file
 		image, err := getImageFromFilePath("./assets/graphics/" + f.Name())
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 		// add image to slice
 		ImageList = append(ImageList, Images{name: f.Name(), image: image})
 	}
+	return nil
 }
 
 // GetImageFromName retourne une image à partir de son nom
@@ -52,7 +51,7 @@ func getImageFromFilePath(filePath string) (img *ebiten.Image, err error) {
 	// Convert for Ebiten
 	image := ebiten.NewImageFromImage(imgDecode)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	return image, err
 }

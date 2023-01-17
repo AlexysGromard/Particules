@@ -1,7 +1,7 @@
 package configPage
 
 import (
-	"io/ioutil"
+	"os"
 
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
@@ -29,7 +29,7 @@ var (
 
 // loadFontRegular charge une police de caractères regular
 func loadFontRegular() error {
-	b, err := ioutil.ReadFile(fontFaceRegular)
+	b, err := os.ReadFile(fontFaceRegular)
 	if err != nil {
 		return err
 	}
@@ -47,7 +47,7 @@ func loadFontRegular() error {
 
 // LoadFontBold charge une police de caractères bold
 func loadFontBold() error {
-	b, err := ioutil.ReadFile(fontFaceBold)
+	b, err := os.ReadFile(fontFaceBold)
 	if err != nil {
 		return err
 	}
@@ -65,7 +65,7 @@ func loadFontBold() error {
 
 // LoadFontTitle
 func loadFontTitle() error {
-	b, err := ioutil.ReadFile(fontFaceBold)
+	b, err := os.ReadFile(fontFaceBold)
 	if err != nil {
 		return err
 	}
