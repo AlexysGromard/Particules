@@ -30,7 +30,7 @@ func main() {
 	// Taille minimum de la fentre
 
 	// Chargement des images de configuration
-	configPage.LoadImages()
+	configPage.LoadAllImages("./assets/graphics/")
 
 	g := game{system: System.NewSystem()}
 

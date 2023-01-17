@@ -165,21 +165,6 @@ var (
 	numberInputImages = []*ebiten.Image{}
 )
 
-// Initialisation des variables de fonts
-
-// FidnImage cherche une image grâce à son nom dans la liste des images
-func findImage(images []Images, filename string) *ebiten.Image {
-	// Boucle dans les images avec leurs noms
-	for _, img := range images {
-		// Trouve l'image avec le nom correspondant
-		if img.name == filename {
-			// Return img
-			return img.image
-		}
-	}
-	return nil
-}
-
 // loadImages charge les images
 func loadImages() {
 	// Liste des images

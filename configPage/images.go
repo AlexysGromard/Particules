@@ -21,15 +21,15 @@ var ImageList = []Images{}
 // Elle ouvre le dossier avec le module OS. Elle boucle sur toutes les images et les ajoute à une slice
 // Entrée: aucun
 // Sortie: aucun
-func LoadImages() error {
+func LoadAllImages(filePath string) error {
 	// Get folder files
-	files, err := os.ReadDir("./assets/graphics")
+	files, err := os.ReadDir(filePath)
 	if err != nil {
 		return err
 	}
 	for _, f := range files {
 		// Get image from file
-		image, err := getImageFromFilePath("./assets/graphics/" + f.Name())
+		image, err := getImageFromFilePath(filePath + f.Name())
 		if err != nil {
 			return err
 		}
@@ -46,6 +46,9 @@ func LoadImages() error {
 func getImageFromFilePath(filePath string) (img *ebiten.Image, err error) {
 	// Open file with OS
 	file, err := os.Open(filePath)
+	if err != nil {
+		return nil, err
+	}
 	// Decode image
 	imgDecode, _, _ := image.Decode(file)
 	// Convert for Ebiten
@@ -54,4 +57,17 @@ func getImageFromFilePath(filePath string) (img *ebiten.Image, err error) {
 		return nil, err
 	}
 	return image, err
+}
+
+// FidnImage cherche une image grâce à son nom dans la liste des images
+func findImage(images []Images, filename string) *ebiten.Image {
+	// Boucle dans les images avec leurs noms
+	for _, img := range images {
+		// Trouve l'image avec le nom correspondant
+		if img.name == filename {
+			// Return img
+			return img.image
+		}
+	}
+	return nil
 }
