@@ -13,8 +13,8 @@ import (
 // (Les valeurs ne peuvent pas être modifiées)
 const (
 	// Chemin des fonts
-	fontFaceRegular = "assets/fonts/Roboto-Regular.ttf"
-	fontFaceBold    = "assets/fonts/Roboto-Bold.ttf"
+	fontFaceRegular = "../assets/fonts/Roboto-Regular.ttf"
+	fontFaceBold    = "../assets/fonts/Roboto-Bold.ttf"
 )
 
 // Variables globales des polices de caractères
