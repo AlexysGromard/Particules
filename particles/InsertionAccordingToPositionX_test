@@ -1,9 +1,0 @@
-package particles
-
-import (
-	"testing"
-)
-
-func TestInsertionAccordingToPositionX(t *testing.T){
-	
-}
