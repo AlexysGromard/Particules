@@ -3,8 +3,9 @@ package main
 import (
 	"project-particles/config"
 	"project-particles/configPage"
-	"project-particles/particles"
-
+	//"project-particles/particles"
+	"project-particles/particles/ParticleModification"
+	
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -69,16 +70,12 @@ func (g *game) Update() error {
 		// Explosion
 		// Si espace est appuyee, on appelle la fonction Explosion du systeme de particules
 		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == particlesPage {
-			particles.Explosion(g.system.Content)
+			ParticleModification.Explosion(g.system.Content)
 		}
 		// Tourbillon
-		// Si T est appuyee, on appelle la fonction Tourbillon du systeme de particules
+		// Si T est appuyee, on appelle la fonction MakeWhirlwind du systeme de particules
 		if ebiten.IsKeyPressed(ebiten.KeyT) {
-			particles.WhirlwindState = true
-		}
-		// Si T n'est plus appuyee, on appelle la fonction Tourbillon du systeme de particules
-		if !ebiten.IsKeyPressed(ebiten.KeyT) && particles.WhirlwindState {
-			particles.WhirlwindState = false
+			ParticleModification.MakeWhirlwind(g.system.Content)
 		}
 	}
 	if config.General.FollowMouse {

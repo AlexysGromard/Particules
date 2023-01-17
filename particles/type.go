@@ -1,15 +1,5 @@
 package particles
 
-import "container/list"
-
-// System définit un système de particules.
-// Pour le moment il ne contient qu'une liste de particules, mais cela peut
-// évoluer durant votre projet.
-type System struct {
-	Content *list.List
-	DeadList *list.List
-}
-
 // Particle définit une particule.
 // Elle possède une position, une rotation, une taille, une couleur, et une
 // opacité. Vous ajouterez certainement d'autres caractéristiques aux particules
