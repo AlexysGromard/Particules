@@ -3,9 +3,10 @@ package main
 import (
 	"project-particles/config"
 	"project-particles/configPage"
+
 	//"project-particles/particles"
 	"project-particles/particles/ParticleModification"
-	
+
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -39,12 +40,14 @@ func (g *game) Update() error {
 	}
 
 	// INTERACTION AVEC CONFIGURATION
-	// Si on appuie sur la Enter, on va sur la page de particules
+	// Si on appuie sur la Enter ou le bouton playButton, on va sur la page de particules
 	// Si on appuie sur la touche Echap, on va sur la page de configuration
-	if ebiten.IsKeyPressed(ebiten.KeyEnter) && CurrentPage == configurationsPage {
-		CurrentPage = particlesPage
-	} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
-		CurrentPage = configurationsPage
+	if configPage.PlayButton != nil {
+		if (ebiten.IsKeyPressed(ebiten.KeyEnter) || configPage.PlayButton.Pressed) && CurrentPage == configurationsPage {
+			CurrentPage = particlesPage
+		} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
+			CurrentPage = configurationsPage
+		}
 	}
 	if config.General.Interaction {
 		// INTERACTION AVEC PARTICULES

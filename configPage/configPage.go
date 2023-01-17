@@ -151,6 +151,8 @@ var (
 	changeOpacityAccordingToLife         *Checkbox
 	changeOpacityAccordingToLifeText     *Text
 
+	// Boutons
+	PlayButton            *Button
 	accessParticlesButton *Button
 	leaveGamebutton       *Button
 )
@@ -387,6 +389,7 @@ func createItems() {
 		}
 	})
 	changeOpacityAccordingToLifeText = newText(520, 935, "En fonction de la vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	PlayButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-130, 170, 50, buttonImages, "Jouer", RobotoRegularFontF, func() {})
 	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig() })
 	leaveGamebutton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-30, 170, 50, buttonImages, "Quitter", RobotoRegularFontF, func() { os.Exit(0) })
 }
@@ -678,6 +681,12 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	changeOpacityAccordingToLifeText.update(screen)
 
 	// Met à jour l'état des bouton et l'affiche
+	// Si le bouton playButton n'est plus à la bonne place en fonction de la taille d'écran
+	if PlayButton.x < config.General.WindowSizeX-PlayButton.width || PlayButton.x > config.General.WindowSizeX-PlayButton.width+30 || PlayButton.y < config.General.WindowSizeY-PlayButton.height || PlayButton.y > config.General.WindowSizeY-PlayButton.height+30 {
+		PlayButton.x = config.General.WindowSizeX - PlayButton.width - 30
+		PlayButton.y = config.General.WindowSizeY - PlayButton.height - 130
+	}
+	PlayButton.update(screen)
 	// Si le bouton accessParticlesButton n'est plus à la bonne place en fonction de la taille d'écran
 	if accessParticlesButton.x < config.General.WindowSizeX-accessParticlesButton.width || accessParticlesButton.x > config.General.WindowSizeX-accessParticlesButton.width+30 || accessParticlesButton.y < config.General.WindowSizeY-accessParticlesButton.height || accessParticlesButton.y > config.General.WindowSizeY-accessParticlesButton.height+30 {
 		accessParticlesButton.x = config.General.WindowSizeX - accessParticlesButton.width - 30

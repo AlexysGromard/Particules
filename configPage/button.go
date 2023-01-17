@@ -18,7 +18,7 @@ type Button struct {
 	text                string
 	textX, textY        int
 	font                font.Face
-	pressed             bool
+	Pressed             bool
 	hover               bool
 	onClick             func()
 }
@@ -27,7 +27,7 @@ type Button struct {
 // Cette fonction met à jour l'affichage des bouttons en fonction de leur état (hover, pressed)
 func (b *Button) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
-	if b.pressed {
+	if b.Pressed {
 		img = b.imagePressed
 	} else if b.hover {
 		img = b.imageHover
@@ -53,13 +53,13 @@ func (b *Button) update(screen *ebiten.Image) {
 	if x > b.x && x < b.x+b.width && y > b.y && y < b.y+b.height {
 		b.hover = true
 		if ebiten.IsMouseButtonPressed(ebiten.MouseButtonLeft) {
-			b.pressed = true
+			b.Pressed = true
 			b.onClick()
 		} else {
-			b.pressed = false
+			b.Pressed = false
 		}
 	} else {
-		b.pressed = false
+		b.Pressed = false
 	}
 	// Mettre le text au centre du boutton
 	// Calcul de la taille du texte
