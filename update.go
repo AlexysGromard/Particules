@@ -10,31 +10,36 @@ import (
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-var configPageScrollY int
+var configPageScrollY int // Variable qui contient le scroll de la page de configuration
 
 // Update se charge d'appeler la fonction Update du système de particules
 // g.system. Elle est appelée automatiquement exactement 60 fois par seconde par
 // la bibliothèque Ebiten. Cette fonction ne devrait pas être modifiée sauf
 // pour les deux dernières extensions.
 func (g *game) Update() error {
-	// Scroll sur la page de configuration
+	// SCROLL SUR LA PAGE DE CONFIGURATION
+	// Calculer la taille des éléments cachés
 	hiddenElementsSizeY := 1020 - config.General.WindowSizeY
+	// Si on est sur la page de configuration et qu'il y a des éléments cachés, on scroll
 	if CurrentPage == configurationsPage && hiddenElementsSizeY > 0 {
-		_, y := ebiten.Wheel()
+		_, y := ebiten.Wheel() // Valeur du scroll
 		if (y < 0 && -(configPageScrollY+int(y*8)) < hiddenElementsSizeY) || (y > 0 && -(configPageScrollY+int(y*8)) > 0) {
+			// Si on scroll vers le haut ou vers le bas et que le scroll ne dépasse pas les limites
 			configPageScrollY += int(y * 8)
 			configPage.ScrollY = int(y * 8)
 		} else if y < 0 && -(configPageScrollY+int(y*8)) > hiddenElementsSizeY && -configPageScrollY < hiddenElementsSizeY {
+			// Si on scroll vers le haut et que le scroll dépasse les limites
 			configPage.ScrollY = -hiddenElementsSizeY - configPageScrollY
 			configPageScrollY = -hiddenElementsSizeY
 		} else if y > 0 && -(configPageScrollY+int(y*8)) < 0 && -configPageScrollY > 0 {
+			// Si on scroll vers le bas et que le scroll dépasse les limites
 			configPage.ScrollY = -configPageScrollY
 			configPageScrollY = 0
 		} else {
 			configPage.ScrollY = 0
 		}
 	} else if configPageScrollY != 0 {
-		// Remettre les valeurs par défaut
+		// Remettre les valeurs par défaut car il n'y a plus de scroll
 		configPage.ScrollY -= configPageScrollY
 		configPageScrollY = 0
 	}
