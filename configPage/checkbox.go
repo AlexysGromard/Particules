@@ -21,7 +21,7 @@ type Checkbox struct {
 
 // Impression des Checkbox
 // Cette fonction met à jour l'affichage des checkbox en fonction de leur état (hover, pressed, checked)
-func (c *Checkbox) Draw(screen *ebiten.Image) {
+func (c *Checkbox) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if c.hover && !c.disabled {
 		img = c.imageHover
@@ -39,7 +39,7 @@ func (c *Checkbox) Draw(screen *ebiten.Image) {
 // Cette fonction regarde si la souris est sur une checkbox et si elle est enfoncée
 // Elle regarde vérifie si la checkbox est cochée ou non
 // Si la checkbox est cochée, elle affiche l'image
-func (c *Checkbox) Update(screen *ebiten.Image) {
+func (c *Checkbox) update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	c.hover = false
@@ -75,7 +75,10 @@ func (c *Checkbox) Update(screen *ebiten.Image) {
 		opt.GeoM.Translate(float64(c.x), float64(c.y))
 		screen.DrawImage(c.circleFalse, opt)
 	}
-
+	// Ajouter le scroll
+	c.y += ScrollY
+	// Draw la checkbox
+	c.draw(screen)
 }
 
 // NewCheckbox crée une nouvelle checkbox en fonction des paramètres

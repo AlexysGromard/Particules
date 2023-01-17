@@ -16,13 +16,15 @@ type Text struct {
 }
 
 // Draw dessine le texte
-func (t *Text) Draw(screen *ebiten.Image) {
+func (t *Text) draw(screen *ebiten.Image) {
 	text.Draw(screen, t.text, t.fontFace, t.x, t.y, t.color)
 }
 
-func (t *Text) Update(screen *ebiten.Image) {
-	// Mettre à jour le texte
-	text.Draw(screen, t.text, t.fontFace, t.x, t.y, t.color)
+func (t *Text) update(screen *ebiten.Image) {
+	// AJouter le scroll
+	t.y += ScrollY
+	// Draw le texte
+	t.draw(screen)
 }
 
 // NewText crée un nouveau texte

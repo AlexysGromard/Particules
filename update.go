@@ -3,64 +3,77 @@ package main
 import (
 	"project-particles/config"
 	"project-particles/configPage"
+
 	//"project-particles/particles"
 	"project-particles/particles/ParticleModification"
-	
+
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
-var configPageScrollY int
+var configPageScrollY int // Variable qui contient le scroll de la page de configuration
 
 // Update se charge d'appeler la fonction Update du système de particules
 // g.system. Elle est appelée automatiquement exactement 60 fois par seconde par
 // la bibliothèque Ebiten. Cette fonction ne devrait pas être modifiée sauf
 // pour les deux dernières extensions.
 func (g *game) Update() error {
-	// Scroll sur la page de configuration
-	if CurrentPage == configurationsPage && config.General.WindowSizeY < 800 {
-		_, y := ebiten.Wheel()
-		hiddenElementsSizeY := 1050 - config.General.WindowSizeY
-		if y > 0 && configPageScrollY < 0 || y < 0 && configPageScrollY > -hiddenElementsSizeY {
+	// SCROLL SUR LA PAGE DE CONFIGURATION
+	// Calculer la taille des éléments cachés
+	hiddenElementsSizeY := 1020 - config.General.WindowSizeY
+	// Si on est sur la page de configuration et qu'il y a des éléments cachés, on scroll
+	if CurrentPage == configurationsPage && hiddenElementsSizeY > 0 {
+		_, y := ebiten.Wheel() // Valeur du scroll
+		if (y < 0 && -(configPageScrollY+int(y*8)) < hiddenElementsSizeY) || (y > 0 && -(configPageScrollY+int(y*8)) > 0) {
+			// Si on scroll vers le haut ou vers le bas et que le scroll ne dépasse pas les limites
 			configPageScrollY += int(y * 8)
 			configPage.ScrollY = int(y * 8)
+		} else if y < 0 && -(configPageScrollY+int(y*8)) > hiddenElementsSizeY && -configPageScrollY < hiddenElementsSizeY {
+			// Si on scroll vers le haut et que le scroll dépasse les limites
+			configPage.ScrollY = -hiddenElementsSizeY - configPageScrollY
+			configPageScrollY = -hiddenElementsSizeY
+		} else if y > 0 && -(configPageScrollY+int(y*8)) < 0 && -configPageScrollY > 0 {
+			// Si on scroll vers le bas et que le scroll dépasse les limites
+			configPage.ScrollY = -configPageScrollY
+			configPageScrollY = 0
 		} else {
 			configPage.ScrollY = 0
 		}
 	} else if configPageScrollY != 0 {
-		// Remettre les valeurs par défaut
+		// Remettre les valeurs par défaut car il n'y a plus de scroll
 		configPage.ScrollY -= configPageScrollY
 		configPageScrollY = 0
-	} else {
-		configPage.ScrollY = 0
 	}
 
 	// INTERACTION AVEC CONFIGURATION
-	// Si on appuie sur la touche espace, on change de page
-	if ebiten.IsKeyPressed(ebiten.KeyEnter) && CurrentPage == configurationsPage {
-		CurrentPage = particlesPage
-		// Save la configuration
-		configPage.SaveConfig()
-	} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
-		CurrentPage = configurationsPage
+	// Si on appuie sur la Enter ou le bouton playButton, on va sur la page de particules
+	// Si on appuie sur la touche Echap, on va sur la page de configuration
+	if configPage.PlayButton != nil {
+		if (ebiten.IsKeyPressed(ebiten.KeyEnter) || configPage.PlayButton.Pressed) && CurrentPage == configurationsPage {
+			CurrentPage = particlesPage
+		} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
+			CurrentPage = configurationsPage
+		}
 	}
 	if config.General.Interaction {
 		// INTERACTION AVEC PARTICULES
 		// Deplacement de la zone de spawn
 		// Si fleche haut est appuyee, on diminue la coordonnee Y de la zone de spawn
-		if ebiten.IsKeyPressed(ebiten.KeyUp) && config.General.SpawnY > 0 {
-			config.General.SpawnY -= 3
-		}
-		// Si fleche bas est appuyee, on augmente la coordonnee Y de la zone de spawn
-		if ebiten.IsKeyPressed(ebiten.KeyDown) && config.General.SpawnY < config.General.WindowSizeY {
-			config.General.SpawnY += 3
-		}
-		// Si fleche gauche est appuyee, on diminue la coordonnee X de la zone de spawn
-		if ebiten.IsKeyPressed(ebiten.KeyLeft) && config.General.SpawnX > 0 {
-			config.General.SpawnX -= 3
-		}
-		// Si fleche droite est appuyee, on augmente la coordonnee X de la zone de spawn
-		if ebiten.IsKeyPressed(ebiten.KeyRight) && config.General.SpawnX < config.General.WindowSizeX {
-			config.General.SpawnX += 3
+		if !config.General.SpawnCenter {
+			if ebiten.IsKeyPressed(ebiten.KeyUp) && config.General.SpawnY > 0 {
+				config.General.SpawnY -= 3
+			}
+			// Si fleche bas est appuyee, on augmente la coordonnee Y de la zone de spawn
+			if ebiten.IsKeyPressed(ebiten.KeyDown) && config.General.SpawnY < config.General.WindowSizeY {
+				config.General.SpawnY += 3
+			}
+			// Si fleche gauche est appuyee, on diminue la coordonnee X de la zone de spawn
+			if ebiten.IsKeyPressed(ebiten.KeyLeft) && config.General.SpawnX > 0 {
+				config.General.SpawnX -= 3
+			}
+			// Si fleche droite est appuyee, on augmente la coordonnee X de la zone de spawn
+			if ebiten.IsKeyPressed(ebiten.KeyRight) && config.General.SpawnX < config.General.WindowSizeX {
+				config.General.SpawnX += 3
+			}
 		}
 		// Explosion
 		// Si espace est appuyee, on appelle la fonction Explosion du systeme de particules

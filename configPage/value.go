@@ -24,25 +24,31 @@ type ValueI struct {
 }
 
 // Draw dessine le texte
-func (v *ValueF) Draw(screen *ebiten.Image) {
+func (v *ValueF) draw(screen *ebiten.Image) {
 	text.Draw(screen, fmt.Sprintf("%v", *v.value), v.fontFace, v.x, v.y, v.color)
 }
-func (v *ValueI) Draw(screen *ebiten.Image) {
+func (v *ValueI) draw(screen *ebiten.Image) {
 	text.Draw(screen, fmt.Sprintf("%v", *v.value), v.fontFace, v.x, v.y, v.color)
 }
 
 // Update met à jour le texte
-func (v *ValueF) Update(screen *ebiten.Image) {
+func (v *ValueF) update(screen *ebiten.Image) {
 	// Mettre à jour le texte
 	// Value = 2 chiffres après la virgule
 	*v.value = float64(int(*v.value*100)) / 100
-	text.Draw(screen, fmt.Sprintf("%v", *v.value), v.fontFace, v.x, v.y, v.color)
+	// Ajouter le scroll
+	v.y += ScrollY
+	// Draw le texte
+	v.draw(screen)
 }
-func (v *ValueI) Update(screen *ebiten.Image) {
+func (v *ValueI) update(screen *ebiten.Image) {
 	// Mettre à jour le texte
 	// Value = 2 chiffres après la virgule
 	*v.value = *v.value * 100 / 100
-	text.Draw(screen, fmt.Sprintf("%v", *v.value), v.fontFace, v.x, v.y, v.color)
+	// Ajouter le scroll
+	v.y += ScrollY
+	// Draw le texte
+	v.draw(screen)
 }
 
 // NewText crée un nouveau texte
