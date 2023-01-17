@@ -69,8 +69,8 @@ func TestPlaceAccordingToPosition2(t *testing.T) {
 	a := sys.Content.Front()
 	b := a.Next()
 	c := b.Next()
-	d := b.Next()
-	e := b.Next()
+	d := c.Next()
+	e := d.Next()
 
 	pa, _ := a.Value.(*particles.Particle)
 	pb, _ := b.Value.(*particles.Particle)
@@ -78,8 +78,8 @@ func TestPlaceAccordingToPosition2(t *testing.T) {
 	pd, _ := d.Value.(*particles.Particle)
 	pe, _ := e.Value.(*particles.Particle)
 
-	if pa != &Particle3 && pb != &Particle1 && pc != &Particle5 && pd != &Particle2 && pe != &Particle4 {
-		t.Error("le tri n'a pas bien fonctionner")
+	if (pa != &Particle3 && pb != &Particle1 && pc != &Particle5 && pd != &Particle2 && pe != &Particle4) || true {
+		t.Error("le tri n'a pas bien fonctionné",pa,pb,pc,pd,pe)
 	}
 
 }
