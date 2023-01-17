@@ -3,7 +3,6 @@ package configPage
 import (
 	"image"
 	"image/color"
-	"project-particles/config"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
@@ -26,7 +25,7 @@ type Button struct {
 
 // Impression des bouttons
 // Cette fonction met à jour l'affichage des bouttons en fonction de leur état (hover, pressed)
-func (b *Button) Draw(screen *ebiten.Image) {
+func (b *Button) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if b.pressed {
 		img = b.imagePressed
@@ -40,13 +39,13 @@ func (b *Button) Draw(screen *ebiten.Image) {
 
 	screen.DrawImage(nineSlice(img, b.width, b.height), opt)
 	// Draw text in the center of the button
-	text.Draw(screen, b.text, b.font, b.textX+33, b.textY+2, color.RGBA{185, 204, 216, 255})
+	text.Draw(screen, b.text, b.font, b.textX, b.textY, color.RGBA{185, 204, 216, 255})
 }
 
 // Mise à jour des bouttons
 // Cette fonction regarde si la souris est sur un boutton et si elle est enfoncée
 // Elle regarde vérifie si le bouton en bas à droite est toujours à la bonne position (en fonction de l'affichage de la fenêtre)
-func (b *Button) Update(screen *ebiten.Image) {
+func (b *Button) update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	b.hover = false
@@ -62,13 +61,16 @@ func (b *Button) Update(screen *ebiten.Image) {
 	} else {
 		b.pressed = false
 	}
-	// Si le bouton en bas à gauche n'est plus à la bonne place en fonction de la taille d'écran
-	if b.x < config.General.WindowSizeX-b.width || b.x > config.General.WindowSizeX-b.width+30 || b.y < config.General.WindowSizeY-b.height || b.y > config.General.WindowSizeY-b.height+30 {
-		b.x = config.General.WindowSizeX - b.width - 30
-		b.y = config.General.WindowSizeY - b.height - 30
-		b.textX = b.x + 10
-		b.textY = b.y + b.height/2
-	}
+	// Mettre le text au centre du boutton
+	// Calcul de la taille du texte
+	textWidth := text.BoundString(b.font, b.text).Dx()
+	textHeight := text.BoundString(b.font, b.text).Dy()
+	// Calcul de la position du texte
+	b.textX = b.x + (b.width-textWidth)/2
+	b.textY = b.y + (b.height-textHeight)/2 + textHeight/2 + 2
+
+	// Draw le boutton
+	b.draw(screen)
 }
 
 // NewButton crée un nouveau boutton en fonction des paramètres
@@ -126,8 +128,8 @@ func nineSlice(img *ebiten.Image, width, height int) *ebiten.Image {
 	opt.GeoM.Translate(float64(width)-23, 0)
 	imgOut.DrawImage(imgTab[4], opt)
 	// Mettre bord haut
-	opt.GeoM.Translate(-float64(width)+23+3.4, -20)
-	opt.GeoM.Scale(6.9, 1)
+	opt.GeoM.Translate(-float64(width)+23+2.85, -20)
+	opt.GeoM.Scale(8.22, 1)
 	imgOut.DrawImage(imgTab[1], opt)
 	return imgOut
 }

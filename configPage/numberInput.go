@@ -28,7 +28,7 @@ type NumberInput struct {
 }
 
 // Draw
-func (t *NumberInput) Draw(screen *ebiten.Image) {
+func (t *NumberInput) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if t.disabled {
 		img = t.imageDisabled
@@ -37,16 +37,17 @@ func (t *NumberInput) Draw(screen *ebiten.Image) {
 	} else {
 		img = t.imageNormal
 	}
+	// Ajouter le scroll
 	// Draw text
 	t.Text.y = t.y + t.height/2 + 7
-	t.Text.Draw(screen)
+	t.Text.draw(screen)
 	opt := &ebiten.DrawImageOptions{}
 	opt.GeoM.Translate(float64(t.x), float64(t.y))
 	screen.DrawImage(nineSliceInput(img, t.width, t.height), opt)
 }
 
 // Update
-func (t *NumberInput) Update(screen *ebiten.Image) {
+func (t *NumberInput) update(screen *ebiten.Image) {
 	x, y := ebiten.CursorPosition()
 	t.hover = false
 	// Si la souris est sur le bouton
@@ -109,7 +110,11 @@ func (t *NumberInput) Update(screen *ebiten.Image) {
 	}
 	// Update text
 	t.Text.text = strconv.Itoa(*t.number)
-	t.Text.Update(screen)
+	t.Text.update(screen)
+	// Ajouter le scroll
+	t.y += ScrollY
+	// Draw le numberInput
+	t.draw(screen)
 }
 
 // Création d'un nouveau TextInput

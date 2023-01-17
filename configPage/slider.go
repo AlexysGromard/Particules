@@ -38,7 +38,7 @@ type SliderI struct {
 
 // Impression des sliders
 // Cette fonction met à jour l'affichage des sliders en fonction de leur état (hover, pressed, checked)
-func (s *SliderF) Draw(screen *ebiten.Image) {
+func (s *SliderF) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if s.disabled {
 		img = s.imageSliderDisabled
@@ -59,7 +59,7 @@ func (s *SliderF) Draw(screen *ebiten.Image) {
 	opt.GeoM.Translate(float64(s.sliderXPosition), float64(s.y))
 	screen.DrawImage(img, opt)
 }
-func (s *SliderI) Draw(screen *ebiten.Image) {
+func (s *SliderI) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if s.disabled {
 		img = s.imageSliderDisabled
@@ -84,7 +84,7 @@ func (s *SliderI) Draw(screen *ebiten.Image) {
 // Mise à jour des sliders
 // Cette fonction regarde si la souris est sur un slider et si elle est enfoncée
 // Si le slider est enfoncé, il est déplacé
-func (s *SliderF) Update(screen *ebiten.Image) {
+func (s *SliderF) update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	// Position de la souris par rapport au slider
@@ -114,13 +114,16 @@ func (s *SliderF) Update(screen *ebiten.Image) {
 	// Mettre à jour la valeur du slider au pointeur
 	// *s.value = (float64(s.sliderXPosition-s.x)/float64(s.width))*s.maxValue + s.minValue
 	*s.value = (float64(s.sliderXPosition-float64(s.x))/float64(s.width-20))*(s.maxValue-s.minValue) + s.minValue
-
 	// Arrondir la valeur du slider
 	if s.round {
 		*s.value = float64(int(*s.value))
 	}
+	// Ajouter le scroll
+	s.y += ScrollY
+	// Draw le slider
+	s.draw(screen)
 }
-func (s *SliderI) Update(screen *ebiten.Image) {
+func (s *SliderI) update(screen *ebiten.Image) {
 	// Position de la souris
 	x, y := ebiten.CursorPosition()
 	// Position de la souris par rapport au slider
@@ -149,6 +152,10 @@ func (s *SliderI) Update(screen *ebiten.Image) {
 	}
 	// Mettre à jour la valeur du slider au pointeur
 	*s.value = int((float64(s.sliderXPosition-float64(s.x))/float64(s.width-20))*(s.maxValue-s.minValue) + s.minValue)
+	// Ajouter le scroll
+	s.y += ScrollY
+	// Draw le slider
+	s.draw(screen)
 }
 
 // Création d'un slider
