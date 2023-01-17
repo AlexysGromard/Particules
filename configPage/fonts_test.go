@@ -32,6 +32,8 @@ func TestLoadFontTitle(t *testing.T) {
 	}
 }
 
+// TestLoadFontsFail test si les fonctions loadFontRegular(), loadFontBold() et loadFontTitle()
+// retournent une erreur si le fichier de la police de caractères n'existe pas
 func TestLoadFontsFail(t *testing.T) {
 	err1 := loadFontRegular("toto/tata")
 	err2 := loadFontBold("toto/tata")
