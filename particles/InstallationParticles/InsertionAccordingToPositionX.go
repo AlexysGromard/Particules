@@ -9,7 +9,6 @@ func InsertionAccordingToPositionX(list *list.List,p *particles.Particle, Xmoiti
 		if list.Len() != 0{
 			
 			if p.PositionX < Xmoitier {
-
 				for i := list.Front(); i != nil; i = i.Next() {
 					pList, _ := i.Value.(*particles.Particle)
 					if p.PositionX < pList.PositionX {
@@ -35,10 +34,5 @@ func InsertionAccordingToPositionX(list *list.List,p *particles.Particle, Xmoiti
 		}else{
 			list.PushFront(p)
 		}
-
-		// la fonction renvois faux car elle n'est pas rentrer dans la boucle for ce qui veux dire
-		//que la liste list est vide et donc qu'on ne peux pas ajouter de particule en fonction
-		//de la position
-	
 
 }
