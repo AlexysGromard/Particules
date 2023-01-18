@@ -410,6 +410,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	}
 	// On met à jour la hauteure de la scrollbar en fonction de la partie visible de la fenêtre
 	scrollBar.height = config.General.WindowSizeY - (1080-config.General.WindowSizeY)*config.General.WindowSizeY/1080
+	scrollBar.x = float64(config.General.WindowSizeX - scrollBar.width)
 	scrollBar.update(screen)
 
 	// Titre de configuration
