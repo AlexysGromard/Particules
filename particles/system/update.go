@@ -19,11 +19,11 @@ func (s *System) Update() {
 	//actualisation des particules
 	for particleNumber != nil {
 
-		p, ok := particleNumber.Value.(*particles.Particle)
+		p, ready := particleNumber.Value.(*particles.Particle)
 
 		particle := particleNumber.Next()
 
-		if ok {
+		if ready {
 
 			// mouvement des particule
 			//la vitesse est modifier en fonction de l'accélération de la gravité

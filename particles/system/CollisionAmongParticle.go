@@ -9,8 +9,8 @@ import (
 func CollisionAmongParticle(ElementActuel *list.Element, ParticuleActuelle *particles.Particle) {
 
 	for ElementProche := ElementActuel.Next(); ElementProche != nil; ElementProche = ElementProche.Next() {
-		ParticuleProche, ok2 := ElementProche.Value.(*particles.Particle)
-		if ok2 {
+		ParticuleProche, ready := ElementProche.Value.(*particles.Particle)
+		if ready {
 			if math.Abs(ParticuleActuelle.PositionX-ParticuleProche.PositionX) <= ParticuleActuelle.ScaleX*10 {
 				if math.Abs(ParticuleActuelle.PositionY-ParticuleProche.PositionY) <= ParticuleActuelle.ScaleY*10 && ParticuleProche != ParticuleActuelle {
 					// quand il y a une collision on échange les vitesses
