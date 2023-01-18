@@ -243,13 +243,13 @@ func TestUpdateAccordingToPosition(t *testing.T) {
 
 	sys.Update()
 
-	if 0 != sys.Content.Front().Value.(*particles.Particle).ColorRed {
+	if sys.Content.Front().Value.(*particles.Particle).ColorRed != 0 {
 		t.Error("la couleur n'a pas été modifier alors que ChangeColorAccordingTo est à 1")
-	} else if 0 != sys.Content.Front().Value.(*particles.Particle).ScaleX {
+	} else if sys.Content.Front().Value.(*particles.Particle).ScaleX != 0 {
 		t.Error("le ScaleX n'a pas été modifier alors que ChangeScaleAccordingTo est à 1")
-	} else if 0 != sys.Content.Front().Value.(*particles.Particle).Opacity {
+	} else if sys.Content.Front().Value.(*particles.Particle).Opacity != 0 {
 		t.Error("l'Opacity n'a pas été modifier alors que ChangeOpacityAccordingTo est à 1")
-	} else if 0 != sys.Content.Front().Value.(*particles.Particle).Rotation {
+	} else if sys.Content.Front().Value.(*particles.Particle).Rotation != 0 {
 		t.Error("la Rotation n'a pas été modifier alors que ChangeRotationAccordingTo est à 1")
 	}
 
@@ -314,13 +314,13 @@ func TestUpdateAccordingToLife(t *testing.T) {
 
 	sys.Update()
 
-	if 0.5 != sys.Content.Front().Value.(*particles.Particle).ColorRed {
+	if sys.Content.Front().Value.(*particles.Particle).ColorRed != 0.5 {
 		t.Error("la couleur n'a pas été modifier alors que ChangeColorAccordingTo est à 2")
-	} else if 0.5 != sys.Content.Front().Value.(*particles.Particle).ScaleX {
+	} else if sys.Content.Front().Value.(*particles.Particle).ScaleX != 0.5 {
 		t.Error("le ScaleX n'a pas été modifier alors que ChangeScaleAccordingTo est à 2")
-	} else if 0.5 != sys.Content.Front().Value.(*particles.Particle).Opacity {
+	} else if sys.Content.Front().Value.(*particles.Particle).Opacity != 0.5 {
 		t.Error("l'Opacity n'a pas été modifier alors que ChangeOpacityAccordingTo est à 2")
-	} else if 1.57 != sys.Content.Front().Value.(*particles.Particle).Rotation {
+	} else if sys.Content.Front().Value.(*particles.Particle).Rotation != 1.57 {
 		t.Error("la Rotation n'a pas été modifier alors que ChangeRotationAccordingTo est à 2")
 	}
 
