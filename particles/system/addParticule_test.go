@@ -113,7 +113,7 @@ func TestAddParticuleRandomSpeed(t *testing.T) {
 	sys.addParticule()
 
 	if sys.Content.Front().Value.(*particles.Particle).SpeedX == sys.Content.Front().Next().Value.(*particles.Particle).SpeedX && sys.Content.Front().Value.(*particles.Particle).SpeedY == sys.Content.Front().Next().Value.(*particles.Particle).SpeedY {
-		t.Error("les vitesse ne sont pas aléatoire alors que TypeSpeed n'est pas égale à 0")
+		t.Error("les vitesses ne sont pas aléatoires alors que TypeSpeed n'est pas égale à 0")
 	}
 }
 
@@ -133,7 +133,7 @@ func TestAddParticuleSeedObject(t *testing.T) {
 	sys.addParticule()
 
 	if sys.Content.Front().Value.(*particles.Particle).SpeedX == sys.Content.Front().Next().Value.(*particles.Particle).SpeedX && sys.Content.Front().Value.(*particles.Particle).SpeedY == sys.Content.Front().Next().Value.(*particles.Particle).SpeedY {
-		t.Error("les vitesse ne sont pas aléatoire alors que TypeSpeed n'est pas égale à 0")
+		t.Error("les vitesses ne sont pas aléatoires alors que TypeSpeed n'est pas égale à 0")
 	}
 }
 

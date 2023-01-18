@@ -11,14 +11,14 @@ import (
 func TestCollisionAmongParticleFalse(t *testing.T) {
 	// Création de la liste de particules
 	l := list.New()
-	// Création de la première particule, scale 1, vitesse 30,2, position 100,100
+	// Création de la première particule
 	Particule1 := Test.Basique_Particule()
 	Particule1.ScaleX, Particule1.ScaleY = 1, 1
 	SpeedXInit1, SpeedYInit1 := float64(30), float64(2)
 	PositionXInit1, PositionYInit1 := float64(100), float64(100)
 	Particule1.PositionX, Particule1.PositionY = PositionXInit1, PositionYInit1
 	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
-	// Création de la deuxième particule, scale 1, vitesse 10,-2, position 200,100
+	// Création de la deuxième particule
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
 	SpeedXInit2, SpeedYInit2 := float64(10), float64(-2)
@@ -53,14 +53,14 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 func TestCollisionAmongParticleTrue1(t *testing.T) {
 	// Création de la liste de particules
 	l := list.New()
-	// Création de la première particule, scale 1, vitesse 30,2, position 100,100
+	// Création de la première particule
 	Particule1 := Test.Basique_Particule()
 	Particule1.ScaleX, Particule1.ScaleY = 1, 1
 	SpeedXInit1, SpeedYInit1 := float64(30), float64(2)
 	PositionXInit1, PositionYInit1 := float64(100), float64(100)
 	Particule1.PositionX, Particule1.PositionY = PositionXInit1, PositionYInit1
 	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
-	// Création de la deuxième particule, scale 1, vitesse 10,-2, position 99,100
+	// Création de la deuxième particule
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
 	SpeedXInit2, SpeedYInit2 := float64(10), float64(-2)
@@ -94,14 +94,14 @@ func TestCollisionAmongParticleTrue1(t *testing.T) {
 func TestCollisionAmongParticleTrue2(t *testing.T) {
 	// Création de la liste de particules
 	l := list.New()
-	// Création de la première particule, scale 1, vitesse 30,2, position 100,100
+	// Création de la première particule
 	Particule1 := Test.Basique_Particule()
 	Particule1.ScaleX, Particule1.ScaleY = 1, 1
 	SpeedXInit1, SpeedYInit1 := float64(30), float64(2)
 	PositionXInit1, PositionYInit1 := float64(100), float64(100)
 	Particule1.PositionX, Particule1.PositionY = PositionXInit1, PositionYInit1
 	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
-	// Création de la deuxième particule, scale 1, vitesse 10,-2, position 99,100
+	// Création de la deuxième particule
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
 	SpeedXInit2, SpeedYInit2 := float64(10), float64(-2)

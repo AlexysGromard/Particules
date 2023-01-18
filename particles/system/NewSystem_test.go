@@ -15,6 +15,6 @@ func TestNewSystem(t *testing.T) {
 	system := NewSystem()
 
 	if system.Content.Len() != 123 {
-		t.Error("il devrait y avoir 123 particule mais il y en à ", system.Content.Len())
+		t.Error("il devrait y avoir 123 particules mais il y en a ", system.Content.Len())
 	}
 }

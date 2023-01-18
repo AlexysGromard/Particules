@@ -29,7 +29,7 @@ func TestUpdateGravity(t *testing.T) {
 	particuleEnd, _ := sys.Content.Front().Value.(*particles.Particle)
 
 	if particuleEnd.SpeedX != SpeedXInit {
-		t.Error("la vitesse en X à été modifier mais elle doit reter la même")
+		t.Error("la vitesse en X à été modifié mais elle doit rester la même")
 	} else if particuleEnd.SpeedY == SpeedYInit {
 		t.Error("")
 	} else if particuleEnd.SpeedY != SpeedYInit+config.General.Gravity {
@@ -85,7 +85,7 @@ func TestUpdateLifeFalse(t *testing.T) {
 	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
 	// On vérifie que la vie n'a pas été modifié
 	if particuleEnd.Life != LifeStart {
-		t.Error("La vie à été modifier alors que le parametre haveLife est à false")
+		t.Error("La vie a été modifiée alors que le paramètre Havelife est à false")
 	}
 }
 
@@ -108,7 +108,7 @@ func TestUpdateLifeTrue(t *testing.T) {
 	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
 	// On vérifie que la vie a bien été modifié
 	if particuleEnd.Life != LifeStart-1 {
-		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+		t.Error("La vie n'a pas correctement diminué alors que le paramètre HaveLife est à True")
 	}
 }
 
@@ -145,42 +145,42 @@ func TestUpdateKillParticuleIf0Life(t *testing.T) {
 // Le test TestUpdateKillParticuleIfOutsideFalse vérifie qu'il n'y pas de collision
 func TestUpdateCollisionAmongParticleFalse1(t *testing.T) {
 	if !verificationCollisionAmongParticle(false, true) {
-		t.Error("il y a eu une collision alors qu'elles sont désactivé")
+		t.Error("il y a eu une collision alors qu'elles sont désactivées")
 	}
 }
 
 // Le test TestUpdateCollisionAmongParticleFalse2 vérifie qu'il n'y pas de collision
 func TestUpdateCollisionAmongParticleFalse2(t *testing.T) {
 	if !verificationCollisionAmongParticle(true, false) {
-		t.Error("il y a eu une collision alors qu'elles sont désactivé")
+		t.Error("il y a eu une collision alors qu'elles sont désactivées")
 	}
 }
 
 // Le test TestUpdateCollisionAmongParticleTrue vérifie qu'il y a bien une collision
 func TestUpdateCollisionAmongParticleTrue(t *testing.T) {
 	if verificationCollisionAmongParticle(true, true) {
-		t.Error("il n'y a pas eu de collision alors qu'elle sont activé")
+		t.Error("il n'y a pas eu de collision alors qu'elles sont activées")
 	}
 }
 
 // Le test TestUpdateCollisionWithWallFalse1 vérifie qu'il n'y pas de collision avec un bord
 func TestUpdateCollisionWithWallFalse1(t *testing.T) {
 	if !verificationCollisionWithWall(false, true) {
-		t.Error("il y a eu une collision avec un bord alors qu'elle sont désactivé")
+		t.Error("il y a eu une collision avec un bord alors qu'elles sont désactivées")
 	}
 }
 
 // Le test TestUpdateCollisionWithWallFalse2 vérifie qu'il n'y pas de collision avec un bord
 func TestUpdateCollisionWithWallFalse2(t *testing.T) {
 	if !verificationCollisionWithWall(true, false) {
-		t.Error("il y a eu une collision avec un bord alors qu'elle sont désactivé")
+		t.Error("il y a eu une collision avec un bord alors qu'elles sont désactivées")
 	}
 }
 
 // Le test TestUpdateCollisionWithWallTrue vérifie qu'il y a bien une collision avec un bord
 func TestUpdateCollisionWithWallTrue(t *testing.T) {
 	if verificationCollisionWithWall(true, true) {
-		t.Error("il n'y a pas eu de collision avec un bord alors qu'elle sont activé")
+		t.Error("il n'y a pas eu de collision avec un bord alors qu'elles sont activées")
 	}
 }
 
@@ -194,7 +194,7 @@ func TestUpdateAjouterParticule(t *testing.T) {
 	sys.Update()
 
 	if sys.Content.Len() != 20 {
-		t.Error("le SpawnRate est à 20 mais il n'y a ", sys.Content.Len(), " particule vivante")
+		t.Error("le SpawnRate est à 20 mais il n'y a pas ", sys.Content.Len(), " particule vivante")
 	}
 }
 
@@ -211,7 +211,7 @@ func TestUpdateSpawnCenter(t *testing.T) {
 	sys.Update()
 
 	if config.General.SpawnX != 100 || config.General.SpawnY != 100 {
-		t.Error("le point de Spawn X et Y ne sont pas au centre de l'écan alors que SpawnCenter est True ")
+		t.Error("le point de Spawn X et Y n'est pas au centre de l'écran alors que SpawnCenter est True ")
 	}
 
 }
@@ -355,7 +355,7 @@ func verificationKillParticule(positionX, positionY float64, life, ParticuleFin 
 	sys.Update()
 	// On vérifie que la particule est bien supprimé
 
-	return sys.Content.Len() != ParticuleFin //t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
+	return sys.Content.Len() != ParticuleFin
 
 }
 

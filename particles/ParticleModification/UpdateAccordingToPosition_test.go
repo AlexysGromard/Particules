@@ -39,6 +39,6 @@ func Test2AccordingToPosition(t *testing.T) {
 	couleur := UpdateAccordingToPosition(&particule, minCouleur, maxCouleur, LargeurFenaitre+HauteurFenaitre)
 
 	if couleur != particule.ColorRed {
-		t.Error("la couleur a  changé alors que la position n'à pas changer")
+		t.Error("la couleur a changé alors que la position n'à pas changer")
 	}
 }
