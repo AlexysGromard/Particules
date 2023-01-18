@@ -2,9 +2,9 @@ package System
 
 import (
 	"container/list"
-	"testing"
 	"project-particles/particles"
 	"project-particles/particles/Test"
+	"testing"
 )
 
 func TestPlaceAccordingToPosition1(t *testing.T) {
@@ -61,10 +61,7 @@ func TestPlaceAccordingToPosition2(t *testing.T) {
 	sys.Content.PushFront(&Particle2)
 	sys.Content.PushFront(&Particle1)
 
-
 	sys.PlaceAccordingToPosition()
-
-	
 
 	a := sys.Content.Front()
 	b := a.Next()
@@ -78,8 +75,8 @@ func TestPlaceAccordingToPosition2(t *testing.T) {
 	pd, _ := d.Value.(*particles.Particle)
 	pe, _ := e.Value.(*particles.Particle)
 
-	if (pa != &Particle3 && pb != &Particle1 && pc != &Particle5 && pd != &Particle2 && pe != &Particle4) || true {
-		t.Error("le tri n'a pas bien fonctionné",pa,pb,pc,pd,pe)
+	if pa != &Particle3 && pb != &Particle1 && pc != &Particle5 && pd != &Particle2 && pe != &Particle4 {
+		t.Error("le tri n'a pas bien fonctionné", pa, pb, pc, pd, pe)
 	}
 
 }

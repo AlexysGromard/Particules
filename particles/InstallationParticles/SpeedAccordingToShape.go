@@ -6,6 +6,10 @@ import (
 )
 
 func SpeedAccordingToShape(SpeedMode int, positionX, positionY, centreX, centreY float64) (SpeedX, SpeedY float64) {
+	if SpeedMode == 0 {
+		return 0, 0
+	}
+
 	maxSpeed, minSpeed := MinAndMaxSpeed(SpeedMode)
 
 	// Récuépartion de l'angle en fonction du centre
@@ -13,8 +17,8 @@ func SpeedAccordingToShape(SpeedMode int, positionX, positionY, centreX, centreY
 	// calcule de la vitesse
 	var vitesse float64 = (float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64())
 	// Calcul de la vitesse en fonction de l'angle
-	SpeedX = vitesse * math.Cos(angle)//(float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * math.Cos(angle)
-	SpeedY = vitesse * math.Sin(angle)//(float64(rand.Intn(maxSpeed-minSpeed)+minSpeed) + rand.Float64()) * math.Sin(angle)
+	SpeedX = vitesse * math.Cos(angle)
+	SpeedY = vitesse * math.Sin(angle)
 
 	return SpeedX, SpeedY
 }

@@ -83,7 +83,7 @@ func (g *game) Update() error {
 		// Tourbillon
 		// Si T est appuyee, on appelle la fonction MakeWhirlwind du systeme de particules
 		if ebiten.IsKeyPressed(ebiten.KeyT) {
-			ParticleModification.MakeWhirlwind(g.system.Content)
+			ParticleModification.MakeWhirlwind(g.system.Content, config.General.SpeedType, float64(config.General.SpawnX), float64(config.General.SpawnY))
 		}
 	}
 	if config.General.FollowMouse {
