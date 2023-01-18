@@ -125,3 +125,89 @@ func TestUpdateKillParticuleIfOutside1(t *testing.T) {
 		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
 	}
 }
+
+func TestUpdateKillParticuleIfOutside2(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	Particule.PositionX, Particule.PositionY = 300, 100
+	Particule.Life = 50
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.WindowSizeX = 200
+	config.General.WindowSizeY = 200
+	config.General.MarginOutsideScreen = 1
+
+	sys.Update()
+
+	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
+
+	if sys.Content.Len() != 0 {
+		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+	}
+}
+
+func TestUpdateKillParticuleIfOutside3(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	Particule.PositionX, Particule.PositionY = 100, 300
+	Particule.Life = 50
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.WindowSizeX = 200
+	config.General.WindowSizeY = 200
+	config.General.MarginOutsideScreen = 1
+
+	sys.Update()
+
+	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
+
+	if sys.Content.Len() != 0 {
+		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+	}
+}
+
+func TestUpdateKillParticuleIf0Life(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	Particule.PositionX, Particule.PositionY = 100, 100
+	Particule.Life = 0
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.WindowSizeX = 200
+	config.General.WindowSizeY = 200
+	config.General.MarginOutsideScreen = 1
+
+	sys.Update()
+
+	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
+
+	if sys.Content.Len() != 0 {
+		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+	}
+}
+
+func TestUpdateCollisionAmong(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	Particule.PositionX, Particule.PositionY = 100, 100
+	Particule.Life = 0
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.WindowSizeX = 200
+	config.General.WindowSizeY = 200
+	config.General.MarginOutsideScreen = 1
+
+	sys.Update()
+
+	if sys.Content.Len() != 0 {
+		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+	}
+}
