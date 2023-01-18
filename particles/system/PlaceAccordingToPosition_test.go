@@ -7,6 +7,9 @@ import (
 	"testing"
 )
 
+// Le test TestPlaceAccordingToPosition vérifie que la fonction placeAccordingToPosition trie bien les particules
+// en fonction de leur position
+// Si ce n'est pas le cas, le test échoue
 func TestPlaceAccordingToPosition(t *testing.T) {
 
 	sys := System{Content: list.New(), DeadList: list.New()}

@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// Le test TestResurrectParticule vérifie que la fonction resurrectParticule ajoute bien une particule à la liste des particules du system
+// et la supprime de la liste des particules mortes
+// Si ça n'est pas le cas, le test échoue
 func TestResurrectParticule(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -18,6 +21,9 @@ func TestResurrectParticule(t *testing.T) {
 	}
 }
 
+// Le test TestResurrectParticule2 vérifie que la fonction resurrectParticule ajoute bien une particule à la liste des particules du system
+// et la supprime de la liste des particules mortes
+// Si ça n'est pas le cas, le test échoue
 func TestResurrectParticule2(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 
