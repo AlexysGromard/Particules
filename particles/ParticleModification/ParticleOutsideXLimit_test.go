@@ -1,45 +1,45 @@
 package ParticleModification
 
 import (
-	"testing"
 	"project-particles/particles/Test"
+	"testing"
 )
 
-func TestParticleOutsideX1(t *testing.T){
+func TestParticleOutsideX1(t *testing.T) {
 	MaxPositionX := 500
 	MarginOutside := 20
 
 	particule := Test.Basique_Particule()
 	particule.PositionX = 600
-	res := ParticleOutsideXLimit(&particule,MaxPositionX,MarginOutside)
+	resultat := ParticleOutsideXLimit(&particule, MaxPositionX, MarginOutside)
 
-	if !res{
-		t.Error("la particule est en dehore des limite mais la fonction du qu'elle est dans les limite")
+	if !resultat {
+		t.Error("la particule est en dehore dès limite mais la fonction du qu'elle est dans les limites")
 	}
 }
 
-func TestParticleOutsideX2(t *testing.T){
+func TestParticleOutsideX2(t *testing.T) {
 	MaxPositionX := 500
 	MarginOutside := 20
 
 	particule := Test.Basique_Particule()
 	particule.PositionX = -100
-	res := ParticleOutsideXLimit(&particule,MaxPositionX,MarginOutside)
+	resultat := ParticleOutsideXLimit(&particule, MaxPositionX, MarginOutside)
 
-	if !res{
-		t.Error("la particule est en dehore des limite mais la fonction du qu'elle est dans les limite")
+	if !resultat {
+		t.Error("la particule est en dehore dès limite mais la fonction du qu'elle est dans les limites")
 	}
 }
 
-func TestParticleinsideX1(t *testing.T){
+func TestParticleinsideX1(t *testing.T) {
 	MaxPositionX := 500
 	MarginOutside := 20
 
 	particule := Test.Basique_Particule()
 	particule.PositionX = 200
-	res := ParticleOutsideXLimit(&particule,MaxPositionX,MarginOutside)
+	resultat := ParticleOutsideXLimit(&particule, MaxPositionX, MarginOutside)
 
-	if res{
-		t.Error("la particule est dans les limite mais la fonction du qu'elle est en dehore des limite")
+	if resultat {
+		t.Error("la particule est dans les limites mais la fonction dit qu'elle est en dehore des limites")
 	}
 }

@@ -72,6 +72,6 @@ func TestSpeedAccordingToShapeSpeed0(t *testing.T) {
 	speedX, speedY := SpeedAccordingToShape(0, particle.PositionX, particle.PositionY, centreX, centreY)
 
 	if speedX != 0 || speedY != 0 {
-		t.Error("la particule ne va pas ces vitesse à 0")
+		t.Error("la particule ne va pas ces vitesses à 0")
 	}
 }

@@ -23,7 +23,7 @@ func TestMakeWhirlwind0(t *testing.T) {
 	MakeWhirlwind(l, 1, float64(CentreX), float64(CentreY))
 
 	if l.Front().Value.(*particles.Particle).SpeedX != SpeedInitX || l.Front().Value.(*particles.Particle).SpeedY != SpeedInitY {
-		t.Error("la distance par raport au centre est de 0 alors la vitesse ne devrais pas être modifier mais elle est différente de sa vitesse initial")
+		t.Error("la distance par rapport au centre et de 0 alors la vitesse ne devrait pas être modifiée mais elle est différente de sa vitesse initiale")
 	}
 }
 
@@ -43,7 +43,7 @@ func TestMakeWhirlwindSpeedType0(t *testing.T) {
 	MakeWhirlwind(l, 0, float64(CentreX), float64(CentreY))
 
 	if l.Front().Value.(*particles.Particle).SpeedX != 0 || l.Front().Value.(*particles.Particle).SpeedY != 0 {
-		t.Error("le TypeSpeed est à 0 alors les vitesse X et y devrait être à 0")
+		t.Error("le TypeSpeed est à 0 alors les vitesses X et y devrait être à 0")
 	}
 }
 
@@ -63,6 +63,6 @@ func TestMakeWhirlwindSpeedType1(t *testing.T) {
 	MakeWhirlwind(l, 1, float64(CentreX), float64(CentreY))
 
 	if l.Front().Value.(*particles.Particle).SpeedX == 0 || l.Front().Value.(*particles.Particle).SpeedY == 0 {
-		t.Error("le TypeSpeed n'est pas 0 alors les vitesse X ou y devrait toujour être à 0")
+		t.Error("le TypeSpeed n'est pas 0 alors les vitesses X où y devrait toujours être à 0")
 	}
 }

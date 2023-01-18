@@ -16,11 +16,11 @@ func TestAddParticuleFromNothing(t *testing.T) {
 	sys.addParticule()
 	// On vérifie que la particule a bien été ajoutée au system
 	if sys.Content.Len() != 1 {
-		t.Error("il y a ", sys.Content.Len(), " particules dans le systeme ,mais il devrait y en avoir que 1")
+		t.Error("il y a ", sys.Content.Len(), " particules dans le système, mais il devrait y en avoir que 1")
 	}
 	// On vérifie que la liste des particules mortes est bien vide
 	if sys.DeadList.Len() != 0 {
-		t.Error("il y a ", sys.DeadList.Len(), " particule(s) dans la liste des particule morte, mais il devrait y en avoir 0")
+		t.Error("il y a ", sys.DeadList.Len(), " particule(s) dans la liste des particules morte, mais il devrait y en avoir 0")
 	}
 }
 
@@ -43,7 +43,7 @@ func TestAddParticuleFromDeadList(t *testing.T) {
 	}
 	// On vérifie que la liste des particules mortes est bien vide
 	if sys.DeadList.Len() != 0 {
-		t.Error("il y a ", sys.DeadList.Len(), " particule(s) dans le systeme ,mais il devrait y en avoir que 0")
+		t.Error("il y a ", sys.DeadList.Len(), " particule(s) dans le système, mais il devrait y en avoir que 0")
 	}
 }
 
@@ -60,7 +60,7 @@ func TestAddParticuleRandomSpawn(t *testing.T) {
 	sys.addParticule()
 
 	if sys.Content.Front().Value.(*particles.Particle).PositionX == sys.Content.Front().Next().Value.(*particles.Particle).PositionX && sys.Content.Front().Value.(*particles.Particle).PositionY == sys.Content.Front().Next().Value.(*particles.Particle).PositionY {
-		t.Error("la possiton n'est pas aléatoire alors que RandomSpawn est à true ")
+		t.Error("la position n'est pas aléatoire alors que RandomSpawn est à True ")
 	}
 }
 
@@ -79,7 +79,7 @@ func TestAddParticuleSpawnOnAnObject(t *testing.T) {
 	sys.addParticule()
 
 	if sys.Content.Front().Value.(*particles.Particle).PositionX == sys.Content.Front().Next().Value.(*particles.Particle).PositionX && sys.Content.Front().Value.(*particles.Particle).PositionY == sys.Content.Front().Next().Value.(*particles.Particle).PositionY {
-		t.Error("la possiton n'est pas aléatoire alors que SpawnOnAnObject est à true ")
+		t.Error("la position n'est pas aléatoire alors que SpawnOnAnObject est à True ")
 	}
 }
 
@@ -96,7 +96,7 @@ func TestAddParticuleNormalSpawn(t *testing.T) {
 	sys.addParticule()
 
 	if sys.Content.Front().Value.(*particles.Particle).PositionX != 100 || sys.Content.Front().Value.(*particles.Particle).PositionY != 110 {
-		t.Error("la possition n'est pas celle qui est prédéfini par SpawnX et SpawnY")
+		t.Error("la position n'est pas celle qui est prédéfinie par SpawnX et SpawnY")
 	}
 }
 

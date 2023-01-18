@@ -16,7 +16,7 @@ func TestPossitionAccordingToCircle(t *testing.T) {
 	DistanceO = float64(int(DistanceO*100000) / 100000)
 
 	if DistanceO != float64(largeur)/2 {
-		t.Error("la distence par rapore à l'origine devrais être de ", largeur/2, " mais la distance est de ", DistanceO)
+		t.Error("la distance par  rapport à l'origine devrait être de ", largeur/2, " mais la distance est de ", DistanceO)
 	}
 }
 
@@ -29,6 +29,6 @@ func TestPossitionAccordingToSquare(t *testing.T) {
 	DistanceOY := math.Abs(posY - centreY)
 
 	if DistanceOX != float64(largeur)/2 && DistanceOY != float64(largeur)/2 {
-		t.Error("l'une des cordonner x ou y devrait être égale à ", largeur/2, " mais elle sont égale à PositionX = ", DistanceOX, " PossitionY = ", DistanceOY)
+		t.Error("l'une des cordonné x où y devrait être égale à ", largeur/2, " mais elles sont égales à PositionX = ", DistanceOX, " PositionY = ", DistanceOY)
 	}
 }

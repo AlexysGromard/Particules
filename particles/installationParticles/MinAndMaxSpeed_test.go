@@ -58,6 +58,6 @@ func TestSpeeModeOther1(t *testing.T) {
 func TestSpeeModeOther2(t *testing.T) {
 	maxSpeed, minSpeed := minAndMaxSpeed(0)
 	if maxSpeed != -1 || minSpeed != -1 {
-		t.Error("maxSpeed et minSpeed devrait être à 5 et 3 mais ils sont à ", maxSpeed, " et ", minSpeed)
+		t.Error("maxSpeed et minSpeed devrait être à -1 et -1 mais ils sont à ", maxSpeed, " et ", minSpeed)
 	}
 }

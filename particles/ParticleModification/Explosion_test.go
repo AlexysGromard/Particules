@@ -13,9 +13,9 @@ func TestExplosionNombreParticuleCree(t *testing.T) {
 	Explosion(l)
 
 	if l.Len() == 0 {
-		t.Error("aucune particule n'a été créée")
+		t.Error("aucune particule n'a été crée")
 	} else if l.Len() != 100 {
-		t.Error("il n'y a pas eu 100 particule qui on été crée")
+		t.Error("il n'y a pas eu 100 particules qui ont été crées")
 	}
 }
 
@@ -34,7 +34,7 @@ func TestExplosionVitesseConforme(t *testing.T) {
 				t.Error("Une particule n'a pas une vitesse entre 3 et 5")
 			}
 		} else {
-			t.Error("Un Element de la liste n'est pas une Particule")
+			t.Error("Un element de la liste n'est pas une particule")
 		}
 	}
 }
