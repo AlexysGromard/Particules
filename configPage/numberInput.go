@@ -27,7 +27,8 @@ type NumberInput struct {
 	Text                *Text
 }
 
-// Draw
+// Impression des numberInput
+// Cette fonction met à jour l'affichage des numberInput en fonction de leur état (hover, pressed, checked)
 func (t *NumberInput) draw(screen *ebiten.Image) {
 	var img *ebiten.Image
 	if t.disabled {
@@ -46,7 +47,9 @@ func (t *NumberInput) draw(screen *ebiten.Image) {
 	screen.DrawImage(nineSliceInput(img, t.width, t.height), opt)
 }
 
-// Update
+// Mise à jour des numberInput
+// Cette fonction met à jour l'état des numberInput en fonction de l'interaction de l'utilisateur
+// Si curseur est sur le bouton et clique gauche appuyé, mode edition activé
 func (t *NumberInput) update(screen *ebiten.Image) {
 	x, y := ebiten.CursorPosition()
 	t.hover = false

@@ -158,7 +158,7 @@ func (s *System) Update() {
 	//
 
 	// Si SpanwCenter = true, on centre le generateur de particules
-	if config.General.SpawnCenter && !config.General.Interaction {
+	if config.General.SpawnCenter {
 		config.General.SpawnX = config.General.WindowSizeX / 2
 		config.General.SpawnY = config.General.WindowSizeY / 2
 	}

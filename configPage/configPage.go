@@ -9,13 +9,14 @@ import (
 )
 
 // NOTICE DES COMMPOSANTS
-// Text : positionX, positionY, text, PoliceDécriture, couleur(RGBA)
-// Button : positionX, positionY, largeur, hauteur, images []*ebiten.Image, text, PoliceDécriture, fonction à appeler
-// ----- images []*ebiten.Image = [0]normal, [1]pressed, [2]hover
-// Checkbox : positionX, positionY, largeur, hauteur, images []*ebiten.Image, valeur(checked), disabled(pointeur), fonction à appeler
-// ----- images []*ebiten.Image = [0]normal, [1]hover, [2]disabled, [3]checked, [4]unchecked, [5]greyed(disabled)
-// Slider : positionX, positionY, largeur, hauteur, imageLigneSlider, imageDuSlider, imageDuSliderHover, imageDuSliderDisabled, valeur(pointeur vers var), valeurMin, valeurMax, disabled
-// numberInput : positionX, positionY, largeur, hauteur, imageNormal, imageHover, imageDisabled, disabled, number(pointeur), PoliceDécriture
+// Text : position x, position y, texte, police de caractères, couleur
+// Checkbox : position x, position y, largeur, hauteur, images []*ebiten.Image, checked (bool), disabled (bool), fonction à exécuter
+// NumberInput (int) : position x, position y, largeur, hauteur, images []*ebiten.Image, disabled (bool), nombre (*int), police de caractères
+// SliderF (float64) : position x, position y, largeur, hauteur, images []*ebiten.Image, value (*float64), min (float64), max (float64), disabled (bool), arrondir (bool)
+// SliderI (int) : position x, position y, largeur, hauteur, images []*ebiten.Image, value (*int), min (float64), max (float64), disabled (bool), arrondir (bool)
+// ValueF : position x, position y, value (*float64), police de caractères, couleur
+// ValueI : position x, position y, value (*int), police de caractères, couleur
+// Button : position x, position y, largeur, hauteur, images []*ebiten.Image, texte, police de caractères, fonction à exécuter
 
 // POLICES DE CARACTÈRES
 // RobotoRegularFontF : Roboto Regular 20
@@ -280,7 +281,7 @@ func createItems() {
 	followMouseText = newText(110, 1030, "Suivre la souris", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	// Partie "Comportement des particules"
 	behaviorText = newText(430, 60, "Comportement des particules", RobotoBoldFontF, color.RGBA{127, 139, 148, 255})
-	speedType = newSliderInt(430, 85, 100, 5, sliderImages, &config.General.SpeedType, 0, 3, false)
+	speedType = newSliderInt(430, 85, 100, 5, sliderImages, &config.General.SpeedType, -1, 3, false)
 	speedTypeValue = newValueInt(535, 95, &config.General.SpeedType, RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	speedTypeText = newText(585, 95, "Type de vitesse", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
 	gravity = newSliderFloat(430, 110, 100, 5, sliderImages, &config.General.Gravity, -1, 1, false, false)
@@ -399,6 +400,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	// Titre de configuration
 	welcomeTitle.update(screen)
 
+	// CONFIGURATION DE LA FENETRE
 	// Titre de configuration de la fenêtre
 	windowConfiguration.update(screen)
 
@@ -406,7 +408,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	debugButton.update(screen)
 	debugText.update(screen)
 
-	// Paartie génération de particules
+	// GÉNÉRATION DES PARTICULES
 	// Titre de génération de particules
 	particleGeneration.update(screen)
 
@@ -459,6 +461,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	spawnObjectWidth.update(screen)
 	spawnObjectWidthText.update(screen)
 
+	// PROPRIÉTÉS DES PARTICULES
 	// Titre particulesPropertiesText
 	particulesPropertiesText.update(screen)
 
@@ -497,7 +500,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	colorBlueValue.update(screen)
 	colorBlueText.update(screen)
 
-	// Partie collisions
+	// COLLISIONS
 	// collisionsText
 	collisionsText.update(screen)
 
@@ -521,7 +524,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	collisionWithWall.update(screen)
 	collisionWithWallText.update(screen)
 
-	// Partie interaction
+	// INTERACTIONS
 	// interactionText
 	interactionsText.update(screen)
 
@@ -539,7 +542,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	followMouse.update(screen)
 	followMouseText.update(screen)
 
-	// Comportement des particules
+	// COMPORTEMENT DES PARTICULES
 	// Titre
 	behaviorText.update(screen)
 
@@ -667,6 +670,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	changeOpacityAccordingToLife.update(screen)
 	changeOpacityAccordingToLifeText.update(screen)
 
+	// PARTIE DES BOUTONS
 	// Met à jour l'état des bouton et l'affiche
 	// Si le bouton playButton n'est plus à la bonne place en fonction de la taille d'écran
 	if PlayButton.x < config.General.WindowSizeX-PlayButton.width || PlayButton.x > config.General.WindowSizeX-PlayButton.width+30 || PlayButton.y < config.General.WindowSizeY-PlayButton.height || PlayButton.y > config.General.WindowSizeY-PlayButton.height+30 {

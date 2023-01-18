@@ -19,7 +19,7 @@ var configPageScrollY int // Variable qui contient le scroll de la page de confi
 func (g *game) Update() error {
 	// SCROLL SUR LA PAGE DE CONFIGURATION
 	// Calculer la taille des éléments cachés
-	hiddenElementsSizeY := 1020 - config.General.WindowSizeY
+	hiddenElementsSizeY := 1080 - config.General.WindowSizeY
 	// Si on est sur la page de configuration et qu'il y a des éléments cachés, on scroll
 	if CurrentPage == configurationsPage && hiddenElementsSizeY > 0 {
 		_, y := ebiten.Wheel() // Valeur du scroll
@@ -97,7 +97,10 @@ func (g *game) Update() error {
 		}
 	}
 
-	g.system.Update()
+	if CurrentPage == particlesPage {
+		// Appel de la fonction Update du systeme de particules
+		g.system.Update()
+	}
 
 	return nil
 }

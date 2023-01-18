@@ -17,15 +17,14 @@ import (
 // charge de faire les mise-à-jour (Update) et affichages (Draw) de manière
 // régulière.
 func main() {
-
 	config.Get("config.json")
 	assets.Get()
 
 	ebiten.SetWindowTitle(config.General.WindowTitle)
 	ebiten.SetWindowSize(config.General.WindowSizeX, config.General.WindowSizeY)
-	_, _, maxW, maxH := ebiten.WindowSizeLimits()
-	ebiten.SetWindowSizeLimits(1024, 500, maxW, maxH)
-	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
+	_, _, maxW, maxH := ebiten.WindowSizeLimits()                  // Taille minimum et max de la fentre
+	ebiten.SetWindowSizeLimits(1024, 500, maxW, maxH)              // Taille minimum et max de la fentre
+	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled) // Autorise le redimensionnement de la fentre
 
 	// Taille minimum de la fentre
 

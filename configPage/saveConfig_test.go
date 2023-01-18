@@ -11,6 +11,8 @@ import (
 // Elle vérifie que la fonction ne retourne pas d'erreur
 // Elle modifie la valeur de Debug à true
 func TestSaveConfig(t *testing.T) {
+	// Sauvegarde la fichier config.json dans config.General
+	config.Get("../config.json")
 	// Mettre Debug à true
 	config.General.Debug = true
 	err := SaveConfig("../config.json")
@@ -22,6 +24,8 @@ func TestSaveConfig(t *testing.T) {
 // La fonction TestValueInJSON permet de tester la fonction SaveConfig
 // Elle vérifie que le fichier config.json contient bien la valeur Debug à false
 func TestValueInJSON(t *testing.T) {
+	// Sauvegarde la fichier config.json dans config.General
+	config.Get("../config.json")
 	// Mettre Debug à true
 	config.General.Debug = false
 	_ = SaveConfig("../config.json")
