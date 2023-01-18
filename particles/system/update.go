@@ -1,7 +1,6 @@
 package system
 
 import (
-	"math"
 	"project-particles/config"
 	"project-particles/particles"
 	"project-particles/particles/ParticleModification"
@@ -85,52 +84,10 @@ func (s *System) Update() {
 
 			if config.General.Collision {
 				if config.General.CollisionAmongParticle {
-					for j := i.Next(); j != nil; j = j.Next() {
-						q, ok2 := j.Value.(*particles.Particle)
-						if ok2 {
-							if math.Abs(p.PositionX-q.PositionX) <= p.ScaleX*10 {
-								if math.Abs(p.PositionY-q.PositionY) <= p.ScaleY*10 && q != p {
-									// quand il y a une collision on échange les vitesses
-									q.SpeedX, q.SpeedY, p.SpeedX, p.SpeedY = p.SpeedX, p.SpeedY, q.SpeedX, q.SpeedY
-									// pour éviter que des particules ne se retrouve collée on les éloigne un peu l'une de l'autre
-									angle1 := math.Atan2(p.PositionY-q.PositionY, p.PositionX-q.PositionX)
-
-									p.PositionX = p.PositionX + math.Cos(angle1)*p.ScaleX*0.1
-									p.PositionY = p.PositionY + math.Sin(angle1)*p.ScaleY*0.1
-									q.PositionX = q.PositionX + math.Cos(-angle1)*q.ScaleX*0.1
-									q.PositionY = q.PositionY + math.Sin(-angle1)*q.ScaleY*0.1
-								}
-							} else {
-								break
-							}
-						}
-					}
+					CollisionAmongParticle(i, p)
 				}
 				if config.General.CollisionWithWall {
-					//collision avec le bord de droite ou de gauche
-					if p.PositionX <= 0 || p.PositionX+p.ScaleX*10 >= float64(config.General.WindowSizeX) {
-						//inverse la vitesse pour faire le rebon
-						p.SpeedX = -p.SpeedX
-
-						// pour que les particules ne se retrouvent pas bloquées dans les bords de l'écran on les éloigne un peut du bord où il y a la collision
-						if p.PositionX <= 0 {
-							p.PositionX = p.PositionX + p.ScaleX*0.1
-						} else {
-							p.PositionX = p.PositionX - p.ScaleX*0.1
-						}
-					}
-
-					//collision avec le bord de haut ou de bas
-					if p.PositionY <= 0 || p.PositionY+p.ScaleY*10 >= float64(config.General.WindowSizeY) {
-						//inverse la vitesse pour faire le rebon
-						p.SpeedY = -p.SpeedY
-						// pour que les particules ne se retrouvent pas bloquées dans les bords de l'écran on les éloigne un peut du bord où il y a la collision
-						if p.PositionY <= 0 {
-							p.PositionY = p.PositionY + p.ScaleY*0.1
-						} else {
-							p.PositionY = p.PositionY - p.ScaleY*0.1
-						}
-					}
+					CollisionWithWall(p, config.General.WindowSizeX, config.General.WindowSizeY)
 				}
 			}
 
