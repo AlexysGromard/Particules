@@ -104,11 +104,6 @@ func (g *game) Update() error {
 		// Appel de la fonction Update du systeme de particules
 		// Permet de ne pas lancer la fonction Update si on est sur la page de configuration
 		g.system.Update()
-		if configPageScrollY != 0 {
-			// Remettre les valeurs par défaut car il n'y a plus de scroll
-			configPage.ScrollY -= configPageScrollY
-			configPageScrollY = 0
-		}
 	}
 	// Si on est sur la page de configuration et qu'on appuie sur le bouton Clear, on clear les particules
 	if CurrentPage == configurationsPage && configPage.ClearButton != nil && configPage.ClearButton.Pressed {
