@@ -1,4 +1,4 @@
-package InstallationParticles
+package installationParticles
 
 import "testing"
 
@@ -18,7 +18,7 @@ func TestDansLesLimite1(t *testing.T) {
 func TestDansLesLimite2(t *testing.T) {
 	var vie int
 	var vieMax uint = 100
-	
+
 	for i := 0; i < 100; i++ {
 		vie = Random_Life(vieMax)
 		if vie < 0 || vie > int(vieMax) {

@@ -3,7 +3,7 @@ package system
 import (
 	"project-particles/config"
 	"project-particles/particles"
-	"project-particles/particles/InstallationParticles"
+	"project-particles/particles/installationParticles"
 )
 
 // cette fonction crée des particules en fonction des paramètre indiqué dans "config.json"
@@ -19,9 +19,9 @@ func (s *System) Add_Particule() {
 	var PositionX float64
 	var PositionY float64
 	if config.General.RandomSpawn && !config.General.SpawnOnAnObject {
-		PositionX, PositionY = InstallationParticles.Random_Position(config.General.WindowSizeX, config.General.WindowSizeY)
+		PositionX, PositionY = installationParticles.Random_Position(config.General.WindowSizeX, config.General.WindowSizeY)
 	} else if config.General.SpawnOnAnObject {
-		PositionX, PositionY = InstallationParticles.PositionAccordingToShape(config.General.SpawnObject, config.General.SpawnObjectWidth, CentreX, CentreY)
+		PositionX, PositionY = installationParticles.PositionAccordingToShape(config.General.SpawnObject, config.General.SpawnObjectWidth, CentreX, CentreY)
 	} else {
 		PositionX = float64(config.General.SpawnX)
 		PositionY = float64(config.General.SpawnY)
@@ -30,17 +30,17 @@ func (s *System) Add_Particule() {
 	// Initialisation de la Vitesse de la partucle
 	var SpeedX, SpeedY float64
 	if config.General.SpawnOnAnObject {
-		SpeedX, SpeedY = InstallationParticles.SpeedAccordingToShape(config.General.SpeedType, PositionX, PositionY, CentreX, CentreY)
+		SpeedX, SpeedY = installationParticles.SpeedAccordingToShape(config.General.SpeedType, PositionX, PositionY, CentreX, CentreY)
 	} else if config.General.SpeedType == 0 {
 		SpeedX, SpeedY = 0, 0
 	} else {
-		SpeedX, SpeedY = InstallationParticles.Random_Speed(config.General.SpeedType)
+		SpeedX, SpeedY = installationParticles.Random_Speed(config.General.SpeedType)
 	}
 
 	// Initialisation de la vie de la particule
 	var Life int
 	if config.General.HaveLife && config.General.RandomLife {
-		Life = InstallationParticles.Random_Life(50)
+		Life = installationParticles.Random_Life(50)
 	} else {
 		Life = config.General.Life
 	}
@@ -81,7 +81,7 @@ func (s *System) Add_Particule() {
 		}
 
 		if config.General.Collision && config.General.CollisionAmongParticle {
-			InstallationParticles.InsertionAccordingToPositionX(s.Content, NouvelleParticule, float64(config.General.WindowSizeX)/2)
+			installationParticles.InsertionAccordingToPositionX(s.Content, NouvelleParticule, float64(config.General.WindowSizeX)/2)
 		} else {
 			s.Content.PushFront(NouvelleParticule)
 		}

@@ -4,13 +4,13 @@ import (
 	"container/list"
 	"project-particles/config"
 	"project-particles/particles"
-	"project-particles/particles/InstallationParticles"
+	"project-particles/particles/installationParticles"
 )
 
 func Explosion(l *list.List) {
 	// On crée une explosion de particules
 	for i := 0; i < 100; i++ {
-		SpeedX, SpeedY := InstallationParticles.Random_Speed(3)
+		SpeedX, SpeedY := installationParticles.Random_Speed(3)
 		l.PushFront(&particles.Particle{
 			PositionX: float64(config.General.SpawnX),
 			PositionY: float64(config.General.SpawnY),
