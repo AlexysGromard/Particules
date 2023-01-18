@@ -1,4 +1,4 @@
-package System
+package system
 
 import (
 	"container/list"

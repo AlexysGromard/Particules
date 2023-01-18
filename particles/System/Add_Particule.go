@@ -1,4 +1,4 @@
-package System
+package system
 
 import (
 	"project-particles/config"
@@ -11,7 +11,7 @@ import (
 
 // enter : DeadList (une liste de particule morte qui sont aussi dans le System)
 func (s *System) Add_Particule() {
-	
+
 	var CentreX, CentreY float64
 	CentreX, CentreY = float64(config.General.WindowSizeX)/2, float64(config.General.WindowSizeY)/2
 
@@ -80,8 +80,8 @@ func (s *System) Add_Particule() {
 			LifeInit: Life, Life: Life,
 		}
 
-		if config.General.Collision && config.General.CollisionAmongParticle{
-			InstallationParticles.InsertionAccordingToPositionX(s.Content,NouvelleParticule, float64(config.General.WindowSizeX)/2)
+		if config.General.Collision && config.General.CollisionAmongParticle {
+			InstallationParticles.InsertionAccordingToPositionX(s.Content, NouvelleParticule, float64(config.General.WindowSizeX)/2)
 		} else {
 			s.Content.PushFront(NouvelleParticule)
 		}
