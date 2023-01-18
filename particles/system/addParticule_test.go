@@ -27,7 +27,7 @@ func TestaddParticuleFromNothing(t *testing.T) {
 // Le test TestAdd_ParticuleFromDeadList vérifie que la fonction Add_Particule ajoute bien une particule au system à partir de la liste des particules mortes
 // et que la liste des particules mortes est bien vide après l'ajout
 // (Lorsque la liste des particules mortes n'est pas vide, la fonction Add_Particule prend une particule de la liste des particules mortes)
-func TestaddParticuleFromDeadList(t *testing.T) {
+func TestAddParticuleFromDeadList(t *testing.T) {
 	// Création du system
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// Ajout d'une particule au system
@@ -47,7 +47,7 @@ func TestaddParticuleFromDeadList(t *testing.T) {
 	}
 }
 
-func TestaddParticuleRandomSpawn(t *testing.T) {
+func TestAddParticuleRandomSpawn(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -61,7 +61,7 @@ func TestaddParticuleRandomSpawn(t *testing.T) {
 	}
 }
 
-func TestaddParticuleSpawnOnAnObject(t *testing.T) {
+func TestAddParticuleSpawnOnAnObject(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -77,7 +77,7 @@ func TestaddParticuleSpawnOnAnObject(t *testing.T) {
 	}
 }
 
-func TestaddParticuleNormalSpawn(t *testing.T) {
+func TestAddParticuleNormalSpawn(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -91,7 +91,7 @@ func TestaddParticuleNormalSpawn(t *testing.T) {
 	}
 }
 
-func TestaddParticuleRandomSpeed(t *testing.T) {
+func TestAddParticuleRandomSpeed(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -105,7 +105,7 @@ func TestaddParticuleRandomSpeed(t *testing.T) {
 	}
 }
 
-func TestaddParticuleSeedObject(t *testing.T) {
+func TestAddParticuleSeedObject(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -122,7 +122,7 @@ func TestaddParticuleSeedObject(t *testing.T) {
 	}
 }
 
-func TestaddParticuleSpeed0(t *testing.T) {
+func TestAddParticuleSpeed0(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -135,7 +135,7 @@ func TestaddParticuleSpeed0(t *testing.T) {
 	}
 }
 
-func TestaddParticuleConstantLife(t *testing.T) {
+func TestAddParticuleConstantLife(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -148,7 +148,7 @@ func TestaddParticuleConstantLife(t *testing.T) {
 	}
 }
 
-func TestaddParticuleRandomLife(t *testing.T) {
+func TestAddParticuleRandomLife(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
