@@ -7,7 +7,7 @@ import (
 
 // La fonction PlaceAccordingToPosition permet de déplacer les particules dans la liste
 // en fonction de leur position en X
-func (s *System) PlaceAccordingToPosition() {
+func (s *System) placeAccordingToPosition() {
 	i := s.Content.Front()
 	for i != nil {
 		suivant := i.Next()
@@ -25,7 +25,7 @@ func (s *System) PlaceAccordingToPosition() {
 // Elle prend en paramètre un élément de la liste des particules
 func location(s *System, e, Derrière, Devant *list.Element) {
 	p, _ := e.Value.(*particles.Particle)
-	if Derrière == nil && Devant != nil {	// Si on est au début de la liste
+	if Derrière == nil && Devant != nil { // Si on est au début de la liste
 		pDevant, _ := Devant.Value.(*particles.Particle)
 		if p.PositionX > pDevant.PositionX {
 			location(s, e, Derrière, Devant.Next())

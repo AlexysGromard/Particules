@@ -8,7 +8,7 @@ import (
 // Elle prend en paramètre une particule et les limites de l'écran
 // Elle vérifie si la particule est assez proche des bords de l'écran pour qu'il y est une collision
 // Si il y a une collision elle inverse la vitesse de la particule pour faire le rebond en fonction du bord où il y a la collision
-func CollisionWithWall(ParticuleActuelle *particles.Particle, LimiteX, LimiteY int) {
+func collisionWithWall(ParticuleActuelle *particles.Particle, LimiteX, LimiteY int) {
 	//collision avec le bord de droite ou de gauche
 	if ParticuleActuelle.PositionX <= 0 || ParticuleActuelle.PositionX+ParticuleActuelle.ScaleX*10 >= float64(LimiteX) {
 		//inverse la vitesse pour faire le rebon

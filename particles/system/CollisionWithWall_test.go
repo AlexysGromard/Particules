@@ -22,7 +22,7 @@ func TestCollisionWithWallFalse(t *testing.T) {
 	// Ajout de la particule à la liste
 	l.PushFront(&Particule1)
 	// On vérifie que la particule ne touche pas les bords
-	CollisionWithWall(&Particule1, LimiteX, LimiteY)
+	collisionWithWall(&Particule1, LimiteX, LimiteY)
 	// On récupère la particule
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	// On vérifie que la vitesse de la particule n'a pas été modifier
@@ -46,7 +46,7 @@ func TestCollisionWithWallTrueUP(t *testing.T) {
 	// Ajout de la particule à la liste
 	l.PushFront(&Particule1)
 	// On vérifie que la particule touche le bord du haut
-	CollisionWithWall(&Particule1, LimiteX, LimiteY)
+	collisionWithWall(&Particule1, LimiteX, LimiteY)
 	// On récupère la particule
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	// On vérifie que la vitesse de la particule a été modifier
@@ -70,7 +70,7 @@ func TestCollisionWithWallTrueDown(t *testing.T) {
 	// Ajout de la particule à la liste
 	l.PushFront(&Particule1)
 	// On vérifie que la particule touche le bord du bas
-	CollisionWithWall(&Particule1, LimiteX, LimiteY)
+	collisionWithWall(&Particule1, LimiteX, LimiteY)
 	// On récupère la particule
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	// On vérifie que la vitesse de la particule a été modifier
@@ -94,7 +94,7 @@ func TestCollisionWithWallTrueLEFT(t *testing.T) {
 	// Ajout de la particule à la liste
 	l.PushFront(&Particule1)
 	// On vérifie que la particule touche le bord de gauche
-	CollisionWithWall(&Particule1, LimiteX, LimiteY)
+	collisionWithWall(&Particule1, LimiteX, LimiteY)
 	// On récupère la particule
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	// On vérifie que la vitesse de la particule a été modifier
@@ -118,7 +118,7 @@ func TestCollisionWithWallTrueRIGHT(t *testing.T) {
 	// Ajout de la particule à la liste
 	l.PushFront(&Particule1)
 	// On vérifie que la particule touche le bord de droite
-	CollisionWithWall(&Particule1, LimiteX, LimiteY)
+	collisionWithWall(&Particule1, LimiteX, LimiteY)
 	// On récupère la particule
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	// On vérifie que la vitesse de la particule a été modifier

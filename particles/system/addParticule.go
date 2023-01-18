@@ -10,7 +10,7 @@ import (
 // si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
 
 // enter : DeadList (une liste de particule morte qui sont aussi dans le System)
-func (s *System) AddParticule() {
+func (s *System) addParticule() {
 
 	var CentreX, CentreY float64
 	CentreX, CentreY = float64(config.General.WindowSizeX)/2, float64(config.General.WindowSizeY)/2
@@ -64,7 +64,7 @@ func (s *System) AddParticule() {
 			pd.LifeInit = Life
 			pd.Life = Life
 
-			s.ResurrectParticule(ParticuleDead, float64(config.General.WindowSizeX)/2, config.General.Collision, config.General.CollisionAmongParticle)
+			s.resurrectParticule(ParticuleDead, float64(config.General.WindowSizeX)/2, config.General.Collision, config.General.CollisionAmongParticle)
 		}
 
 	} else {

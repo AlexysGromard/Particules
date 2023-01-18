@@ -33,7 +33,7 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
 		if ok {
-			CollisionAmongParticle(NuméroParticule, ParticuleActuelle)
+			collisionAmongParticle(NuméroParticule, ParticuleActuelle)
 		}
 	}
 	// On récupère les particules de la liste
@@ -74,7 +74,7 @@ func TestCollisionAmongParticleTrue1(t *testing.T) {
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
 		if ok {
-			CollisionAmongParticle(NuméroParticule, ParticuleActuelle)
+			collisionAmongParticle(NuméroParticule, ParticuleActuelle)
 		}
 	}
 	// On récupère les particules de la liste
@@ -115,7 +115,7 @@ func TestCollisionAmongParticleTrue2(t *testing.T) {
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
 		if ok {
-			CollisionAmongParticle(NuméroParticule, ParticuleActuelle)
+			collisionAmongParticle(NuméroParticule, ParticuleActuelle)
 		}
 	}
 	// On récupère les particules de la liste

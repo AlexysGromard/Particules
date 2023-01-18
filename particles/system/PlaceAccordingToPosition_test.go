@@ -7,39 +7,7 @@ import (
 	"testing"
 )
 
-func TestPlaceAccordingToPosition1(t *testing.T) {
-
-	sys := System{Content: list.New(), DeadList: list.New()}
-
-	Particle1 := Test.Basique_Particule()
-	Particle2 := Test.Basique_Particule()
-	Particle3 := Test.Basique_Particule()
-
-	Particle1.PositionX = 30
-	Particle2.PositionX = 25
-	Particle3.PositionX = 37
-
-	sys.Content.PushFront(&Particle3)
-	sys.Content.PushFront(&Particle2)
-	sys.Content.PushFront(&Particle1)
-
-	sys.PlaceAccordingToPosition()
-
-	a := sys.Content.Front()
-	b := a.Next()
-	c := b.Next()
-
-	pa, _ := a.Value.(*particles.Particle)
-	pb, _ := b.Value.(*particles.Particle)
-	pc, _ := c.Value.(*particles.Particle)
-
-	if pa != &Particle2 && pb != &Particle1 && pc != &Particle3 {
-		t.Error("le tri n'a pas bien fonctionner")
-	}
-
-}
-
-func TestPlaceAccordingToPosition2(t *testing.T) {
+func TestPlaceAccordingToPosition(t *testing.T) {
 
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -61,7 +29,7 @@ func TestPlaceAccordingToPosition2(t *testing.T) {
 	sys.Content.PushFront(&Particle2)
 	sys.Content.PushFront(&Particle1)
 
-	sys.PlaceAccordingToPosition()
+	sys.placeAccordingToPosition()
 
 	a := sys.Content.Front()
 	b := a.Next()

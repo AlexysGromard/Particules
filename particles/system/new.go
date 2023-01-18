@@ -20,7 +20,7 @@ func NewSystem() System {
 	// Initialisation des particules
 	for i := 0; i < config.General.InitNumParticles; i++ {
 		// Initialisation de la position de la particule
-		system.AddParticule()
+		system.addParticule()
 	}
 	return system
 }

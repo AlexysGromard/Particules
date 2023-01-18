@@ -43,7 +43,7 @@ func (s *System) Update() {
 
 			//tue les particules morte
 			if (ParticleModification.ParticleOutsideXLimit(particule, config.General.WindowSizeX, config.General.MarginOutsideScreen)) || (ParticleModification.ParticleOutsideYLimit(particule, config.General.WindowSizeY, config.General.MarginOutsideScreen)) || particule.Life <= 0 {
-				s.KillParticule(particleNumber)
+				s.killParticule(particleNumber)
 			}
 
 			// Modifciation des parametre Couleur, Scale, Rotation, Opacity en fonction de mode choisie dans "config.json"
@@ -81,10 +81,10 @@ func (s *System) Update() {
 
 			if config.General.Collision {
 				if config.General.CollisionAmongParticle {
-					CollisionAmongParticle(particleNumber, particule)
+					collisionAmongParticle(particleNumber, particule)
 				}
 				if config.General.CollisionWithWall {
-					CollisionWithWall(particule, config.General.WindowSizeX, config.General.WindowSizeY)
+					collisionWithWall(particule, config.General.WindowSizeX, config.General.WindowSizeY)
 				}
 			}
 
@@ -93,7 +93,7 @@ func (s *System) Update() {
 	}
 
 	if config.General.Collision && config.General.CollisionAmongParticle {
-		s.PlaceAccordingToPosition()
+		s.placeAccordingToPosition()
 	}
 
 	//ajout des particule
@@ -101,7 +101,7 @@ func (s *System) Update() {
 		nombreDeToureMax := Part_particle
 		for nombreDeToure := 0; float64(nombreDeToure) < nombreDeToureMax; nombreDeToure++ {
 			Part_particle -= 1
-			s.AddParticule()
+			s.addParticule()
 		}
 	}
 	//

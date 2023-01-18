@@ -11,7 +11,7 @@ import (
 // Elle vérifie si les particules sont assez proche pour qu'il y est une collision
 // Si il y a une collision elle échange les vitesses des particules
 // et les éloigne un peu l'une de l'autre
-func CollisionAmongParticle(ElementActuel *list.Element, ParticuleActuelle *particles.Particle) {
+func collisionAmongParticle(ElementActuel *list.Element, ParticuleActuelle *particles.Particle) {
 
 	for ElementProche := ElementActuel.Next(); ElementProche != nil; ElementProche = ElementProche.Next() {
 		ParticuleProche, ready := ElementProche.Value.(*particles.Particle)
