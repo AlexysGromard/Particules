@@ -163,7 +163,7 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 
 ## 🖥️ Interface de configuration
 
-<img src="interface-screenshot.png" alt="Screen de l'interface" width=70%></img>
+<img src="interface-screenshot.png" alt="Screen de l'interface"></img>
 </br>
 Un interface a été mis en place pour aider l'utilisateur à trouver une configuration parfaite.
 </br>
