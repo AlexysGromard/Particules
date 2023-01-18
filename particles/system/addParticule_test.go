@@ -159,7 +159,7 @@ func TestAddParticuleRandomLife(t *testing.T) {
 	sys.addParticule()
 	sys.addParticule()
 
-	if sys.Content.Front().Value.(*particles.Particle).Life == sys.Content.Front().Value.(*particles.Particle).Life || sys.Content.Front().Value.(*particles.Particle).LifeInit != sys.Content.Front().Value.(*particles.Particle).Life || sys.Content.Front().Next().Value.(*particles.Particle).LifeInit != sys.Content.Front().Value.(*particles.Particle).Life {
+	if sys.Content.Front().Value.(*particles.Particle).Life == sys.Content.Front().Value.(*particles.Particle).Life || sys.Content.Front().Value.(*particles.Particle).LifeInit != sys.Content.Front().Value.(*particles.Particle).Life || sys.Content.Front().Next().Value.(*particles.Particle).LifeInit != sys.Content.Front().Next().Value.(*particles.Particle).Life {
 		t.Error("les vies initiale ne sont pas à 50 ou elles ne sont pas aléatoire")
 	}
 }
