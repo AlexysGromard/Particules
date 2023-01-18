@@ -151,10 +151,14 @@ var (
 	changeOpacityAccordingToLife         *Checkbox
 	changeOpacityAccordingToLifeText     *Text
 	// Boutons
+	ClearButton           *Button
 	PlayButton            *Button
 	accessParticlesButton *Button
 	leaveGamebutton       *Button
 )
+
+// Scrollbar
+var scrollBar *Scrollbar
 
 // Initialisation des variables images
 var (
@@ -162,6 +166,7 @@ var (
 	buttonImages      = []*ebiten.Image{}
 	sliderImages      = []*ebiten.Image{}
 	numberInputImages = []*ebiten.Image{}
+	scrollbarImages   = []*ebiten.Image{}
 )
 
 // loadImages charge les images
@@ -190,6 +195,10 @@ func loadImages() {
 		findImage(ImageList, "text-input-idle.png"),     // Default
 		findImage(ImageList, "text-input-hover.png"),    // Hover
 		findImage(ImageList, "text-input-disabled.png")} // Disabled
+	// Scrollbar
+	scrollbarImages = []*ebiten.Image{
+		findImage(ImageList, "slider-handle-idle.png"),     // Default
+		findImage(ImageList, "slider-handle-disabled.png")} // Disabled
 }
 
 func loadFont(path string) error {
@@ -374,6 +383,7 @@ func createItems() {
 		}
 	})
 	changeOpacityAccordingToLifeText = newText(520, 935, "En fonction de la vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	ClearButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-180, 170, 50, buttonImages, "Clear", RobotoRegularFontF, func() {})
 	PlayButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-130, 170, 50, buttonImages, "Jouer", RobotoRegularFontF, func() {})
 	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig("./config.json") })
 	leaveGamebutton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-30, 170, 50, buttonImages, "Quitter", RobotoRegularFontF, func() { os.Exit(0) })
@@ -394,8 +404,13 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 			return err
 		}
 		createItems()
+		// Créer la scrollbar
+		scrollBar = newScrollbar(float64(config.General.WindowSizeX-5), 0, 5, 500, scrollbarImages)
 		itemsCreated = true
 	}
+	// On met à jour la hauteure de la scrollbar en fonction de la partie visible de la fenêtre
+	scrollBar.height = config.General.WindowSizeY - (1080-config.General.WindowSizeY)*config.General.WindowSizeY/1080
+	scrollBar.update(screen)
 
 	// Titre de configuration
 	welcomeTitle.update(screen)
@@ -672,6 +687,13 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// PARTIE DES BOUTONS
 	// Met à jour l'état des bouton et l'affiche
+	// Si le bouton ClearButton n'est plus à la bonne place en fonction de la taille d'écran
+	if ClearButton.x < config.General.WindowSizeX-ClearButton.width || ClearButton.x > config.General.WindowSizeX-ClearButton.width+30 || ClearButton.y < config.General.WindowSizeY-ClearButton.height || ClearButton.y > config.General.WindowSizeY-ClearButton.height+30 {
+		ClearButton.x = config.General.WindowSizeX - ClearButton.width - 30
+		ClearButton.y = config.General.WindowSizeY - ClearButton.height - 180
+	}
+	ClearButton.update(screen)
+
 	// Si le bouton playButton n'est plus à la bonne place en fonction de la taille d'écran
 	if PlayButton.x < config.General.WindowSizeX-PlayButton.width || PlayButton.x > config.General.WindowSizeX-PlayButton.width+30 || PlayButton.y < config.General.WindowSizeY-PlayButton.height || PlayButton.y > config.General.WindowSizeY-PlayButton.height+30 {
 		PlayButton.x = config.General.WindowSizeX - PlayButton.width - 30
