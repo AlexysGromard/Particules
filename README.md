@@ -1,7 +1,27 @@
 # Particules
 Particule est un projet créé en Go (golang) pour le cours d'initiation au développement à <a href="https://iutnantes.univ-nantes.fr">l'IUT de Nantes</a>.
 
-## 🏁 Pour commencer
+<!-- Sommaire -->
+## Sommaire
+* [📦 Pour commencer](#📦-pour-commencer)
+	* [Pré-requis](#pré-requis)
+	* [Installation](#installation)
+* [🔧 Configuration](#🔧-configuration)
+	* [Configuration de la fenêtre](#configuration-de-la-fenêtre)
+	* [Debug](#debug)
+	* [Génération des particules](#génération-des-particules)
+	* [Generation sur un objet](#generation-sur-un-objet)
+	* [Propriétés des particules](#propriétés-des-particules)
+	* [Comportement de la particule](#comportement-de-la-particule)
+	* [Changement dynamique des particules](#changement-dynamique-des-particules)
+	* [Collision](#collision)
+	* [Interaction avec l'utilisateur](#interaction-avec-lutilisateur)
+* [🖥️ Interface de configuration](#🖥️-interface-de-configuration)
+* [⌨️ Les commandes](#⌨️-les-commandes)
+* [📝 Auteurs](#📝-auteurs)
+
+
+## 📦 Pour commencer
 ### Pré-requis
 - Go <a href="https://go.dev/doc/install">(Lien vers l'instalation de Go)</a>
 - Git <a href="https://git-scm.com/book/fr/v2/Démarrage-rapide-Installation-de-Git">(Lien vers l'instalation de Git)</a>
@@ -181,7 +201,16 @@ Cette pages possède 3 boutons :
 💡 Astuce : Vous pouvez sélectionner plusieurs sliders et les déplacer en même temps. 
 ```
 
-## ⌨️ Credits
+## ⌨️ Les commandes
+- ```ENTER``` : Accéder aux particules
+- ```ESCAPE``` : Revenir à l'interface de configuration
+</br>
+</br><i>(Si interaction est activée)</i>
+- ```Flèches directionnelles``` : Déplacer le générateur de particules
+- ```Espace``` : Explosion de particules
+- ```T``` : Tourbillon de particules
+
+## 📝 Auteurs
 Ce projet a été réalisé par :
 - Alexys G : [@E226772R](https://gitlab.univ-nantes.fr/E226772R) 
 - Floran M : [@E226752U](https://gitlab.univ-nantes.fr/E226752U)
