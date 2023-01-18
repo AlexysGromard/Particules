@@ -44,10 +44,9 @@ func (g *game) Draw(screen *ebiten.Image) {
 	}
 
 	if config.General.Debug {
-		ebitenutil.DebugPrint(screen, fmt.Sprint(ebiten.CurrentTPS()))
-		ebitenutil.DebugPrintAt(screen, fmt.Sprint("Nombre de Particule en vie : ", g.system.Content.Len()), 0, 10)
-		ebitenutil.DebugPrintAt(screen, fmt.Sprint("Nombre de Particule Morte  : ", g.system.DeadList.Len()), 0, 20)
-
+		ebitenutil.DebugPrint(screen, fmt.Sprint(ebiten.ActualTPS()))
+		ebitenutil.DebugPrintAt(screen, fmt.Sprint("Content : ", g.system.Content.Len()), 0, 10)
+		ebitenutil.DebugPrintAt(screen, fmt.Sprint("DeadList : ", g.system.DeadList.Len()), 0, 20)
 	}
 
 }
