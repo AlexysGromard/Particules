@@ -31,7 +31,7 @@ func TestUpdateGravity(t *testing.T) {
 	if particuleEnd.SpeedX != SpeedXInit {
 		t.Error("la vitesse en X à été modifié mais elle doit rester la même")
 	} else if particuleEnd.SpeedY == SpeedYInit {
-		t.Error("")
+		t.Error("La vitesse n'a pas changer")
 	} else if particuleEnd.SpeedY != SpeedYInit+config.General.Gravity {
 		t.Error("la Gravite n'a pas été appliqué correctement")
 	}
