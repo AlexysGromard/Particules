@@ -11,21 +11,25 @@ import (
 func TestUpdateGravity(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 
-	ParticuleInit := Test.Basique_Particule()
+	Particule := Test.Basique_Particule()
 	SpeedXInit, SpeedYInit := float64(20), float64(20)
-	ParticuleInit.SpeedX, ParticuleInit.SpeedY = SpeedXInit, SpeedYInit
+	Particule.PositionX, Particule.PositionY = 100, 100
+	Particule.SpeedX, Particule.SpeedY = SpeedXInit, SpeedYInit
 
-	sys.Content.PushFront(&ParticuleInit)
+	sys.Content.PushFront(&Particule)
 
 	config.General.Gravity = 1
+	config.General.WindowSizeX, config.General.WindowSizeY = 1000, 1000
 
 	sys.Update()
 
-	if sys.Content.Front().Value.(*particles.Particle).SpeedX != SpeedXInit {
+	particuleEnd, _ := sys.Content.Front().Value.(*particles.Particle)
+
+	if particuleEnd.SpeedX != SpeedXInit {
 		t.Error("la vitesse en X à été modifier mais elle doit reter la même")
-	} else if sys.Content.Front().Value.(*particles.Particle).SpeedY == SpeedYInit {
+	} else if particuleEnd.SpeedY == SpeedYInit {
 		t.Error("")
-	} else if sys.Content.Front().Value.(*particles.Particle).SpeedY != SpeedYInit+config.General.Gravity {
+	} else if particuleEnd.SpeedY != SpeedYInit+config.General.Gravity {
 		t.Error("la Gravite n'a pas été appliqué correctement")
 	}
 }
@@ -33,20 +37,22 @@ func TestUpdateGravity(t *testing.T) {
 func TestUpdateVitesse(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 
-	ParticuleInit := Test.Basique_Particule()
-	ParticuleInit.SpeedX, ParticuleInit.SpeedY = 20, 10
-	ParticuleInit.PositionX, ParticuleInit.PositionY = 80, 80
+	Particule := Test.Basique_Particule()
+	Particule.SpeedX, Particule.SpeedY = 20, 10
+	PositionXInit, PositionYInit := float64(80), float64(80)
+	Particule.PositionX, Particule.PositionY = PositionXInit, PositionYInit
 
-	sys.Content.PushFront(&ParticuleInit)
+	sys.Content.PushFront(&Particule)
 
 	config.General.Gravity = 0
+	config.General.WindowSizeX, config.General.WindowSizeY = 1000, 1000
 
 	sys.Update()
 
 	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
 
-	if particuleEnd.PositionX == ParticuleInit.PositionX || particuleEnd.PositionY == ParticuleInit.PositionY {
-		t.Error("la vitesse n'a pas été appliqué")
+	if particuleEnd.PositionX == PositionXInit || particuleEnd.PositionY == PositionYInit {
+		t.Error("la vitesse n'a pas été appliqué", Particule.PositionX, Particule.PositionY)
 	} else if particuleEnd.PositionX != 100 || particuleEnd.PositionY != 90 {
 		t.Error("la vitesse n'a pas été correctement appliqué")
 	}
