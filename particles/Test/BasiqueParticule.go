@@ -2,6 +2,7 @@ package Test
 
 import "project-particles/particles"
 
+// Basique_Particule renvois une particule basique
 func Basique_Particule() particles.Particle {
 	return particles.Particle{
 		PositionX: 0,
