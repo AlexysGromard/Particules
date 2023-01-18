@@ -3,10 +3,10 @@ Particule est un projet créé en Go (golang) pour le cours d'initiation au dév
 
 <!-- Sommaire -->
 ## Sommaire
-* [📦 Pour commencer](#📦-pour-commencer)
+* [Pour commencer](#pour-commencer)
 	* [Pré-requis](#pré-requis)
 	* [Installation](#installation)
-* [🔧 Configuration](#🔧-configuration)
+* [Configuration](#configuration)
 	* [Configuration de la fenêtre](#configuration-de-la-fenêtre)
 	* [Debug](#debug)
 	* [Génération des particules](#génération-des-particules)
@@ -16,12 +16,12 @@ Particule est un projet créé en Go (golang) pour le cours d'initiation au dév
 	* [Changement dynamique des particules](#changement-dynamique-des-particules)
 	* [Collision](#collision)
 	* [Interaction avec l'utilisateur](#interaction-avec-lutilisateur)
-* [🖥️ Interface de configuration](#🖥️-interface-de-configuration)
-* [⌨️ Les commandes](#⌨️-les-commandes)
-* [📝 Auteurs](#📝-auteurs)
+* [Interface de configuration](#interface-de-configuration)
+* [Les commandes](#les-commandes)
+* [Auteurs](#auteurs)
 
 
-## 📦 Pour commencer
+## Pour commencer
 ### Pré-requis
 - Go <a href="https://go.dev/doc/install">(Lien vers l'instalation de Go)</a>
 - Git <a href="https://git-scm.com/book/fr/v2/Démarrage-rapide-Installation-de-Git">(Lien vers l'instalation de Git)</a>
@@ -45,7 +45,7 @@ go build
 ```
 (ou ```particules.exe``` sur Windows)
 
-## 🔧 Configuration
+## Configuration
 Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet de configurer le projet.
 
 ### Configuration de la fenêtre
@@ -181,7 +181,7 @@ Dans ce projet, il se trouve un fichier intitulé ```config.json``` qui permet d
 - ```Interaction``` : Si ```true```, les particules peuvent être déplacées par l'utilisateur avec le clavier. (Touches : flèches directionnelles)
 - ```FollowMouse``` : Si ```true```, les particules suivent la souris
 
-## 🖥️ Interface de configuration
+## Interface de configuration
 
 <img src="interface-screenshot.png" alt="Screen de l'interface"></img>
 </br>
@@ -201,16 +201,18 @@ Cette pages possède 3 boutons :
 💡 Astuce : Vous pouvez sélectionner plusieurs sliders et les déplacer en même temps. 
 ```
 
-## ⌨️ Les commandes
+## Les commandes
 - ```ENTER``` : Accéder aux particules
 - ```ESCAPE``` : Revenir à l'interface de configuration
-</br>
-</br>(Si interaction est activée)
 - ```Flèches directionnelles``` : Déplacer le générateur de particules
 - ```Espace``` : Explosion de particules
 - ```T``` : Tourbillon de particules
 
-## 📝 Auteurs
+```
+💡 Information : Les interactions avec les particules fonctionneront si la checkbox "interaction" est check.
+```
+
+## Auteurs
 Ce projet a été réalisé par :
 - Alexys G : [@E226772R](https://gitlab.univ-nantes.fr/E226772R) 
 - Floran M : [@E226752U](https://gitlab.univ-nantes.fr/E226752U)
