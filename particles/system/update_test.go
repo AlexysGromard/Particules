@@ -111,78 +111,83 @@ func TestUpdateLifeTrue(t *testing.T) {
 // Le test TestUpdateKillParticuleIfOutside1 vérifie que la particule est bien supprimé si elle est en dehors de l'écran
 // avec un parametre MarginOutsideScreen à 1
 func TestUpdateKillParticuleIfOutside1(t *testing.T) {
-	// On crée un systeme
-	sys := System{Content: list.New(), DeadList: list.New()}
-	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
-	Particule := Test.Basique_Particule()
-	Particule.PositionX, Particule.PositionY = 100, 100
-	Particule.Life = 50
-	// On ajoute la particule au systeme
-	sys.Content.PushFront(&Particule)
-	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
-	config.General.WindowSizeX = 200
-	config.General.WindowSizeY = 200
-	config.General.MarginOutsideScreen = 1
-	// On met à jour le systeme
-	sys.Update()
-	// On vérifie que la particule est bien supprimé
-	if sys.Content.Len() != 1 {
+
+	if verificationKillParticule(100, 100, 50, 1) {
 		t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
 	}
 }
 
 // Le test TestUpdateKillParticuleIfOutside2 vérifie que la particule est bien supprimé si elle est en dehors de l'écran
 func TestUpdateKillParticuleIfOutside2(t *testing.T) {
-	// On crée un systeme
-	sys := System{Content: list.New(), DeadList: list.New()}
-	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
-	Particule := Test.Basique_Particule()
-	Particule.PositionX, Particule.PositionY = 300, 100
-	Particule.Life = 50
-	// On ajoute la particule au systeme
-	sys.Content.PushFront(&Particule)
-	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
-	config.General.WindowSizeX = 200
-	config.General.WindowSizeY = 200
-	config.General.MarginOutsideScreen = 1
-	// On met à jour le systeme
-	sys.Update()
-	// On vérifie que la particule est bien supprimé
-	if sys.Content.Len() != 0 {
+	if verificationKillParticule(300, 100, 50, 0) {
 		t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
 	}
 }
 
 // Le test TestUpdateKillParticuleIfOutside3 vérifie que la particule est bien supprimé si elle est en dehors de l'écran
 func TestUpdateKillParticuleIfOutside3(t *testing.T) {
-	// On crée un systeme
-	sys := System{Content: list.New(), DeadList: list.New()}
-	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
-	Particule := Test.Basique_Particule()
-	Particule.PositionX, Particule.PositionY = 100, 300
-	Particule.Life = 50
-	// On ajoute la particule au systeme
-	sys.Content.PushFront(&Particule)
-	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
-	config.General.WindowSizeX = 200
-	config.General.WindowSizeY = 200
-	config.General.MarginOutsideScreen = 1
-	// On met à jour le systeme
-	sys.Update()
-	// On vérifie que la particule est bien supprimé
-	if sys.Content.Len() != 0 {
+	if verificationKillParticule(100, 300, 50, 0) {
 		t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
 	}
 }
 
 // Le test TestUpdateKillParticuleIf0Life vérifie que la particule est bien supprimé si elle a une vie de 0
 func TestUpdateKillParticuleIf0Life(t *testing.T) {
+	if verificationKillParticule(100, 100, 0, 0) {
+		t.Error("La particule n'a pas été supprimé alors qu'elle a une vie de 0")
+	}
+}
+
+func TestUpdateCollisionAmongParticleFalse1(t *testing.T) {
+	if !verificationCollisionAmongParticle(false, true) {
+		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+	}
+}
+func TestUpdateCollisionAmongParticleFalse2(t *testing.T) {
+	if !verificationCollisionAmongParticle(true, false) {
+		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+	}
+}
+func TestUpdateCollisionAmongParticleTrue(t *testing.T) {
+	if verificationCollisionAmongParticle(true, true) {
+		t.Error("il n'y a pas eu d collision alors qu'elle sont activé")
+	}
+}
+
+// /
+func TestUpdateCollisionWithWallFalse1(t *testing.T) {
+	if !verificationCollisionWithWall(false, true) {
+		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+	}
+}
+func TestUpdateCollisionWithWallFalse2(t *testing.T) {
+	if !verificationCollisionWithWall(true, false) {
+		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+	}
+}
+func TestUpdateCollisionWithWallTrue(t *testing.T) {
+	if verificationCollisionWithWall(true, true) {
+		t.Error("il n'y a pas eu d collision alors qu'elle sont activé")
+	}
+}
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+func verificationKillParticule(positionX, positionY float64, life, ParticuleFin int) bool {
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-	// On crée une particule, avec une vie de 0 et une position en X et Y de 100
+	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
 	Particule := Test.Basique_Particule()
-	Particule.PositionX, Particule.PositionY = 100, 100
-	Particule.Life = 0
+	Particule.PositionX, Particule.PositionY = positionX, positionY
+	Particule.Life = life
 	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
 	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
@@ -192,27 +197,40 @@ func TestUpdateKillParticuleIf0Life(t *testing.T) {
 	// On met à jour le systeme
 	sys.Update()
 	// On vérifie que la particule est bien supprimé
-	if sys.Content.Len() != 0 {
-		t.Error("La particule n'a pas été supprimé alors qu'elle a une vie de 0")
-	}
+
+	return sys.Content.Len() != ParticuleFin //t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
+
 }
 
-func TestUpdateCollisionAmongParticle(t *testing.T) {
-	sys := System{Content: list.New(), DeadList: list.New()}
+func verificationCollisionAmongParticle(Collision, CollisionAmongParticle bool) bool {
+	// Création de la liste de particules
+	l := list.New()
+	// Création de la première particule, scale 1, vitesse 30,2, position 100,100
+	Particule1 := Test.Basique_Particule()
+	Particule1.ScaleX, Particule1.ScaleY = 1, 1
+	PositionXInit1 := float64(100)
+	Particule1.PositionX, Particule1.PositionY = PositionXInit1, 2
+	Particule1.SpeedX, Particule1.SpeedY = 100, 100
+	// Création de la deuxième particule, scale 1, vitesse 10,-2, position 99,100
+	Particule2 := Test.Basique_Particule()
+	Particule2.ScaleX, Particule2.ScaleY = 1, 1
+	Particule2.PositionX, Particule2.PositionY = 10, -2
+	Particule2.SpeedX, Particule2.SpeedY = 99.5, 100
+	// Ajout des particules à la liste
+	l.PushFront(&Particule2)
+	l.PushFront(&Particule1)
 
-	Particule := Test.Basique_Particule()
-	Particule.PositionX, Particule.PositionY = 100, 100
-	Particule.Life = 0
+	config.General.Collision = Collision
+	config.General.CollisionAmongParticle = CollisionAmongParticle
 
-	sys.Content.PushFront(&Particule)
-
-	config.General.WindowSizeX = 200
-	config.General.WindowSizeY = 200
-	config.General.MarginOutsideScreen = 1
+	sys := System{Content: l, DeadList: list.New()}
 
 	sys.Update()
 
-	if sys.Content.Len() != 0 {
-		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
-	}
+	return sys.Content.Front().Value.(*particles.Particle).PositionX != PositionXInit1+0.1
+
+}
+
+func verificationCollisionWithWall(Collision, CollisionWithWall bool) bool {
+
 }
