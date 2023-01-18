@@ -39,7 +39,7 @@ func Vérification(mode int) bool {
 	var speedX, SpeedY, v_Réelle float64
 	var min, max int
 
-	max, min = MinAndMaxSpeed(mode)
+	max, min = minAndMaxSpeed(mode)
 
 	for i := 0; i < 100; i++ {
 		speedX, SpeedY = Random_Speed(mode)

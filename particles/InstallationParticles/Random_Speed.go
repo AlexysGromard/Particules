@@ -15,7 +15,7 @@ func Random_Speed(SpeedMode int) (SpeedX, SpeedY float64) {
 	}
 
 	// Initialisation de l'intervalle vitesse de la particule
-	maxSpeed, minSpeed := MinAndMaxSpeed(SpeedMode)
+	maxSpeed, minSpeed := minAndMaxSpeed(SpeedMode)
 	// Initialisation de la direction de la particule
 	var direction float64 = float64(rand.Intn(360))
 	// Initialisation de la vitesse de la particule

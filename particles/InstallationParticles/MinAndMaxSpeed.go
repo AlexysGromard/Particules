@@ -5,7 +5,7 @@ package installationParticles
 // Valeur d'entree : un entier qui peux être -1,1,2 ou 3
 // Valeur de sortie : deux entiers compris entre 0 et 5 qui correspondent a la vitesse minimale
 // et maximale
-func MinAndMaxSpeed(SpeedMode int) (minSpeed, maxSpeed int) {
+func minAndMaxSpeed(SpeedMode int) (minSpeed, maxSpeed int) {
 	switch SpeedMode {
 	// -1: vitesse aleatoire entre 0 et 5
 	case -1:
@@ -23,6 +23,7 @@ func MinAndMaxSpeed(SpeedMode int) (minSpeed, maxSpeed int) {
 	case 3:
 		minSpeed = 3
 		maxSpeed = 5
+	// Si le mode de vitesse n'est pas compris entre -1 et 3, les deux valeurs retournées seront -1
 	default:
 		minSpeed = -1
 		maxSpeed = -1
