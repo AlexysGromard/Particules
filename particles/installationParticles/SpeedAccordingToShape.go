@@ -5,6 +5,8 @@ import (
 	"math/rand"
 )
 
+// La fonction SpeedAccordingToShape retourne la vitesse en X et en Y en fonction de la forme
+// géométrique choisie
 func SpeedAccordingToShape(SpeedMode int, positionX, positionY, centreX, centreY float64) (SpeedX, SpeedY float64) {
 	if SpeedMode == 0 {
 		return 0, 0
