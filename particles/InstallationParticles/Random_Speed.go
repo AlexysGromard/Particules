@@ -1,9 +1,8 @@
-package InstallationParticles
+package installationParticles
 
 import (
 	"math"
 	"math/rand"
-
 )
 
 // La fonction Random_Speed permet de définir la vitesse de la particule aléatoirement

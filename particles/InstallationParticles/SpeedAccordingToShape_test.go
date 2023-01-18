@@ -1,4 +1,4 @@
-package InstallationParticles
+package installationParticles
 
 import (
 	"testing"
