@@ -192,7 +192,7 @@ func TestUpdateKillParticuleIf0Life(t *testing.T) {
 	}
 }
 
-func TestUpdateCollisionAmong(t *testing.T) {
+func TestUpdateCollisionAmongParticle(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	Particule := Test.Basique_Particule()
