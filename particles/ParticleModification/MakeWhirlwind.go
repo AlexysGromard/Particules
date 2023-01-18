@@ -11,7 +11,7 @@ func MakeWhirlwind(list *list.List, SpeedType int, centreX, centreY float64) {
 		p, ok := i.Value.(*particles.Particle)
 		if ok {
 			//Calcule de la distance par raport au centre
-			distance := math.Sqrt(math.Pow(p.PositionX-centreX, 2) + math.Pow(p.PositionY-centreY, 2))
+			distance := math.Sqrt((p.PositionX-centreX)*(p.PositionX-centreX) + (p.PositionY-centreY)*(p.PositionY-centreY))
 
 			//pour éviter de stoper les particules au moment de leur aparition au centre On applique l'effect,
 			//uniquement quand elle ne sont plus au centre donc que la distance est égale à 0

@@ -58,6 +58,8 @@ func (c *Checkbox) update(screen *ebiten.Image) {
 
 		}
 	}
+	// Ajouter le scroll
+	c.y += ScrollY
 	// Si la checkbox est cochée
 	if c.disabled {
 		// Afficher l'image disabled
@@ -75,8 +77,6 @@ func (c *Checkbox) update(screen *ebiten.Image) {
 		opt.GeoM.Translate(float64(c.x), float64(c.y))
 		screen.DrawImage(c.circleFalse, opt)
 	}
-	// Ajouter le scroll
-	c.y += ScrollY
 	// Draw la checkbox
 	c.draw(screen)
 }

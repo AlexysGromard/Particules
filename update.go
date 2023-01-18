@@ -99,7 +99,7 @@ func (g *game) Update() error {
 		}
 	}
 
-	//
+	// Si on est sur la page de particules, on appelle la fonction Update du systeme de particules
 	if CurrentPage == particlesPage {
 		// Appel de la fonction Update du systeme de particules
 		// Permet de ne pas lancer la fonction Update si on est sur la page de configuration
@@ -110,7 +110,7 @@ func (g *game) Update() error {
 			configPageScrollY = 0
 		}
 	}
-
+	// Si on est sur la page de configuration et qu'on appuie sur le bouton Clear, on clear les particules
 	if CurrentPage == configurationsPage && configPage.ClearButton != nil && configPage.ClearButton.Pressed {
 		g.system.ClearParticles()
 	}
