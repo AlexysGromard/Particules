@@ -18,7 +18,7 @@ func NewSystem() System {
 	// Initialisation de la liste des particules
 	system := System{Content: list.New(), DeadList: list.New()}
 	// Initialisation des particules
-	for i := 0; i < config.General.InitNumParticles; i++ {
+	for NuméroToure := 0; NuméroToure < config.General.InitNumParticles; NuméroToure++ {
 		// Initialisation de la position de la particule
 		system.addParticule()
 	}

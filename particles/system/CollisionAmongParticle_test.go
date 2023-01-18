@@ -9,8 +9,10 @@ import (
 
 // Le test TestCollisionAmongParticleFalse vérifie que les particules ne produisent pas de collision entre elles
 func TestCollisionAmongParticleFalse(t *testing.T) {
+
 	// Création de la liste de particules
 	l := list.New()
+
 	// Création de la première particule
 	Particule1 := Test.Basique_Particule()
 	Particule1.ScaleX, Particule1.ScaleY = 1, 1
@@ -18,6 +20,7 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 	PositionXInit1, PositionYInit1 := float64(100), float64(100)
 	Particule1.PositionX, Particule1.PositionY = PositionXInit1, PositionYInit1
 	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
+
 	// Création de la deuxième particule
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
@@ -28,6 +31,7 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 	// Ajout des particules à la liste
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
+
 	// Boucle sur la liste de particules
 	// Pour chaque particule, on vérifie si elle est en collision avec une autre particule
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
@@ -36,9 +40,11 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 			collisionAmongParticle(NuméroParticule, ParticuleActuelle)
 		}
 	}
+
 	// On récupère les particules de la liste
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	particuleEnd2, _ := l.Front().Next().Value.(*particles.Particle)
+
 	// On vérifie que la vitesse des particules n'ont pas été modifier du fait d'une collision
 	if particuleEnd1.SpeedX != SpeedXInit1 || particuleEnd1.SpeedY != SpeedYInit1 || particuleEnd2.SpeedX != SpeedXInit2 || particuleEnd2.SpeedY != SpeedYInit2 {
 		t.Error("Les vitesses des particules ont été modifiées alors qu'il n'y a pas eu de collision entre particules")
@@ -51,8 +57,10 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 
 // Le test TestCollisionAmongParticleTrue1 vérifie que les particules produisent bien une collision entre elles
 func TestCollisionAmongParticleTrue1(t *testing.T) {
+
 	// Création de la liste de particules
 	l := list.New()
+
 	// Création de la première particule
 	Particule1 := Test.Basique_Particule()
 	Particule1.ScaleX, Particule1.ScaleY = 1, 1
@@ -60,6 +68,7 @@ func TestCollisionAmongParticleTrue1(t *testing.T) {
 	PositionXInit1, PositionYInit1 := float64(100), float64(100)
 	Particule1.PositionX, Particule1.PositionY = PositionXInit1, PositionYInit1
 	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
+
 	// Création de la deuxième particule
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
@@ -67,9 +76,11 @@ func TestCollisionAmongParticleTrue1(t *testing.T) {
 	PositionXInit2, PositionYInit2 := float64(99.5), float64(100)
 	Particule2.PositionX, Particule2.PositionY = PositionXInit2, PositionYInit2
 	Particule2.SpeedX, Particule2.SpeedY = SpeedXInit2, SpeedYInit2
+
 	// Ajout des particules à la liste
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
+
 	// Boucle sur la liste de particules
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
@@ -77,9 +88,11 @@ func TestCollisionAmongParticleTrue1(t *testing.T) {
 			collisionAmongParticle(NuméroParticule, ParticuleActuelle)
 		}
 	}
+
 	// On récupère les particules de la liste
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	particuleEnd2, _ := l.Front().Next().Value.(*particles.Particle)
+
 	// On vérifie que les vitesses des particules se sont bien inversées
 	if particuleEnd1.SpeedX != SpeedXInit2 || particuleEnd1.SpeedY != SpeedYInit2 || particuleEnd2.SpeedX != SpeedXInit1 || particuleEnd2.SpeedY != SpeedYInit1 {
 		t.Error("Les vitesses ne se sont pas inversé avec la particule qu'elle a touchée")
@@ -101,6 +114,7 @@ func TestCollisionAmongParticleTrue2(t *testing.T) {
 	PositionXInit1, PositionYInit1 := float64(100), float64(100)
 	Particule1.PositionX, Particule1.PositionY = PositionXInit1, PositionYInit1
 	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
+
 	// Création de la deuxième particule
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
@@ -108,9 +122,11 @@ func TestCollisionAmongParticleTrue2(t *testing.T) {
 	PositionXInit2, PositionYInit2 := float64(100), float64(99.5)
 	Particule2.PositionX, Particule2.PositionY = PositionXInit2, PositionYInit2
 	Particule2.SpeedX, Particule2.SpeedY = SpeedXInit2, SpeedYInit2
+
 	// Ajout des particules à la liste
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
+
 	// Boucle sur la liste de particules
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
@@ -118,9 +134,11 @@ func TestCollisionAmongParticleTrue2(t *testing.T) {
 			collisionAmongParticle(NuméroParticule, ParticuleActuelle)
 		}
 	}
+
 	// On récupère les particules de la liste
 	particuleEnd1, _ := l.Front().Value.(*particles.Particle)
 	particuleEnd2, _ := l.Front().Next().Value.(*particles.Particle)
+
 	// On vérifie que les vitesses des particules se sont bien inversées
 	if particuleEnd1.SpeedX != SpeedXInit2 || particuleEnd1.SpeedY != SpeedYInit2 || particuleEnd2.SpeedX != SpeedXInit1 || particuleEnd2.SpeedY != SpeedYInit1 {
 		t.Error("Les vitesses ne se sont pas inversé avec la particule qu'elle a touchée")

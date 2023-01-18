@@ -8,15 +8,15 @@ import (
 // La fonction PlaceAccordingToPosition permet de déplacer les particules dans la liste
 // en fonction de leur position en X
 func (s *System) placeAccordingToPosition() {
-	i := s.Content.Front()
-	for i != nil {
-		suivant := i.Next()
+	ElementActuel := s.Content.Front()
+	for ElementActuel != nil {
+		suivant := ElementActuel.Next()
 
-		Devant := i.Next()
-		Derrière := i.Prev()
-		location(s, i, Derrière, Devant)
+		Devant := ElementActuel.Next()
+		Derrière := ElementActuel.Prev()
+		location(s, ElementActuel, Derrière, Devant)
 
-		i = suivant
+		ElementActuel = suivant
 	}
 }
 
