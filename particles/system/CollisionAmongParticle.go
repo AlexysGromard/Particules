@@ -20,8 +20,8 @@ func CollisionAmongParticle(ElementActuel *list.Element, ParticuleActuelle *part
 
 					ParticuleActuelle.PositionX = ParticuleActuelle.PositionX + math.Cos(angle1)*ParticuleActuelle.ScaleX*0.1
 					ParticuleActuelle.PositionY = ParticuleActuelle.PositionY + math.Sin(angle1)*ParticuleActuelle.ScaleY*0.1
-					ParticuleProche.PositionX = ParticuleProche.PositionX + math.Cos(-angle1)*ParticuleProche.ScaleX*0.1
-					ParticuleProche.PositionY = ParticuleProche.PositionY + math.Sin(-angle1)*ParticuleProche.ScaleY*0.1
+					ParticuleProche.PositionX = ParticuleProche.PositionX + math.Cos(angle1+math.Pi)*ParticuleProche.ScaleX*0.1
+					ParticuleProche.PositionY = ParticuleProche.PositionY + math.Sin(angle1+math.Pi)*ParticuleProche.ScaleY*0.1
 				}
 			} else {
 				break
