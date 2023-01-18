@@ -6,6 +6,8 @@ import (
 	"project-particles/particles/Test"
 )
 
+// Le test TestSpeedAccordingToShape1 vérifie que la fonction SpeedAccordingToShape renvoie une vitesse positive si la particule est dans le bon sens
+// Si ce n'est pas le cas, le test échoue
 func TestSpeedAccordingToShape1(t *testing.T) {
 	centreX, centreY := float64(100), float64(100)
 
@@ -20,6 +22,8 @@ func TestSpeedAccordingToShape1(t *testing.T) {
 	}
 }
 
+// Le test TestSpeedAccordingToShape2 vérifie que la fonction SpeedAccordingToShape renvoie une vitesse positive si la particule est dans le bon sens
+// Si ce n'est pas le cas, le test échoue
 func TestSpeedAccordingToShape2(t *testing.T) {
 	centreX, centreY := float64(100), float64(100)
 
@@ -34,6 +38,8 @@ func TestSpeedAccordingToShape2(t *testing.T) {
 	}
 }
 
+// Le test TestSpeedAccordingToShape3 vérifie que la fonction SpeedAccordingToShape renvoie une vitesse positive si la particule est dans le bon sens
+// Si ce n'est pas le cas, le test échoue
 func TestSpeedAccordingToShape3(t *testing.T) {
 	centreX, centreY := float64(100), float64(100)
 
@@ -48,6 +54,8 @@ func TestSpeedAccordingToShape3(t *testing.T) {
 	}
 }
 
+// Le test TestSpeedAccordingToShape4 vérifie que la fonction SpeedAccordingToShape renvoie une vitesse positive si la particule est dans le bon sens
+// Si ce n'est pas le cas, le test échoue
 func TestSpeedAccordingToShape4(t *testing.T) {
 	centreX, centreY := float64(100), float64(100)
 
@@ -62,6 +70,7 @@ func TestSpeedAccordingToShape4(t *testing.T) {
 	}
 }
 
+// Le test TestSpeedAccordingToShapeSpeed0 vérifie que la fonction SpeedAccordingToShape renvoie une vitesse nulle si la particule est dans le bon sens
 func TestSpeedAccordingToShapeSpeed0(t *testing.T) {
 	centreX, centreY := float64(100), float64(100)
 
