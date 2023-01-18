@@ -25,10 +25,10 @@ var CurrentPage int
 // la bibliothèque Ebiten. Cette fonction pourra être légèrement modifiée quand
 // c'est précisé dans le sujet.
 func (g *game) Draw(screen *ebiten.Image) {
-	if CurrentPage == configurationsPage {
-		screen.Fill(color.RGBA{20, 26, 33, 255})
+	if CurrentPage == configurationsPage { // Affichage de la page de configuration
+		screen.Fill(color.RGBA{20, 26, 33, 255}) // Background
 		configPage.UpdateConfigPage(screen)
-	} else if CurrentPage == particlesPage {
+	} else if CurrentPage == particlesPage { // Affichage de la page de particules
 		for e := g.system.Content.Front(); e != nil; e = e.Next() {
 			p, ok := e.Value.(*particles.Particle)
 			if ok {

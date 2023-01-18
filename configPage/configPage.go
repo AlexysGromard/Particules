@@ -400,6 +400,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	// Titre de configuration
 	welcomeTitle.update(screen)
 
+	// CONFIGURATION DE LA FENETRE
 	// Titre de configuration de la fenêtre
 	windowConfiguration.update(screen)
 
@@ -407,7 +408,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	debugButton.update(screen)
 	debugText.update(screen)
 
-	// Paartie génération de particules
+	// GÉNÉRATION DES PARTICULES
 	// Titre de génération de particules
 	particleGeneration.update(screen)
 
@@ -460,6 +461,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	spawnObjectWidth.update(screen)
 	spawnObjectWidthText.update(screen)
 
+	// PROPRIÉTÉS DES PARTICULES
 	// Titre particulesPropertiesText
 	particulesPropertiesText.update(screen)
 
@@ -498,7 +500,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	colorBlueValue.update(screen)
 	colorBlueText.update(screen)
 
-	// Partie collisions
+	// COLLISIONS
 	// collisionsText
 	collisionsText.update(screen)
 
@@ -522,7 +524,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	collisionWithWall.update(screen)
 	collisionWithWallText.update(screen)
 
-	// Partie interaction
+	// INTERACTIONS
 	// interactionText
 	interactionsText.update(screen)
 
@@ -540,7 +542,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	followMouse.update(screen)
 	followMouseText.update(screen)
 
-	// Comportement des particules
+	// COMPORTEMENT DES PARTICULES
 	// Titre
 	behaviorText.update(screen)
 
@@ -668,6 +670,7 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 	changeOpacityAccordingToLife.update(screen)
 	changeOpacityAccordingToLifeText.update(screen)
 
+	// PARTIE DES BOUTONS
 	// Met à jour l'état des bouton et l'affiche
 	// Si le bouton playButton n'est plus à la bonne place en fonction de la taille d'écran
 	if PlayButton.x < config.General.WindowSizeX-PlayButton.width || PlayButton.x > config.General.WindowSizeX-PlayButton.width+30 || PlayButton.y < config.General.WindowSizeY-PlayButton.height || PlayButton.y > config.General.WindowSizeY-PlayButton.height+30 {
