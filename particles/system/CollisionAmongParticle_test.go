@@ -2,7 +2,6 @@ package system
 
 import (
 	"container/list"
-	"project-particles/config"
 	"project-particles/particles"
 	"project-particles/particles/Test"
 	"testing"
@@ -28,9 +27,6 @@ func TestCollisionAmongParticleFalse(t *testing.T) {
 
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
-
-	config.General.Gravity = 1
-	config.General.WindowSizeX, config.General.WindowSizeY = 1000, 1000
 
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
@@ -71,9 +67,6 @@ func TestCollisionAmongParticleTrue1(t *testing.T) {
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
 
-	config.General.Gravity = 1
-	config.General.WindowSizeX, config.General.WindowSizeY = 1000, 1000
-
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
 		if ok {
@@ -112,9 +105,6 @@ func TestCollisionAmongParticleTrue2(t *testing.T) {
 
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
-
-	config.General.Gravity = 1
-	config.General.WindowSizeX, config.General.WindowSizeY = 1000, 1000
 
 	for NuméroParticule := l.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
 		ParticuleActuelle, ok := NuméroParticule.Value.(*particles.Particle)
