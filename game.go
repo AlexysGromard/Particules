@@ -1,6 +1,6 @@
 package main
 
-import "project-particles/particles/System"
+import "project-particles/particles/system"
 
 // game est un type qui implémente l'interface Game de la bibliothèque Ebiten
 // car il dispose d'une méthode Update, d'une méthode Draw et d'une méthode
@@ -8,5 +8,5 @@ import "project-particles/particles/System"
 // afficher un système de particules. Ce type ne devrait pas être modifié sauf
 // pour les deux dernières extensions.
 type game struct {
-	system System.System
+	system system.System
 }

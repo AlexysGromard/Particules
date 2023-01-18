@@ -1,10 +1,9 @@
-package System
+package system
 
 import (
 	"container/list"
-	"testing"
 	"project-particles/particles/Test"
-
+	"testing"
 )
 
 func TestResurrectParticule(t *testing.T) {

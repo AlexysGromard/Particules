@@ -5,7 +5,7 @@ import (
 	"project-particles/assets"
 	"project-particles/config"
 	"project-particles/configPage"
-	"project-particles/particles/System"
+	"project-particles/particles/system"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
@@ -31,7 +31,7 @@ func main() {
 	// Chargement des images de configuration
 	configPage.LoadAllImages("./assets/graphics/")
 
-	g := game{system: System.NewSystem()}
+	g := game{system: system.NewSystem()}
 
 	err := ebiten.RunGame(&g)
 	if err != nil {

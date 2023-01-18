@@ -1,4 +1,4 @@
-package System
+package system
 
 func (s *System) ClearParticles() {
 	NuméroPaticule := s.Content.Front()

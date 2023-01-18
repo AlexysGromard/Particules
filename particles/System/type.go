@@ -1,4 +1,4 @@
-package System
+package system
 
 import "container/list"
 
@@ -6,6 +6,6 @@ import "container/list"
 // Pour le moment il ne contient qu'une liste de particules, mais cela peut
 // évoluer durant votre projet.
 type System struct {
-	Content *list.List
+	Content  *list.List
 	DeadList *list.List
 }
