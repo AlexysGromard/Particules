@@ -133,16 +133,12 @@ func (s *System) Update() {
 					}
 				}
 			}
-			// Tourbillon
-			//if WhirlwindState {
-			//	ParticleModification.MakeWhirlwind(p)
-			//}
 
 		}
 		i = suivant
 	}
 
-	if config.General.Collision {
+	if config.General.Collision && config.General.CollisionAmongParticle {
 
 		s.PlaceAccordingToPosition()
 

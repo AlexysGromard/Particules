@@ -1,6 +1,5 @@
 package InstallationParticles
 
-
 // MinAndMaxSpeed retourne la vitesse minimale et maximale en fonction du mode de vitesse
 // choisi par l'utilisateur.
 // Valeur d'entree : un entier qui peux être -1,1,2 ou 3
@@ -24,7 +23,10 @@ func MinAndMaxSpeed(SpeedMode int) (minSpeed, maxSpeed int) {
 	case 3:
 		minSpeed = 3
 		maxSpeed = 5
+	default:
+		minSpeed = -1
+		maxSpeed = -1
 	}
-// mettre à -1 si on est pas de les cas prédéfini
+	// mettre à -1 si on est pas de les cas prédéfini
 	return maxSpeed, minSpeed
 }

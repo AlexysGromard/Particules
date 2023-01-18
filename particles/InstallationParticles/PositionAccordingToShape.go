@@ -21,20 +21,14 @@ func PositionAccordingToShape(TypeShape string, Width int, CentreX, CentreY floa
 	// Création d'un carré
 	case "square":
 		// On choisit une une face du carré et une position aléatoire sur cette face
-		var randomPosition int = rand.Intn(4)
-		switch randomPosition {
+		var randomAxe int = rand.Intn(2)
+		switch randomAxe {
 		case 0:
-			PositionX = CentreX + float64(Width/2)
-			PositionY = CentreY + float64(rand.Intn(Width)) - float64(Width/2)
+			PositionX = CentreX - float64(Width/2) + float64(rand.Intn(2)*Width)
+			PositionY = CentreY - float64(Width/2) + float64(rand.Float64()*float64(Width))
 		case 1:
-			PositionX = CentreX + float64(rand.Intn(Width)) - float64(Width/2)
-			PositionY = CentreY + float64(Width/2)
-		case 2:
-			PositionX = CentreX - float64(Width/2)
-			PositionY = CentreY + float64(rand.Intn(Width)) - float64(Width/2)
-		case 3:
-			PositionX = CentreX + float64(rand.Intn(Width)) - float64(Width/2)
-			PositionY = CentreY - float64(Width/2)
+			PositionX = CentreX - float64(Width/2) + float64(rand.Float64()*float64(Width))
+			PositionY = CentreY - float64(Width/2) + float64(rand.Intn(2)*Width)
 		}
 	}
 	return PositionX, PositionY

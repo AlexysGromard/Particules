@@ -29,3 +29,17 @@ func TestSpeeMode3(t *testing.T) {
 		t.Error("maxSpeed et minSpeed devrait être à 5 et 3 mais ils sont à ", maxSpeed, " et ", minSpeed)
 	}
 }
+
+func TestSpeeModeOther1(t *testing.T) {
+	maxSpeed, minSpeed := MinAndMaxSpeed(10)
+	if maxSpeed != -1 || minSpeed != -1 {
+		t.Error("maxSpeed et minSpeed devrait être à 5 et 3 mais ils sont à ", maxSpeed, " et ", minSpeed)
+	}
+}
+
+func TestSpeeModeOther2(t *testing.T) {
+	maxSpeed, minSpeed := MinAndMaxSpeed(0)
+	if maxSpeed != -1 || minSpeed != -1 {
+		t.Error("maxSpeed et minSpeed devrait être à 5 et 3 mais ils sont à ", maxSpeed, " et ", minSpeed)
+	}
+}
