@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// Le test TestKillParticule vérifie que la fonction KillParticule ajoute bien une particule à la liste des particules mortes
+// et la supprime de la liste des particules du system
+// Si deadList est vide et que la liste des particules est à 1, le test échoue
 func TestKillParticule(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 

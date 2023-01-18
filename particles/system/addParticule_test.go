@@ -9,7 +9,7 @@ import (
 )
 
 // Le test TestAdd_ParticuleFromNothing vérifie que la fonction Add_Particule ajoute bien une particule au system si la liste des particules mortes est vide
-func TestaddParticuleFromNothing(t *testing.T) {
+func TestAddParticuleFromNothing(t *testing.T) {
 	// Création du system
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// Ajout d'une particule au system
@@ -47,6 +47,9 @@ func TestAddParticuleFromDeadList(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleRandomSpawn vérifie que la fonction AddParticule ajoute bien une particule au system avec une position aléatoire
+// si la configuration générale est à RandomSpawn = true
+// Si ce n'est pas le cas, le test échoue
 func TestAddParticuleRandomSpawn(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -61,6 +64,9 @@ func TestAddParticuleRandomSpawn(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleSpawnOnAnObject vérifie que la fonction AddParticule ajoute bien une particule au system sur un objet
+// de type "circle" de largeur 500
+// Si ce n'est pas le cas, le test échoue
 func TestAddParticuleSpawnOnAnObject(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -77,6 +83,9 @@ func TestAddParticuleSpawnOnAnObject(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleNormalSpawn vérifie que la fonction AddParticule ajoute bien une particule au system avec une position prédéfini
+// par SpawnX et SpawnY. Ici, SpawnX = 100 et SpawnY = 110
+// Si ce n'est pas le cas, le test échoue
 func TestAddParticuleNormalSpawn(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -91,6 +100,9 @@ func TestAddParticuleNormalSpawn(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleRandomSpeed vérifie que la fonction AddParticule ajoute bien une particule au system avec une vitesse aléatoire
+// de type 1. (speedType = 0 ferait que la vitesse soit nulle)
+// Si ce n'est pas le cas, le test échoue
 func TestAddParticuleRandomSpeed(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -105,6 +117,9 @@ func TestAddParticuleRandomSpeed(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleSeedObject vérifie que la fonction AddParticule ajoute bien les particules sur un objet
+// de type "circle" de largeur 500 et avec une vitesse de type 1
+// Si ce n'est pas le cas, le test échoue
 func TestAddParticuleSeedObject(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -122,6 +137,7 @@ func TestAddParticuleSeedObject(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleSpeed0 vérifie que la fonction AddParticule ajoute bien une particule au system avec une vitesse nulle
 func TestAddParticuleSpeed0(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -131,10 +147,12 @@ func TestAddParticuleSpeed0(t *testing.T) {
 	sys.addParticule()
 
 	if sys.Content.Front().Value.(*particles.Particle).SpeedX != 0 || sys.Content.Front().Value.(*particles.Particle).SpeedY != 0 {
-		t.Error("la vitesse n'est 0 alors que TypeSpeed est égale à 0")
+		t.Error("la vitesse n'est pas de 0 alors que TypeSpeed est égale à 0")
 	}
 }
 
+// Le test TestAddParticuleConstantLife vérifie que la fonction AddParticule ajoute bien une particule au system avec une vie de 10
+// Si ce n'est pas le cas, le test échoue
 func TestAddParticuleConstantLife(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -148,6 +166,9 @@ func TestAddParticuleConstantLife(t *testing.T) {
 	}
 }
 
+// Le test TestAddParticuleRandomLife vérifie que la fonction AddParticule ajoute bien une particule au system avec une vie aléatoire
+// Si ce n'est pas le cas, le test échoue
+// (En vie aléatoire, la vie est toujours < à 50)
 func TestAddParticuleRandomLife(t *testing.T) {
 	resetConfigaddParticule()
 	sys := System{Content: list.New(), DeadList: list.New()}

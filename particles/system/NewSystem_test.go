@@ -5,6 +5,9 @@ import (
 	"testing"
 )
 
+// Le test TestNewSystem vérifie que la fonction NewSystem initialise bien le system avec le nombre de particule
+// défini dans la configuration. Ici 123 particules
+// Si ce n'est pas le cas, le test échoue
 func TestNewSystem(t *testing.T) {
 
 	config.General.InitNumParticles = 123
