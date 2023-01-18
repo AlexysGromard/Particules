@@ -2,6 +2,8 @@ package installationParticles
 
 import "testing"
 
+// Le test TestDansLesLimite1 vérifie que la fonction Random_Life retourne bien une valeur dans l'intervalle [0; 50[
+// Si ce n'est pas le cas, le test échoue
 func TestDansLesLimite1(t *testing.T) {
 	var vie int
 	var vieMax uint = 50
@@ -15,6 +17,8 @@ func TestDansLesLimite1(t *testing.T) {
 	}
 }
 
+// Le test TestDansLesLimite2 vérifie que la fonction Random_Life retourne bien une valeur dans l'intervalle [0; 100[
+// Si ce n'est pas le cas, le test échoue
 func TestDansLesLimite2(t *testing.T) {
 	var vie int
 	var vieMax uint = 100

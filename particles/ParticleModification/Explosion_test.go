@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// Le test TestExplosionNombreParticuleCree vérifie que la fonction Explosion crée bien 100 particules
 func TestExplosionNombreParticuleCree(t *testing.T) {
 	l := list.New()
 
@@ -19,6 +20,9 @@ func TestExplosionNombreParticuleCree(t *testing.T) {
 	}
 }
 
+// Le test TestExplosionVitesseConforme vérifie que la fonction Explosion crée bien des particules avec une vitesse entre 3 et 5
+// Si une particule n'a pas une vitesse entre 3 et 5, le test échoue
+// Si un element n'est pas une particule, le test échoue
 func TestExplosionVitesseConforme(t *testing.T) {
 	l := list.New()
 

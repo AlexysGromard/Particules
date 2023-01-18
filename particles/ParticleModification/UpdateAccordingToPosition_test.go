@@ -6,6 +6,8 @@ import (
 	"testing"
 )
 
+// Le test Test1AccordingToPosition vérifie que la fonction UpdateAccordingToPosition renvoie une couleur différente si la particule a changé de position
+// Si ce n'est pas le cas, le test échoue
 func Test1AccordingToPosition(t *testing.T) {
 	var particule particles.Particle
 	particule.PositionX, particule.PositionY = 0, 0
@@ -23,6 +25,8 @@ func Test1AccordingToPosition(t *testing.T) {
 	}
 }
 
+// Le test Test2AccordingToPosition vérifie que la fonction UpdateAccordingToPosition renvoie une couleur différente si la particule a changé de position
+// Si ce n'est pas le cas, le test échoue
 func Test2AccordingToPosition(t *testing.T) {
 	var particule particles.Particle
 	LargeurFenaitre, HauteurFenaitre := 100, 100

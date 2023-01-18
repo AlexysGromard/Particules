@@ -7,6 +7,8 @@ import (
 	"testing"
 )
 
+// Le test TestInsertionAccordingToPositionXVide vérifie que la fonction InsertionAccordingToPositionX ajoute bien une particule à la liste
+// Si la liste n'est pas égale à 1, le test échoue
 func TestInsertionAccordingToPositionXVide(t *testing.T) {
 	l := list.New()
 
@@ -19,6 +21,9 @@ func TestInsertionAccordingToPositionXVide(t *testing.T) {
 	}
 }
 
+// Le test TestInsertionAccordingToPositionXUnElement1 vérifie que la fonction InsertionAccordingToPositionX ajoute bien 2 particule à la liste
+// Si la liste n'est pas égale à 2, le test échoue
+// Si les particules ne sont pas trié dans la bonne ordre, le test échoue également
 func TestInsertionAccordingToPositionXUnElement1(t *testing.T) {
 	l := list.New()
 
@@ -38,6 +43,9 @@ func TestInsertionAccordingToPositionXUnElement1(t *testing.T) {
 	}
 }
 
+// Le test TestInsertionAccordingToPositionXUnElement2 vérifie que la fonction InsertionAccordingToPositionX ajoute bien 2 particule à la liste
+// Si la liste n'est pas égale à 2, le test échoue
+// Si les particules ne sont pas trié dans la bonne ordre, le test échoue également
 func TestInsertionAccordingToPositionXUnElement2(t *testing.T) {
 	l := list.New()
 

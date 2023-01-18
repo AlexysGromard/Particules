@@ -5,6 +5,9 @@ import (
 	"testing"
 )
 
+// Le test TestPossitionAccordingToCircle vérifie que la fonction PositionAccordingToShape retourne bien des coordonnées
+// qui sont dans un cercle de rayon largeur/2
+// Si ce n'est pas le cas, le test échoue
 func TestPossitionAccordingToCircle(t *testing.T) {
 	var centreX, centreY float64 = 100, 100
 	largeur := 10
@@ -20,6 +23,9 @@ func TestPossitionAccordingToCircle(t *testing.T) {
 	}
 }
 
+// Le test TestPossitionAccordingToSquare vérifie que la fonction PositionAccordingToShape retourne bien des coordonnées
+// qui sont dans un carré de largeur largeur
+// Si ce n'est pas le cas, le test échoue
 func TestPossitionAccordingToSquare(t *testing.T) {
 	var centreX, centreY float64 = 100, 100
 	largeur := 20

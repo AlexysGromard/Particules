@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// Le test TestParticleOutsideX1 vérifie que la fonction ParticleOutsideXLimit renvoie true si la particule est en dehors des limites
+// Si ce n'est pas le cas, le test échoue
 func TestParticleOutsideX1(t *testing.T) {
 	MaxPositionX := 500
 	MarginOutside := 20

@@ -2,6 +2,9 @@ package installationParticles
 
 import "testing"
 
+// Le test TestDansLInterval1 vérifie que la fonction Random_Position retourne bien des positions
+// dans l'intervalle [0; 100[ en X et [0; 75[ en Y
+// Si ce n'est pas le cas, le test échoue
 func TestDansLInterval1(t *testing.T) {
 	var posX, posY float64
 	var posXMax, posYMax int = 100, 75
@@ -20,6 +23,9 @@ func TestDansLInterval1(t *testing.T) {
 	}
 }
 
+// Le test TestDansLInterval2 vérifie que la fonction Random_Position retourne bien des positions
+// dans l'intervalle [0; 200[ en X et [0; 100[ en Y
+// Si ce n'est pas le cas, le test échoue
 func TestDansLInterval2(t *testing.T) {
 	var posX, posY float64
 	var posXMax, posYMax int = 100, 75

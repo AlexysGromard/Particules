@@ -7,6 +7,7 @@ import (
 	"testing"
 )
 
+// Le test TestMakeWhirlwind0 vérifie que la fonction MakeWhirlwind ne modifie pas la vitesse d'une particule si elle est à 0 de distance par raport au centre
 func TestMakeWhirlwind0(t *testing.T) {
 	CentreX, CentreY := 100, 100
 
@@ -27,6 +28,8 @@ func TestMakeWhirlwind0(t *testing.T) {
 	}
 }
 
+// Le test TestMakeWhirlwindSpeedType0 vérifie que la fonction MakeWhirlwind ne modifie pas la vitesse d'une particule si le TypeSpeed est à 0
+// Si ça n'est pas le cas, le test échoue
 func TestMakeWhirlwindSpeedType0(t *testing.T) {
 	CentreX, CentreY := 100, 100
 
@@ -47,6 +50,7 @@ func TestMakeWhirlwindSpeedType0(t *testing.T) {
 	}
 }
 
+// Le test TestMakeWhirlwindSpeedType1 vérifie que la fonction MakeWhirlwind modifie la vitesse d'une particule si le TypeSpeed est à 1
 func TestMakeWhirlwindSpeedType1(t *testing.T) {
 	CentreX, CentreY := 100, 100
 

@@ -5,30 +5,45 @@ import (
 	"testing"
 )
 
+// Le test TestRandom_Speedmoin1 vérifie que la fonction randomSpeed retourne bien des vitesses comprises entre 0 et 5
+// lorsque le mode de vitesse est -1
+// Si ce n'est pas le cas, le test échoue
 func TestRandom_Speedmoin1(t *testing.T) {
 	if !Vérification(-1) {
 		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
 	}
 }
 
+// Le test TestRandom_Speed0 vérifie que la fonction randomSpeed retourne bien uen vitesse nulle
+// lorsque le mode de vitesse est 0
+// Si ce n'est pas le cas, le test échoue
 func TestRandom_Speed0(t *testing.T) {
 	if !Vérification(0) {
 		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
 	}
 }
 
+// Le test TestRandom_Speed1 vérifie que la fonction randomSpeed retourne bien des vitesses comprises entre 0 et 1
+// lorsque le mode de vitesse est 1
+// Si ce n'est pas le cas, le test échoue
 func TestRandom_Speed1(t *testing.T) {
 	if !Vérification(1) {
 		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
 	}
 }
 
+// Le test TestRandom_Speed2 vérifie que la fonction randomSpeed retourne bien des vitesses comprises entre 1 et 3
+// lorsque le mode de vitesse est 2
+// Si ce n'est pas le cas, le test échoue
 func TestRandom_Speed2(t *testing.T) {
 	if !Vérification(2) {
 		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
 	}
 }
 
+// Le test TestRandom_Speed3 vérifie que la fonction randomSpeed retourne bien des vitesses comprises entre 3 et 5
+// lorsque le mode de vitesse est 3
+// Si ce n'est pas le cas, le test échoue
 func TestRandom_Speed3(t *testing.T) {
 	if !Vérification(3) {
 		t.Error("Les vitesses générées ne sont pas dans l'intervalle")
