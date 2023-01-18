@@ -11,7 +11,7 @@ import (
 // Le test TestUpdateGravity vérifie que la gravité est bien appliqué
 // Elle vérifie aussi que la vitesse en X n'est pas modifier
 func TestUpdateGravity(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	Particule := Test.Basique_Particule()
@@ -41,7 +41,7 @@ func TestUpdateGravity(t *testing.T) {
 // Elle vérifie aussi que la position en X et Y a bien été modifier
 // et que la vitesse a bien été modifié.
 func TestUpdateVitesse(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	Particule := Test.Basique_Particule()
@@ -68,7 +68,7 @@ func TestUpdateVitesse(t *testing.T) {
 
 // Le Test TestUpdateLifeFalse vérifie que la vie n'est pas modifié si le parametre HaveLife est à false
 func TestUpdateLifeFalse(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// On crée une particule, avec une vie de 50
@@ -91,7 +91,7 @@ func TestUpdateLifeFalse(t *testing.T) {
 
 // Le test TestUpdateLifeTrue vérifie que la vie est bien modifié si le parametre HaveLife est à true
 func TestUpdateLifeTrue(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// On crée une particule, avec une vie de 50
@@ -175,7 +175,7 @@ func TestUpdateCollisionWithWallTrue(t *testing.T) {
 }
 
 func TestUpdateAjouterParticule(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	config.General.SpawnRate = 20
@@ -188,7 +188,7 @@ func TestUpdateAjouterParticule(t *testing.T) {
 }
 
 func TestUpdateSpawnCenter(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	config.General.SpawnCenter = true
 	config.General.WindowSizeX = 200
 	config.General.WindowSizeY = 200
@@ -205,7 +205,7 @@ func TestUpdateSpawnCenter(t *testing.T) {
 }
 
 func TestUpdateAccordingToPosition(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	particule := Test.Basique_Particule()
@@ -242,7 +242,7 @@ func TestUpdateAccordingToPosition(t *testing.T) {
 }
 
 func TestUpdatePlaceAccordingToPosition(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -273,7 +273,7 @@ func TestUpdatePlaceAccordingToPosition(t *testing.T) {
 }
 
 func TestUpdateAccordingToLife(t *testing.T) {
-	ResetConfig()
+	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	particule := Test.Basique_Particule()
@@ -322,7 +322,7 @@ func TestUpdateAccordingToLife(t *testing.T) {
 
 func verificationKillParticule(positionX, positionY float64, life, ParticuleFin int) bool {
 
-	ResetConfig()
+	resetConfigUpdate()
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
@@ -344,7 +344,7 @@ func verificationKillParticule(positionX, positionY float64, life, ParticuleFin 
 }
 
 func verificationCollisionAmongParticle(Collision, CollisionAmongParticle bool) bool {
-	ResetConfig()
+	resetConfigUpdate()
 	// Création de la liste de particules
 	l := list.New()
 	// Création de la première particule, scale 1, vitesse 30,2, position 100,100
@@ -374,7 +374,7 @@ func verificationCollisionAmongParticle(Collision, CollisionAmongParticle bool) 
 }
 
 func verificationCollisionWithWall(Collision, CollisionWithWall bool) bool {
-	ResetConfig()
+	resetConfigUpdate()
 	// Création de la liste de particules
 	l := list.New()
 	// Définire les limite de l'écan
@@ -401,7 +401,7 @@ func verificationCollisionWithWall(Collision, CollisionWithWall bool) bool {
 
 }
 
-func ResetConfig() {
+func resetConfigUpdate() {
 	config.General.WindowSizeX, config.General.WindowSizeY = 200, 200
 
 	config.General.SpawnCenter = false

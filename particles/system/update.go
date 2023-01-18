@@ -101,7 +101,7 @@ func (s *System) Update() {
 		nombreDeToureMax := Part_particle
 		for nombreDeToure := 0; float64(nombreDeToure) < nombreDeToureMax; nombreDeToure++ {
 			Part_particle -= 1
-			s.Add_Particule()
+			s.AddParticule()
 		}
 	}
 	//

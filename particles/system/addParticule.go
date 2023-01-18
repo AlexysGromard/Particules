@@ -10,7 +10,7 @@ import (
 // si DeadListe contient des particules alors il réutilise les particule comptenu dans DeadList
 
 // enter : DeadList (une liste de particule morte qui sont aussi dans le System)
-func (s *System) Add_Particule() {
+func (s *System) AddParticule() {
 
 	var CentreX, CentreY float64
 	CentreX, CentreY = float64(config.General.WindowSizeX)/2, float64(config.General.WindowSizeY)/2
