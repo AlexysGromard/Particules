@@ -11,6 +11,7 @@ import (
 // Le test TestUpdateGravity vérifie que la gravité est bien appliqué
 // Elle vérifie aussi que la vitesse en X n'est pas modifier
 func TestUpdateGravity(t *testing.T) {
+	ResetConfig()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	Particule := Test.Basique_Particule()
@@ -40,6 +41,7 @@ func TestUpdateGravity(t *testing.T) {
 // Elle vérifie aussi que la position en X et Y a bien été modifier
 // et que la vitesse a bien été modifié.
 func TestUpdateVitesse(t *testing.T) {
+	ResetConfig()
 	sys := System{Content: list.New(), DeadList: list.New()}
 
 	Particule := Test.Basique_Particule()
@@ -66,6 +68,7 @@ func TestUpdateVitesse(t *testing.T) {
 
 // Le Test TestUpdateLifeFalse vérifie que la vie n'est pas modifié si le parametre HaveLife est à false
 func TestUpdateLifeFalse(t *testing.T) {
+	ResetConfig()
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// On crée une particule, avec une vie de 50
@@ -88,6 +91,7 @@ func TestUpdateLifeFalse(t *testing.T) {
 
 // Le test TestUpdateLifeTrue vérifie que la vie est bien modifié si le parametre HaveLife est à true
 func TestUpdateLifeTrue(t *testing.T) {
+	ResetConfig()
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// On crée une particule, avec une vie de 50
@@ -150,25 +154,160 @@ func TestUpdateCollisionAmongParticleFalse2(t *testing.T) {
 }
 func TestUpdateCollisionAmongParticleTrue(t *testing.T) {
 	if verificationCollisionAmongParticle(true, true) {
-		t.Error("il n'y a pas eu d collision alors qu'elle sont activé")
+		t.Error("il n'y a pas eu de collision alors qu'elle sont activé")
 	}
 }
 
-// /
 func TestUpdateCollisionWithWallFalse1(t *testing.T) {
 	if !verificationCollisionWithWall(false, true) {
-		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+		t.Error("il y a eu une collision avec un bord alors qu'elle sont désactivé")
 	}
 }
 func TestUpdateCollisionWithWallFalse2(t *testing.T) {
 	if !verificationCollisionWithWall(true, false) {
-		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+		t.Error("il y a eu une collision avec un bord alors qu'elle sont désactivé")
 	}
 }
 func TestUpdateCollisionWithWallTrue(t *testing.T) {
 	if verificationCollisionWithWall(true, true) {
-		t.Error("il n'y a pas eu d collision alors qu'elle sont activé")
+		t.Error("il n'y a pas eu de collision avec un bord alors qu'elle sont activé")
 	}
+}
+
+func TestUpdateAjouterParticule(t *testing.T) {
+	ResetConfig()
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	config.General.SpawnRate = 20
+
+	sys.Update()
+
+	if sys.Content.Len() != 20 {
+		t.Error("le SpawnRate est à 20 mais il n'y a ", sys.Content.Len(), " particule vivante")
+	}
+}
+
+func TestUpdateSpawnCenter(t *testing.T) {
+	ResetConfig()
+	config.General.SpawnCenter = true
+	config.General.WindowSizeX = 200
+	config.General.WindowSizeY = 200
+	config.General.SpawnX, config.General.SpawnY = 0, 0
+
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	sys.Update()
+
+	if config.General.SpawnX != 100 || config.General.SpawnY != 100 {
+		t.Error("le point de Spawn X et Y ne sont pas au centre de l'écan alors que SpawnCenter est True ")
+	}
+
+}
+
+func TestUpdateAccordingToPosition(t *testing.T) {
+	ResetConfig()
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	particule := Test.Basique_Particule()
+	particule.PositionX, particule.PositionY = 0, 0
+	particule.SpeedX, particule.SpeedY = 0, 0
+	particule.ColorRed = 1
+	particule.ScaleX = 1
+	particule.Opacity = 1
+	particule.Rotation = 1
+	sys.Content.PushFront(&particule)
+
+	config.General.MinColorRed, config.General.MaxColorRed = 0, 1
+	config.General.ScaleX = 1
+	config.General.Opacity = 1
+	config.General.Rotation = 3.14
+
+	config.General.ChangeColorAccordingTo = 1
+	config.General.ChangeScaleAccordingTo = 1
+	config.General.ChangeOpacityAccordingTo = 1
+	config.General.ChangeRotationAccordingTo = 1
+
+	sys.Update()
+
+	if 0 != sys.Content.Front().Value.(*particles.Particle).ColorRed {
+		t.Error("la couleur n'a pas été modifier alors que ChangeColorAccordingTo est à 1")
+	} else if 0 != sys.Content.Front().Value.(*particles.Particle).ScaleX {
+		t.Error("le ScaleX n'a pas été modifier alors que ChangeScaleAccordingTo est à 1")
+	} else if 0 != sys.Content.Front().Value.(*particles.Particle).Opacity {
+		t.Error("l'Opacity n'a pas été modifier alors que ChangeOpacityAccordingTo est à 1")
+	} else if 0 != sys.Content.Front().Value.(*particles.Particle).Rotation {
+		t.Error("la Rotation n'a pas été modifier alors que ChangeRotationAccordingTo est à 1")
+	}
+
+}
+
+func TestUpdatePlaceAccordingToPosition(t *testing.T) {
+	ResetConfig()
+
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particle1 := Test.Basique_Particule()
+	Particle2 := Test.Basique_Particule()
+
+	Particle1.PositionX = 30
+	Particle2.PositionX = 25
+
+	sys.Content.PushFront(&Particle2)
+	sys.Content.PushFront(&Particle1)
+
+	config.General.Collision = true
+	config.General.CollisionAmongParticle = true
+
+	sys.Update()
+
+	a := sys.Content.Front()
+	b := a.Next()
+
+	pa, _ := a.Value.(*particles.Particle)
+	pb, _ := b.Value.(*particles.Particle)
+
+	if pa != &Particle2 && pb != &Particle1 {
+		t.Error("il n'y a pas eu de tri alors que Collision et CollisionAmongParticle sont à True")
+	}
+
+}
+
+func TestUpdateAccordingToLife(t *testing.T) {
+	ResetConfig()
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	particule := Test.Basique_Particule()
+	particule.Life = 25
+	particule.LifeInit = 50
+	particule.SpeedX, particule.SpeedY = 0, 0
+	particule.ColorRed = 1
+	particule.ScaleX = 1
+	particule.Opacity = 1
+	particule.Rotation = 1
+	sys.Content.PushFront(&particule)
+
+	config.General.MinColorRed, config.General.MaxColorRed = 0, 1
+	config.General.ScaleX = 1
+	config.General.Opacity = 1
+	config.General.Rotation = 3.14
+
+	config.General.ChangeColorAccordingTo = 2
+	config.General.ChangeScaleAccordingTo = 2
+	config.General.ChangeOpacityAccordingTo = 2
+	config.General.ChangeRotationAccordingTo = 2
+
+	sys.Update()
+
+	if 0.5 != sys.Content.Front().Value.(*particles.Particle).ColorRed {
+		t.Error("la couleur n'a pas été modifier alors que ChangeColorAccordingTo est à 2")
+	} else if 0.5 != sys.Content.Front().Value.(*particles.Particle).ScaleX {
+		t.Error("le ScaleX n'a pas été modifier alors que ChangeScaleAccordingTo est à 2")
+	} else if 0.5 != sys.Content.Front().Value.(*particles.Particle).Opacity {
+		t.Error("l'Opacity n'a pas été modifier alors que ChangeOpacityAccordingTo est à 2")
+	} else if 1.57 != sys.Content.Front().Value.(*particles.Particle).Rotation {
+		t.Error("la Rotation n'a pas été modifier alors que ChangeRotationAccordingTo est à 2")
+	}
+
 }
 
 //
@@ -182,6 +321,8 @@ func TestUpdateCollisionWithWallTrue(t *testing.T) {
 //
 
 func verificationKillParticule(positionX, positionY float64, life, ParticuleFin int) bool {
+
+	ResetConfig()
 	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
 	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
@@ -203,19 +344,20 @@ func verificationKillParticule(positionX, positionY float64, life, ParticuleFin 
 }
 
 func verificationCollisionAmongParticle(Collision, CollisionAmongParticle bool) bool {
+	ResetConfig()
 	// Création de la liste de particules
 	l := list.New()
 	// Création de la première particule, scale 1, vitesse 30,2, position 100,100
 	Particule1 := Test.Basique_Particule()
 	Particule1.ScaleX, Particule1.ScaleY = 1, 1
-	PositionXInit1 := float64(100)
-	Particule1.PositionX, Particule1.PositionY = PositionXInit1, 2
-	Particule1.SpeedX, Particule1.SpeedY = 100, 100
+	PositionXInit1 := float64(99.5)
+	Particule1.PositionX, Particule1.PositionY = PositionXInit1, 100
+	Particule1.SpeedX, Particule1.SpeedY = 0, 0
 	// Création de la deuxième particule, scale 1, vitesse 10,-2, position 99,100
 	Particule2 := Test.Basique_Particule()
 	Particule2.ScaleX, Particule2.ScaleY = 1, 1
-	Particule2.PositionX, Particule2.PositionY = 10, -2
-	Particule2.SpeedX, Particule2.SpeedY = 99.5, 100
+	Particule2.PositionX, Particule2.PositionY = 100, 100
+	Particule2.SpeedX, Particule2.SpeedY = 0, 0
 	// Ajout des particules à la liste
 	l.PushFront(&Particule2)
 	l.PushFront(&Particule1)
@@ -227,10 +369,70 @@ func verificationCollisionAmongParticle(Collision, CollisionAmongParticle bool) 
 
 	sys.Update()
 
-	return sys.Content.Front().Value.(*particles.Particle).PositionX != PositionXInit1+0.1
+	return sys.Content.Front().Value.(*particles.Particle).PositionX != PositionXInit1-0.1
 
 }
 
 func verificationCollisionWithWall(Collision, CollisionWithWall bool) bool {
+	ResetConfig()
+	// Création de la liste de particules
+	l := list.New()
+	// Définire les limite de l'écan
+	LimiteX, LimiteY := 200, 200 // Définire les limite de l'écan
+	// Création de la particule
+	Particule1 := Test.Basique_Particule()
+	Particule1.ScaleX, Particule1.ScaleY = 1, 1
+	SpeedXInit1, SpeedYInit1 := float64(30), float64(2)
+	Particule1.PositionX, Particule1.PositionY = 170, 100
+	Particule1.SpeedX, Particule1.SpeedY = SpeedXInit1, SpeedYInit1
+	// Ajout de la particule à la liste
+	l.PushFront(&Particule1)
 
+	config.General.WindowSizeX, config.General.WindowSizeY = LimiteX, LimiteY
+	config.General.Collision = Collision
+	config.General.CollisionWithWall = CollisionWithWall
+
+	sys := System{Content: l, DeadList: list.New()}
+
+	sys.Update()
+
+	// On vérifie que la vitesse de la particule a été modifier
+	return sys.Content.Front().Value.(*particles.Particle).SpeedX != -SpeedXInit1
+
+}
+
+func ResetConfig() {
+	config.General.WindowSizeX, config.General.WindowSizeY = 200, 200
+
+	config.General.SpawnCenter = false
+	config.General.SpawnX, config.General.SpawnY = 0, 0
+	config.General.SpawnRate = 0
+	config.General.Rotation = 0
+	config.General.ScaleX, config.General.ScaleY = 1, 1
+	config.General.Opacity = 1
+	config.General.ColorRed, config.General.ColorGreen, config.General.ColorBlue = 1, 1, 1
+	config.General.Gravity = 0
+	config.General.HaveLife = false
+	config.General.RandomLife = false
+	config.General.Life = 1
+
+	config.General.MarginOutsideScreen = 0
+
+	config.General.ChangeColorAccordingTo = 0
+	config.General.MinColorRed = 0
+	config.General.MinColorGreen = 0
+	config.General.MinColorBlue = 0
+	config.General.MaxColorRed = 0
+	config.General.MaxColorGreen = 0
+	config.General.MaxColorBlue = 0
+	config.General.ChangeScaleAccordingTo = 0
+	config.General.ChangeRotationAccordingTo = 0
+	config.General.ChangeOpacityAccordingTo = 0
+
+	config.General.Collision = false
+	config.General.CollisionAmongParticle = false
+	config.General.CollisionWithWall = false
+	// Interaction
+	config.General.Interaction = false
+	config.General.FollowMouse = false
 }

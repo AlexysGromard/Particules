@@ -93,14 +93,13 @@ func (s *System) Update() {
 	}
 
 	if config.General.Collision && config.General.CollisionAmongParticle {
-
 		s.PlaceAccordingToPosition()
-
 	}
 
 	//ajout des particule
 	if Part_particle >= 1 {
-		for i := 0; float64(i) < Part_particle; i++ {
+		nombreDeToureMax := Part_particle
+		for nombreDeToure := 0; float64(nombreDeToure) < nombreDeToureMax; nombreDeToure++ {
 			Part_particle -= 1
 			s.Add_Particule()
 		}
