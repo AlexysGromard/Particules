@@ -64,131 +64,136 @@ func TestUpdateVitesse(t *testing.T) {
 
 }
 
+// Le Test TestUpdateLifeFalse vérifie que la vie n'est pas modifié si le parametre HaveLife est à false
 func TestUpdateLifeFalse(t *testing.T) {
+	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-
+	// On crée une particule, avec une vie de 50
 	Particule := Test.Basique_Particule()
 	LifeStart := 50
 	Particule.Life = LifeStart
-
+	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
-
+	// On met le parametre HaveLife à false
 	config.General.HaveLife = false
-
+	// On met à jour le systeme
 	sys.Update()
-
+	// On récupère la particule
 	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
-
+	// On vérifie que la vie n'a pas été modifié
 	if particuleEnd.Life != LifeStart {
 		t.Error("La vie à été modifier alors que le parametre haveLife est à false")
 	}
 }
 
+// Le test TestUpdateLifeTrue vérifie que la vie est bien modifié si le parametre HaveLife est à true
 func TestUpdateLifeTrue(t *testing.T) {
+	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-
+	// On crée une particule, avec une vie de 50
 	Particule := Test.Basique_Particule()
 	LifeStart := 50
 	Particule.Life = LifeStart
-
+	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
-
+	// On met le parametre HaveLife à true
 	config.General.HaveLife = true
-
+	// On met à jour le systeme
 	sys.Update()
-
+	// On récupère la particule
 	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
-
+	// On vérifie que la vie a bien été modifié
 	if particuleEnd.Life != LifeStart-1 {
 		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
 	}
 }
 
+// Le test TestUpdateKillParticuleIfOutside1 vérifie que la particule est bien supprimé si elle est en dehors de l'écran
+// avec un parametre MarginOutsideScreen à 1
 func TestUpdateKillParticuleIfOutside1(t *testing.T) {
+	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-
+	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
 	Particule := Test.Basique_Particule()
 	Particule.PositionX, Particule.PositionY = 100, 100
 	Particule.Life = 50
-
+	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
-
+	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
 	config.General.WindowSizeX = 200
 	config.General.WindowSizeY = 200
 	config.General.MarginOutsideScreen = 1
-
+	// On met à jour le systeme
 	sys.Update()
-
-	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
-
+	// On vérifie que la particule est bien supprimé
 	if sys.Content.Len() != 1 {
-		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+		t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
 	}
 }
 
+// Le test TestUpdateKillParticuleIfOutside2 vérifie que la particule est bien supprimé si elle est en dehors de l'écran
 func TestUpdateKillParticuleIfOutside2(t *testing.T) {
+	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-
+	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
 	Particule := Test.Basique_Particule()
 	Particule.PositionX, Particule.PositionY = 300, 100
 	Particule.Life = 50
-
+	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
-
+	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
 	config.General.WindowSizeX = 200
 	config.General.WindowSizeY = 200
 	config.General.MarginOutsideScreen = 1
-
+	// On met à jour le systeme
 	sys.Update()
-
-	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
-
+	// On vérifie que la particule est bien supprimé
 	if sys.Content.Len() != 0 {
-		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+		t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
 	}
 }
 
+// Le test TestUpdateKillParticuleIfOutside3 vérifie que la particule est bien supprimé si elle est en dehors de l'écran
 func TestUpdateKillParticuleIfOutside3(t *testing.T) {
+	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-
+	// On crée une particule, avec une vie de 50 et une position en X et Y de 100
 	Particule := Test.Basique_Particule()
 	Particule.PositionX, Particule.PositionY = 100, 300
 	Particule.Life = 50
-
+	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
-
+	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
 	config.General.WindowSizeX = 200
 	config.General.WindowSizeY = 200
 	config.General.MarginOutsideScreen = 1
-
+	// On met à jour le systeme
 	sys.Update()
-
-	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
-
+	// On vérifie que la particule est bien supprimé
 	if sys.Content.Len() != 0 {
-		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+		t.Error("La particule n'a pas été supprimé alors qu'elle est en dehors de l'écran")
 	}
 }
 
+// Le test TestUpdateKillParticuleIf0Life vérifie que la particule est bien supprimé si elle a une vie de 0
 func TestUpdateKillParticuleIf0Life(t *testing.T) {
+	// On crée un systeme
 	sys := System{Content: list.New(), DeadList: list.New()}
-
+	// On crée une particule, avec une vie de 0 et une position en X et Y de 100
 	Particule := Test.Basique_Particule()
 	Particule.PositionX, Particule.PositionY = 100, 100
 	Particule.Life = 0
-
+	// On ajoute la particule au systeme
 	sys.Content.PushFront(&Particule)
-
+	// On met le parametre windowSizeX et Y à 200 et le parametre MarginOutsideScreen à 1
 	config.General.WindowSizeX = 200
 	config.General.WindowSizeY = 200
 	config.General.MarginOutsideScreen = 1
-
+	// On met à jour le systeme
 	sys.Update()
-
-	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
-
+	// On vérifie que la particule est bien supprimé
 	if sys.Content.Len() != 0 {
-		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+		t.Error("La particule n'a pas été supprimé alors qu'elle a une vie de 0")
 	}
 }
 
