@@ -7,6 +7,8 @@ import (
 	"project-particles/particles/installationParticles"
 )
 
+// La fonction Explosion crée une explosion de particules
+// Elle est appelée grâce à la barre espace
 func Explosion(l *list.List) {
 	// On crée une explosion de particules
 	for i := 0; i < 100; i++ {

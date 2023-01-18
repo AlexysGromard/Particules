@@ -6,6 +6,8 @@ import (
 	"project-particles/particles"
 )
 
+// La fonction MakeWhirlwind crée un tourbillon de particules
+// Elle est appelée grâce à la touche T
 func MakeWhirlwind(list *list.List, SpeedType int, centreX, centreY float64) {
 	for i := list.Front(); i != nil; i = i.Next() {
 		p, ok := i.Value.(*particles.Particle)
