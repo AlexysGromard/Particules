@@ -5,7 +5,7 @@
 	"ParticleImage": "assets/particle.png",
 	"Debug": true,
 
-	"InitNumParticles": 30000,
+	"InitNumParticles": 20000,
 	"RandomSpawn": true,
 	"SpanwCenter": false,
 	"SpawnX": 400,
@@ -16,8 +16,8 @@
 	"SpawnObjectWidth" : 500,
 
 	"Rotation":0,
-	"ScaleX": 0.1,
-	"ScaleY": 0.1,
+	"ScaleX": 0.3,
+	"ScaleY": 0.3,
 	"Opacity": 1,
 	"ColorRed": 0.1,
 	"ColorGreen": 0.1,
