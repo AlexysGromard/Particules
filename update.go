@@ -76,17 +76,18 @@ func (g *game) Update() error {
 				config.General.SpawnX += 3
 			}
 		}
-		// Explosion
+		// EXPLOSION
 		// Si espace est appuyee, on appelle la fonction Explosion du systeme de particules
 		if ebiten.IsKeyPressed(ebiten.KeySpace) && CurrentPage == particlesPage {
 			ParticleModification.Explosion(g.system.Content)
 		}
-		// Tourbillon
+		// TOURBILLON
 		// Si T est appuyee, on appelle la fonction MakeWhirlwind du systeme de particules
 		if ebiten.IsKeyPressed(ebiten.KeyT) {
 			ParticleModification.MakeWhirlwind(g.system.Content, config.General.SpeedType, float64(config.General.SpawnX), float64(config.General.SpawnY))
 		}
 	}
+	// SUIVRE LA SOURIS
 	if config.General.FollowMouse {
 		// On recupere les coordonnees de la souris
 		x, y := ebiten.CursorPosition()
@@ -98,10 +99,15 @@ func (g *game) Update() error {
 		}
 	}
 
+	//
 	if CurrentPage == particlesPage {
 		// Appel de la fonction Update du systeme de particules
+		// Permet de ne pas lancer la fonction Update si on est sur la page de configuration
 		g.system.Update()
 		if configPageScrollY != 0 {
+			// Remettre les valeurs par défaut car il n'y a plus de scroll
+			configPage.ScrollY -= configPageScrollY
+			configPageScrollY = 0
 		}
 	}
 

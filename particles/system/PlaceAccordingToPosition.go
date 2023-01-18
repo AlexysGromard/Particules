@@ -5,6 +5,8 @@ import (
 	"project-particles/particles"
 )
 
+// La fonction PlaceAccordingToPosition permet de déplacer les particules dans la liste
+// en fonction de leur position en X
 func (s *System) PlaceAccordingToPosition() {
 	i := s.Content.Front()
 	for i != nil {
@@ -12,36 +14,38 @@ func (s *System) PlaceAccordingToPosition() {
 
 		Devant := i.Next()
 		Derrière := i.Prev()
-		rec(s, i, Derrière, Devant)
+		location(s, i, Derrière, Devant)
 
 		i = suivant
 	}
 }
 
-func rec(s *System, e, Derrière, Devant *list.Element) {
+// La fonction location permet de déplacer les particules dans la liste
+// en fonction de leur position en X
+// Elle prend en paramètre un élément de la liste des particules
+func location(s *System, e, Derrière, Devant *list.Element) {
 	p, _ := e.Value.(*particles.Particle)
-	if Derrière == nil && Devant != nil {
+	if Derrière == nil && Devant != nil {	// Si on est au début de la liste
 		pDevant, _ := Devant.Value.(*particles.Particle)
 		if p.PositionX > pDevant.PositionX {
-			rec(s, e, Derrière, Devant.Next())
+			location(s, e, Derrière, Devant.Next())
 		} else {
 			s.Content.MoveBefore(e, Devant)
 		}
-	} else if Derrière != nil && Devant == nil {
+	} else if Derrière != nil && Devant == nil { // Si on est à la fin de la liste
 		pDerrière, _ := Derrière.Value.(*particles.Particle)
 		if p.PositionX < pDerrière.PositionX {
-			rec(s, e, Derrière.Prev(), Derrière)
+			location(s, e, Derrière.Prev(), Derrière)
 		} else {
 			s.Content.MoveAfter(e, Derrière)
 		}
-	} else if Derrière != nil && Devant != nil {
+	} else if Derrière != nil && Devant != nil { // Si on est au milieu de la liste
 		pDevant, _ := Devant.Value.(*particles.Particle)
 		pDerrière, _ := Derrière.Value.(*particles.Particle)
-
 		if p.PositionX > pDevant.PositionX {
-			rec(s, e, Devant, Devant.Next())
+			location(s, e, Devant, Devant.Next())
 		} else if p.PositionX < pDerrière.PositionX {
-			rec(s, e, Derrière.Prev(), Derrière)
+			location(s, e, Derrière.Prev(), Derrière)
 		} else {
 			s.Content.MoveBefore(e, Devant)
 		}

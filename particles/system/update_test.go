@@ -8,6 +8,8 @@ import (
 	"testing"
 )
 
+// Le test TestUpdateGravity vérifie que la gravité est bien appliqué
+// Elle vérifie aussi que la vitesse en X n'est pas modifier
 func TestUpdateGravity(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 
@@ -34,6 +36,9 @@ func TestUpdateGravity(t *testing.T) {
 	}
 }
 
+// Le test TestUpdateVitesse vérifie que la vitesse est bien appliqué
+// Elle vérifie aussi que la position en X et Y a bien été modifier
+// et que la vitesse a bien été modifié.
 func TestUpdateVitesse(t *testing.T) {
 	sys := System{Content: list.New(), DeadList: list.New()}
 

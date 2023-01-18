@@ -10,7 +10,7 @@ func SpeedAccordingToShape(SpeedMode int, positionX, positionY, centreX, centreY
 		return 0, 0
 	}
 
-	maxSpeed, minSpeed := MinAndMaxSpeed(SpeedMode)
+	maxSpeed, minSpeed := minAndMaxSpeed(SpeedMode)
 
 	// Récuépartion de l'angle en fonction du centre
 	var angle float64 = math.Atan2(positionY-float64(centreY), positionX-float64(centreX))
