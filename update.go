@@ -47,12 +47,13 @@ func (g *game) Update() error {
 	// INTERACTION AVEC CONFIGURATION
 	// Si on appuie sur la Enter ou le bouton playButton, on va sur la page de particules
 	// Si on appuie sur la touche Echap, on va sur la page de configuration
-	if configPage.PlayButton != nil {
-		if (ebiten.IsKeyPressed(ebiten.KeyEnter) || configPage.PlayButton.Pressed) && CurrentPage == configurationsPage {
-			CurrentPage = particlesPage
-		} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
-			CurrentPage = configurationsPage
-		}
+	if configPage.PlayButton != nil && ((ebiten.IsKeyPressed(ebiten.KeyEnter) || configPage.PlayButton.Pressed) && CurrentPage == configurationsPage) {
+		// On remet les valeurs du scroll en haut
+		configPage.ScrollY -= configPageScrollY
+		configPageScrollY = 0
+		CurrentPage = particlesPage
+	} else if ebiten.IsKeyPressed(ebiten.KeyEscape) && CurrentPage == particlesPage {
+		CurrentPage = configurationsPage
 	}
 	if config.General.Interaction {
 		// INTERACTION AVEC PARTICULES
@@ -100,6 +101,12 @@ func (g *game) Update() error {
 	if CurrentPage == particlesPage {
 		// Appel de la fonction Update du systeme de particules
 		g.system.Update()
+		if configPageScrollY != 0 {
+		}
+	}
+
+	if CurrentPage == configurationsPage && configPage.ClearButton != nil && configPage.ClearButton.Pressed {
+		g.system.ClearParticles()
 	}
 
 	return nil

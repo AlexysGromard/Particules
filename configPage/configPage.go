@@ -151,6 +151,7 @@ var (
 	changeOpacityAccordingToLife         *Checkbox
 	changeOpacityAccordingToLifeText     *Text
 	// Boutons
+	ClearButton           *Button
 	PlayButton            *Button
 	accessParticlesButton *Button
 	leaveGamebutton       *Button
@@ -374,6 +375,7 @@ func createItems() {
 		}
 	})
 	changeOpacityAccordingToLifeText = newText(520, 935, "En fonction de la vie", RobotoRegularFontF, color.RGBA{127, 139, 148, 255})
+	ClearButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-180, 170, 50, buttonImages, "Clear", RobotoRegularFontF, func() {})
 	PlayButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-130, 170, 50, buttonImages, "Jouer", RobotoRegularFontF, func() {})
 	accessParticlesButton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-80, 170, 50, buttonImages, "Sauvegarder", RobotoRegularFontF, func() { SaveConfig("./config.json") })
 	leaveGamebutton = newButton(config.General.WindowSizeX-150-50, config.General.WindowSizeY-50-30, 170, 50, buttonImages, "Quitter", RobotoRegularFontF, func() { os.Exit(0) })
@@ -672,6 +674,13 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 
 	// PARTIE DES BOUTONS
 	// Met à jour l'état des bouton et l'affiche
+	// Si le bouton ClearButton n'est plus à la bonne place en fonction de la taille d'écran
+	if ClearButton.x < config.General.WindowSizeX-ClearButton.width || ClearButton.x > config.General.WindowSizeX-ClearButton.width+30 || ClearButton.y < config.General.WindowSizeY-ClearButton.height || ClearButton.y > config.General.WindowSizeY-ClearButton.height+30 {
+		ClearButton.x = config.General.WindowSizeX - ClearButton.width - 30
+		ClearButton.y = config.General.WindowSizeY - ClearButton.height - 180
+	}
+	ClearButton.update(screen)
+
 	// Si le bouton playButton n'est plus à la bonne place en fonction de la taille d'écran
 	if PlayButton.x < config.General.WindowSizeX-PlayButton.width || PlayButton.x > config.General.WindowSizeX-PlayButton.width+30 || PlayButton.y < config.General.WindowSizeY-PlayButton.height || PlayButton.y > config.General.WindowSizeY-PlayButton.height+30 {
 		PlayButton.x = config.General.WindowSizeX - PlayButton.width - 30
