@@ -13,23 +13,23 @@ func InsertionAccordingToPositionX(list *list.List, p *particles.Particle, Xhalf
 	if list.Len() != 0 {
 
 		if p.PositionX < Xhalf {
-			for i := list.Front(); i != nil; i = i.Next() {
-				pList, _ := i.Value.(*particles.Particle)
+			for NuméroParticule := list.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
+				pList, _ := NuméroParticule.Value.(*particles.Particle)
 				if p.PositionX < pList.PositionX {
-					list.InsertBefore(p, i)
+					list.InsertBefore(p, NuméroParticule)
 					break
-				} else if i.Next() == nil {
+				} else if NuméroParticule.Next() == nil {
 					list.PushBack(p)
 					break
 				}
 			}
 		} else {
-			for i := list.Back(); i != nil; i = i.Prev() {
-				pList, _ := i.Value.(*particles.Particle)
+			for NuméroParticule := list.Back(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Prev() {
+				pList, _ := NuméroParticule.Value.(*particles.Particle)
 				if p.PositionX > pList.PositionX {
-					list.InsertAfter(p, i)
+					list.InsertAfter(p, NuméroParticule)
 					break
-				} else if i.Next() == nil {
+				} else if NuméroParticule.Next() == nil {
 					list.PushFront(p)
 					break
 				}
