@@ -9,7 +9,7 @@ func TestDansLInterval1(t *testing.T) {
 	var posX, posY float64
 	var posXMax, posYMax int = 100, 75
 
-	for i := 0; i < 100; i++ {
+	for NuméroToure := 0; NuméroToure < 100; NuméroToure++ {
 		posX, posY = Random_Position(posXMax, posYMax)
 
 		if posX <= 0 || posX > float64(posXMax) {
@@ -30,7 +30,7 @@ func TestDansLInterval2(t *testing.T) {
 	var posX, posY float64
 	var posXMax, posYMax int = 100, 75
 
-	for i := 0; i < 100; i++ {
+	for NuméroToure := 0; NuméroToure < 100; NuméroToure++ {
 		posX, posY = Random_Position(posXMax, posYMax)
 
 		if posX <= 0 || posX > float64(posXMax) {

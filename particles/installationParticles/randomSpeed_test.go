@@ -56,7 +56,7 @@ func Vérification(mode int) bool {
 
 	max, min = minAndMaxSpeed(mode)
 
-	for i := 0; i < 100; i++ {
+	for NuméroToure := 0; NuméroToure < 100; NuméroToure++ {
 		speedX, SpeedY = Random_Speed(mode)
 
 		v_Réelle = math.Sqrt(carrée(speedX) + carrée(SpeedY)) //la fonction Sqrt du math accepte considère que Sqrt(0) == 0
