@@ -9,8 +9,8 @@ import (
 // La fonction MakeWhirlwind crée un tourbillon de particules
 // Elle est appelée grâce à la touche T
 func MakeWhirlwind(list *list.List, SpeedType int, centreX, centreY float64) {
-	for i := list.Front(); i != nil; i = i.Next() {
-		p, ok := i.Value.(*particles.Particle)
+	for NuméroParticule := list.Front(); NuméroParticule != nil; NuméroParticule = NuméroParticule.Next() {
+		p, ok := NuméroParticule.Value.(*particles.Particle)
 		if ok {
 			//Calcule de la distance par raport au centre
 			distance := math.Sqrt((p.PositionX-centreX)*(p.PositionX-centreX) + (p.PositionY-centreY)*(p.PositionY-centreY))

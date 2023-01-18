@@ -32,9 +32,9 @@ func TestExplosionVitesseConforme(t *testing.T) {
 		particule, ok := NuméroParticule.Value.(*particles.Particle)
 
 		if ok {
-			v_Réelle := math.Sqrt(particule.SpeedX*particule.SpeedX + particule.SpeedY*particule.SpeedY) //la fonction Sqrt du math accepte considère que Sqrt(0) == 0
+			vitesse_Réelle := math.Sqrt(particule.SpeedX*particule.SpeedX + particule.SpeedY*particule.SpeedY) //la fonction Sqrt du math accepte considère que Sqrt(0) == 0
 
-			if v_Réelle < float64(3) || v_Réelle > float64(5) {
+			if vitesse_Réelle < float64(3) || vitesse_Réelle > float64(5) {
 				t.Error("Une particule n'a pas une vitesse entre 3 et 5")
 			}
 		} else {
