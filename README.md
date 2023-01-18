@@ -205,7 +205,7 @@ Cette pages possède 3 boutons :
 - ```ENTER``` : Accéder aux particules
 - ```ESCAPE``` : Revenir à l'interface de configuration
 </br>
-</br><i>(Si interaction est activée)</i>
+</br>(Si interaction est activée)
 - ```Flèches directionnelles``` : Déplacer le générateur de particules
 - ```Espace``` : Explosion de particules
 - ```T``` : Tourbillon de particules
