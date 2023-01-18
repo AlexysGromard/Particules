@@ -57,8 +57,71 @@ func TestUpdateVitesse(t *testing.T) {
 	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
 
 	if particuleEnd.PositionX == PositionXInit || particuleEnd.PositionY == PositionYInit {
-		t.Error("la vitesse n'a pas été appliqué", Particule.PositionX, Particule.PositionY)
+		t.Error("la vitesse n'a pas été appliqué")
 	} else if particuleEnd.PositionX != 100 || particuleEnd.PositionY != 90 {
 		t.Error("la vitesse n'a pas été correctement appliqué")
+	}
+
+}
+
+func TestUpdateLifeFalse(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	LifeStart := 50
+	Particule.Life = LifeStart
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.HaveLife = false
+
+	sys.Update()
+
+	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
+
+	if particuleEnd.Life != LifeStart {
+		t.Error("La vie à été modifier alors que le parametre haveLife est à false")
+	}
+}
+
+func TestUpdateLifeTrue(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	LifeStart := 50
+	Particule.Life = LifeStart
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.HaveLife = true
+
+	sys.Update()
+
+	particuleEnd := sys.Content.Front().Value.(*particles.Particle)
+
+	if particuleEnd.Life != LifeStart-1 {
+		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
+	}
+}
+
+func TestUpdateKillParticuleIfOutside1(t *testing.T) {
+	sys := System{Content: list.New(), DeadList: list.New()}
+
+	Particule := Test.Basique_Particule()
+	Particule.PositionX, Particule.PositionY = 100, 100
+	Particule.Life = 50
+
+	sys.Content.PushFront(&Particule)
+
+	config.General.WindowSizeX = 200
+	config.General.WindowSizeY = 200
+	config.General.MarginOutsideScreen = 1
+
+	sys.Update()
+
+	//particuleEnd := sys.Content.Front().Value.(*particles.Particle)
+
+	if sys.Content.Len() != 1 {
+		t.Error("La vie n'a pas correctement diminuer alors que le parametre HaveLife est à true")
 	}
 }
