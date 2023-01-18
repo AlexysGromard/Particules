@@ -142,38 +142,49 @@ func TestUpdateKillParticuleIf0Life(t *testing.T) {
 	}
 }
 
+// Le test TestUpdateKillParticuleIfOutsideFalse vérifie qu'il n'y pas de collision
 func TestUpdateCollisionAmongParticleFalse1(t *testing.T) {
 	if !verificationCollisionAmongParticle(false, true) {
-		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+		t.Error("il y a eu une collision alors qu'elles sont désactivé")
 	}
 }
+
+// Le test TestUpdateCollisionAmongParticleFalse2 vérifie qu'il n'y pas de collision
 func TestUpdateCollisionAmongParticleFalse2(t *testing.T) {
 	if !verificationCollisionAmongParticle(true, false) {
-		t.Error("il y a eu une collision alors qu'elle sont désactivé")
+		t.Error("il y a eu une collision alors qu'elles sont désactivé")
 	}
 }
+
+// Le test TestUpdateCollisionAmongParticleTrue vérifie qu'il y a bien une collision
 func TestUpdateCollisionAmongParticleTrue(t *testing.T) {
 	if verificationCollisionAmongParticle(true, true) {
 		t.Error("il n'y a pas eu de collision alors qu'elle sont activé")
 	}
 }
 
+// Le test TestUpdateCollisionWithWallFalse1 vérifie qu'il n'y pas de collision avec un bord
 func TestUpdateCollisionWithWallFalse1(t *testing.T) {
 	if !verificationCollisionWithWall(false, true) {
 		t.Error("il y a eu une collision avec un bord alors qu'elle sont désactivé")
 	}
 }
+
+// Le test TestUpdateCollisionWithWallFalse2 vérifie qu'il n'y pas de collision avec un bord
 func TestUpdateCollisionWithWallFalse2(t *testing.T) {
 	if !verificationCollisionWithWall(true, false) {
 		t.Error("il y a eu une collision avec un bord alors qu'elle sont désactivé")
 	}
 }
+
+// Le test TestUpdateCollisionWithWallTrue vérifie qu'il y a bien une collision avec un bord
 func TestUpdateCollisionWithWallTrue(t *testing.T) {
 	if verificationCollisionWithWall(true, true) {
 		t.Error("il n'y a pas eu de collision avec un bord alors qu'elle sont activé")
 	}
 }
 
+// Le test TestUpdateAjouterParticule vérifie que le nombre de particule vivante est bien égale au SpawnRate
 func TestUpdateAjouterParticule(t *testing.T) {
 	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -187,6 +198,7 @@ func TestUpdateAjouterParticule(t *testing.T) {
 	}
 }
 
+// Le test TestUpdateSpawnCenter vérifie que le point de Spawn est bien au centre de l'écran
 func TestUpdateSpawnCenter(t *testing.T) {
 	resetConfigUpdate()
 	config.General.SpawnCenter = true
@@ -204,6 +216,8 @@ func TestUpdateSpawnCenter(t *testing.T) {
 
 }
 
+// Le test TestUpdateAccordingToPosition vérifie que les particules sont bien modifiés selon la position
+// de la particule
 func TestUpdateAccordingToPosition(t *testing.T) {
 	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
@@ -241,6 +255,7 @@ func TestUpdateAccordingToPosition(t *testing.T) {
 
 }
 
+// Le test TestUpdatePlaceAccordingToPosition vérifie que les particules sont bien trié selon la position
 func TestUpdatePlaceAccordingToPosition(t *testing.T) {
 	resetConfigUpdate()
 
@@ -272,6 +287,7 @@ func TestUpdatePlaceAccordingToPosition(t *testing.T) {
 
 }
 
+// Le test TestUpdateAccordingToLife vérifie que les particules sont bien modifiés selon la vie de la particule
 func TestUpdateAccordingToLife(t *testing.T) {
 	resetConfigUpdate()
 	sys := System{Content: list.New(), DeadList: list.New()}
