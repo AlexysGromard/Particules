@@ -23,7 +23,7 @@ func TestMakeWhirlwind0(t *testing.T) {
 	MakeWhirlwind(l, 1, float64(CentreX), float64(CentreY))
 
 	if l.Front().Value.(*particles.Particle).SpeedX != SpeedInitX || l.Front().Value.(*particles.Particle).SpeedY != SpeedInitY {
-		t.Error("la distance par raport au centre est de 0 alors la vitesse ne devrais pas être modifier mais elle est différente de savitesse initial")
+		t.Error("la distance par raport au centre est de 0 alors la vitesse ne devrais pas être modifier mais elle est différente de sa vitesse initial")
 	}
 }
 
