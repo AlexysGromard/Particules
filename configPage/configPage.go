@@ -157,12 +157,16 @@ var (
 	leaveGamebutton       *Button
 )
 
+// Scrollbar
+var scrollBar *Scrollbar
+
 // Initialisation des variables images
 var (
 	checkboxImages    = []*ebiten.Image{}
 	buttonImages      = []*ebiten.Image{}
 	sliderImages      = []*ebiten.Image{}
 	numberInputImages = []*ebiten.Image{}
+	scrollbarImages   = []*ebiten.Image{}
 )
 
 // loadImages charge les images
@@ -191,6 +195,10 @@ func loadImages() {
 		findImage(ImageList, "text-input-idle.png"),     // Default
 		findImage(ImageList, "text-input-hover.png"),    // Hover
 		findImage(ImageList, "text-input-disabled.png")} // Disabled
+	// Scrollbar
+	scrollbarImages = []*ebiten.Image{
+		findImage(ImageList, "slider-handle-idle.png"),     // Default
+		findImage(ImageList, "slider-handle-disabled.png")} // Disabled
 }
 
 func loadFont(path string) error {
@@ -396,8 +404,13 @@ func UpdateConfigPage(screen *ebiten.Image) error {
 			return err
 		}
 		createItems()
+		// Créer la scrollbar
+		scrollBar = newScrollbar(float64(config.General.WindowSizeX-5), 0, 5, 500, scrollbarImages)
 		itemsCreated = true
 	}
+	// On met à jour la hauteure de la scrollbar en fonction de la partie visible de la fenêtre
+	scrollBar.height = config.General.WindowSizeY - (1080-config.General.WindowSizeY)*config.General.WindowSizeY/1080
+	scrollBar.update(screen)
 
 	// Titre de configuration
 	welcomeTitle.update(screen)
