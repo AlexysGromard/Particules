@@ -5,10 +5,14 @@ import (
 	"project-particles/particles"
 )
 
-func InsertionAccordingToPositionX(list *list.List, p *particles.Particle, Xmoitier float64) {
+// La fonction InsertionAccordingToPositionX ajoute une particule à la liste selon sa position X
+// Si la liste est vide, la particule est ajouté à la liste
+// Si la particule est plus petite que la moitié de la liste, la particule est ajouté à la liste en partant du début
+// Si la particule est plus grande que la moitié de la liste, la particule est ajouté à la liste en partant de la fin
+func InsertionAccordingToPositionX(list *list.List, p *particles.Particle, Xhalf float64) {
 	if list.Len() != 0 {
 
-		if p.PositionX < Xmoitier {
+		if p.PositionX < Xhalf {
 			for i := list.Front(); i != nil; i = i.Next() {
 				pList, _ := i.Value.(*particles.Particle)
 				if p.PositionX < pList.PositionX {
