@@ -34,20 +34,20 @@ func TestPlaceAccordingToPosition(t *testing.T) {
 
 	sys.placeAccordingToPosition()
 
-	a := sys.Content.Front()
-	b := a.Next()
-	c := b.Next()
-	d := c.Next()
-	e := d.Next()
+	elementa := sys.Content.Front()
+	elementb := elementa.Next()
+	elementc := elementb.Next()
+	elementd := elementc.Next()
+	elemente := elementd.Next()
 
-	pa, _ := a.Value.(*particles.Particle)
-	pb, _ := b.Value.(*particles.Particle)
-	pc, _ := c.Value.(*particles.Particle)
-	pd, _ := d.Value.(*particles.Particle)
-	pe, _ := e.Value.(*particles.Particle)
+	particulea, _ := elementa.Value.(*particles.Particle)
+	particuleb, _ := elementb.Value.(*particles.Particle)
+	particulec, _ := elementc.Value.(*particles.Particle)
+	particuled, _ := elementd.Value.(*particles.Particle)
+	particulee, _ := elemente.Value.(*particles.Particle)
 
-	if pa != &Particle3 && pb != &Particle1 && pc != &Particle5 && pd != &Particle2 && pe != &Particle4 {
-		t.Error("le tri n'a pas bien fonctionné", pa, pb, pc, pd, pe)
+	if particulea != &Particle3 && particuleb != &Particle1 && particulec != &Particle5 && particuled != &Particle2 && particulee != &Particle4 {
+		t.Error("le tri n'a pas bien fonctionné")
 	}
 
 }

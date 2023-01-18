@@ -275,13 +275,13 @@ func TestUpdatePlaceAccordingToPosition(t *testing.T) {
 
 	sys.Update()
 
-	a := sys.Content.Front()
-	b := a.Next()
+	elementa := sys.Content.Front()
+	elementb := elementa.Next()
 
-	pa, _ := a.Value.(*particles.Particle)
-	pb, _ := b.Value.(*particles.Particle)
+	particulea, _ := elementa.Value.(*particles.Particle)
+	particuleb, _ := elementb.Value.(*particles.Particle)
 
-	if pa != &Particle2 && pb != &Particle1 {
+	if particulea != &Particle2 && particuleb != &Particle1 {
 		t.Error("il n'y a pas eu de tri alors que Collision et CollisionAmongParticle sont à True")
 	}
 
