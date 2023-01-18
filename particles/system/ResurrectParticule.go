@@ -6,6 +6,10 @@ import (
 	"project-particles/particles/installationParticles"
 )
 
+// La méthode ResurrectParticule permet de réanimer une particule
+// Elle prend en paramètre un élément de la liste des particules mortes
+// Elle ajoute la particule à la liste des particules
+// Elle supprime l'élément de la liste des particules mortes
 func (s *System) ResurrectParticule(e *list.Element, Xmoitier float64, Collision, CollisionAmongParticle bool) {
 	p, _ := e.Value.(*particles.Particle)
 	if Collision && CollisionAmongParticle {
