@@ -15,15 +15,13 @@ var Part_particle float64 // cette variable correspond au partie de particule
 // C'est à vous de développer cette fonction.
 func (s *System) Update() {
 	Part_particle += config.General.SpawnRate
-
-	i := s.Content.Front()
-
+	particleNumber := s.Content.Front()
 	//actualisation des particules
-	for i != nil {
+	for particleNumber != nil {
 
-		p, ok := i.Value.(*particles.Particle)
+		p, ok := particleNumber.Value.(*particles.Particle)
 
-		suivant := i.Next()
+		particle := particleNumber.Next()
 
 		if ok {
 
@@ -46,7 +44,7 @@ func (s *System) Update() {
 
 			//tue les particules morte
 			if (ParticleModification.ParticleOutsideXLimit(p, config.General.WindowSizeX, config.General.MarginOutsideScreen)) || (ParticleModification.ParticleOutsideYLimit(p, config.General.WindowSizeY, config.General.MarginOutsideScreen)) || p.Life <= 0 {
-				s.KillParticule(i)
+				s.KillParticule(particleNumber)
 			}
 
 			// Modifciation des parametre Couleur, Scale, Rotation, Opacity en fonction de mode choisie dans "config.json"
@@ -84,7 +82,7 @@ func (s *System) Update() {
 
 			if config.General.Collision {
 				if config.General.CollisionAmongParticle {
-					CollisionAmongParticle(i, p)
+					CollisionAmongParticle(particleNumber, p)
 				}
 				if config.General.CollisionWithWall {
 					CollisionWithWall(p, config.General.WindowSizeX, config.General.WindowSizeY)
@@ -92,7 +90,7 @@ func (s *System) Update() {
 			}
 
 		}
-		i = suivant
+		particleNumber = particle
 	}
 
 	if config.General.Collision && config.General.CollisionAmongParticle {
