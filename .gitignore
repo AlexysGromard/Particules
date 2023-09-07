@@ -2,3 +2,7 @@
 *.DS_store
 
 # Project build files
+./project-particles
+./project-particles.exe
+project-particles
+project-particles.exe
