@@ -20,7 +20,7 @@ import (
 // charge de faire les mise-à-jour (Update) et affichages (Draw) de manière
 // régulière.
 func main() {
-	config.Get("config.json")
+	config.Get("config2.json")
 	assets.Get()
 
 	ebiten.SetWindowTitle(config.General.WindowTitle)
